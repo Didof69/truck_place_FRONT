@@ -1,0 +1,15 @@
+#navbarPhone {
+    display: none;
+}
+
+@media only screen and (max-width: 48rem) {
+
+    #footer,
+    #navbar {
+        display: none;
+    }
+
+    #navbarPhone {
+        display: block;
+    }
+}
