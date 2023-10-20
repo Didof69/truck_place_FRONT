@@ -12,6 +12,7 @@ import { NavbarPhoneComponent } from './components/navbar-phone/navbar-phone.com
 import { PageHomeComponent } from './pages/page-home/page-home.component';
 import { PageMapComponent } from './pages/page-map/page-map.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { PageAccountComponent } from './pages/page-account/page-account.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     NavbarPhoneComponent,
     PageHomeComponent,
     PageMapComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    PageAccountComponent
   ],
   imports: [
     BrowserModule,
