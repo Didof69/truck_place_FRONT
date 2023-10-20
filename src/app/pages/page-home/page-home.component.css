@@ -94,7 +94,7 @@ ul {
 }
 
 .img-wrapper01 .img01 {
-    background: url('http://dev.madeagencydev.com/distort/images/image01.jpg') no-repeat;
+    background-color: none;
     background-position: 50%;
     background-size: cover;
     height: 500px;
@@ -112,7 +112,7 @@ ul {
 }
 
 .img-wrapper02 .img02 {
-    background: url('http://dev.madeagencydev.com/distort/images/image02.png') no-repeat;
+    background-color: none;
     background-position: 50%;
     background-size: cover;
     height: 100vh;
@@ -312,7 +312,7 @@ ul {
 }
 
 .bottomnav-img {
-    background: url('http://dev.madeagencydev.com/distort/images/bottomnav-img.jpg') no-repeat;
+    background-color: none;
     background-position: 50%;
     background-size: cover;
     height: 200px;
