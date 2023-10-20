@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { UserLog } from '../models/user-log';
 import { LogData } from '../models/log-data';
 
@@ -32,5 +32,19 @@ export class UserService {
       `${this.urlAPI}auth/login`,
       data
     );
+  }
+
+  getUserByPseudo(): Observable<User> {
+        const headers = this.setHeaders();
+        return this.http
+          .get<User>(`${this.urlAPI}users`, { headers })
+          .pipe(
+            tap((user: User) => {
+              sessionStorage.setItem(
+                'user_profil',
+                user.admin.toString()
+              );
+            })
+          );
   }
 }
