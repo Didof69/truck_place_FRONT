@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'home', component: PageHomeComponent },
   { path: 'map', component: PageMapComponent },
   { path: 'account', component: PageAccountComponent },
-  { path: 'account/login', component: LoginComponent},
+  { path: 'account/login', component: LoginComponent },
   { path: 'account/signup', component: SignupComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
