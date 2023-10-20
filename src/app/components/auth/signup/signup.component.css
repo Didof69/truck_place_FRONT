@@ -13,6 +13,7 @@
 h1{
     font-size: 1.5rem;
 }
+
 input {
     background-color: rgba(34, 87, 119, 0.2);
     border: none;
@@ -70,8 +71,8 @@ input {
 }
 
 .btn:hover {
-    background-color: #3b94cb;
-    box-shadow: 0rem 0rem 0rem 0.05rem #3b94cb;
+    background-color: #234e35;
+    box-shadow: 0rem 0rem 0rem 0.05rem #234e35;
 }
 
 /*Media Queries */

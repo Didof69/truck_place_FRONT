@@ -1,1 +1,63 @@
-<p>login works!</p>
+<div class="mainContainer container-principal">
+  <div class="textBienvenue">
+    <h1>En route !</h1>
+  </div>
+
+  <form #connexion="ngForm" (ngSubmit)="login(connexion)">
+    <div class="form-group">
+      <input
+        type="text"
+        required
+        pattern="^[a-zA-Z]{2,17}[0-9]{0,3}$"
+        class="form-control shadow-sm"
+        [(ngModel)]="user.pseudo"
+        name="pseudo"
+        #pseudo="ngModel"
+        [class.input-error]="pseudo.invalid && isFormValidate"
+        [class.input-error-log]="connexionKO"
+        placeholder="Pseudo"
+      />
+      <div *ngIf="pseudo.invalid && isFormValidate" class="alert">
+        <div *ngIf="pseudo.errors?.['required']">Le pseudo est obligatoire.</div>
+        <div *ngIf="pseudo.errors?.['pattern']">
+          Veuillez entrer un pseudo valide.
+        </div>
+
+      </div>        
+ 
+    </div>
+
+    <div class="form-group">
+      <input
+        type="password"
+        required
+        pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}"
+        class="form-control shadow-sm"
+        [(ngModel)]="user.password"
+        name="password"
+        #password="ngModel"        
+        [class.input-error]="password.invalid && isFormValidate"
+        [class.input-error-email]="connexionKO"
+        placeholder="Mot de passe"
+      />
+      <div *ngIf="password.invalid && isFormValidate" class="alert">
+        <div *ngIf="password.errors?.['required']">
+          Le mot de passe est obligatoire.
+        </div>
+        <div class="errorMdp" *ngIf="password.errors?.['pattern']">
+          Au moins 12 caractères, 1 majuscule, 1 chiffre et 1 symbole.
+        </div>
+      </div>
+      <div *ngIf="connexionKO" class="alert">Vérifiez votre email et votre mot de passe.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Se connecter</button>
+  </form>
+
+  <div class="lienEnregistrer">
+    <p>
+      Pas de compte ?
+      <a [routerLink]="'/account/signup'">Inscrivez-vous</a>
+    </p>
+  </div>
+</div>

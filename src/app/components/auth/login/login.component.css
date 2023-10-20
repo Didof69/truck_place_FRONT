@@ -1,0 +1,100 @@
+.mainContainer {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.textBienvenue {
+    text-align: center;
+    padding-top: 8rem;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+input {
+    background-color: rgba(34, 87, 119, 0.2);
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.7rem;
+    padding-left: 3rem;
+    width: 30vw;
+}
+
+.input-error {
+    border: 0.13rem solid #BC3030;
+}
+
+.input-error-email {
+    border: 0.13rem solid #BC3030;
+}
+
+.input-error-log {
+    border: 0.13rem solid #BC3030;
+}
+
+.alert {
+    color: #BC3030;
+    font-size: 0.8rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.btn {
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #337551;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    margin-top: 2rem;
+    padding: 0.7rem;
+    width: 30vw;
+}
+
+.lienEnregistrer {
+    margin-top: 1rem;
+}
+
+.btn:hover {
+    background-color: #234e35;
+    box-shadow: 0rem 0rem 0rem 0.05rem #234e35;
+}
+
+
+/*Media Queries */
+@media only screen and (max-width: 48rem) {
+    input {
+        align-items: center;
+        padding-left: 1.3rem;
+        width: 68vw;
+    }
+
+    .alert {
+        font-size: 0.69rem;
+    }
+
+    .errorMdp {
+        width: 55vw;
+    }
+
+    .btn {
+        width: 68vw;
+        margin-top: 1.5rem;
+    }
+
+    .btn:hover {
+        background-color: #337551;
+    }
+}
+
+
+@media (min-width: 100rem) {
+    .mainContainer {
+        margin-top: 8rem;
+    }
+}
