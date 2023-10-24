@@ -7,7 +7,7 @@ export interface Parking {
   longitude: string;
   nb_space_all: number;
   nb_space_free: number;
-  registration_date: Date;
+  registration_date?: Date;
   public_view: boolean;
   main_road?: string;
   direction?: string;

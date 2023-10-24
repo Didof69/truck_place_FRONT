@@ -1,14 +1,14 @@
-
 <!-- Modal -->
-<div class="modal fade" id="parkingModal" tabindex="-1" aria-labelledby="parkingModalLabel" aria-hidden="true">
+<div  class="modal fade" id="parkingModal" tabindex="-1" aria-labelledby="parkingModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="parkingModalLabel">modal</h1>
+        <h1 class="modal-title fs-5" id="parkingModalLabel">{{parking.parking_name}}</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        
       </div>
       <div class="modal-body">
-        ...
+         <h2 class="modal-title fs-5" id="parkingNbSpaceAll">{{parking.nb_space_all}}</h2>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
