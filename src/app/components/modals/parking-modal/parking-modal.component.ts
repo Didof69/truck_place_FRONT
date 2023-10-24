@@ -11,11 +11,13 @@ import { Location } from 'src/app/models/location';
 export class ParkingModalComponent {
   @Input() parking!: Parking;
   @Input() location!: Location;
+  @Input() reliabilityStatus!: string;
 
-  constructor(
-    private router: Router,
-  ) {}
+  constructor(private router: Router) {}
 
+  ngOnInit() {
+
+  }
   returnMap() {
     this.router.navigate(['/map']);
   }

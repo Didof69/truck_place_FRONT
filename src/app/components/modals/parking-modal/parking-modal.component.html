@@ -22,10 +22,10 @@
 
         <div>
           <h1 class="modal-title" id="parkingModalLabel">
-          {{ parking.parking_name }}
+          {{ parking.parking_name | uppercaseFirst }}
         </h1>
         <h2 class="modal-title fs-5" id="parkingNbSpaceAll">
-          {{ location.zip_code }} {{ location.city_name }}
+          {{ location.zip_code }} {{ location.city_name | uppercaseFirst}}
         </h2>
         <h2
           class="modal-title fs-5"
@@ -57,8 +57,8 @@
             <p>{{ parking.nb_space_all }}</p>
           </div>
           <div class="text-center">
-            <p class="modal-title fs-5" id="parkingNbSpaceAll">Libre</p>
-            <p>{{ parking.nb_space_free }}</p>
+            <p class="modal-title fs-5" id="parkingNbSpaceFree">Libre</p>
+            <p [ngClass]="reliabilityStatus">{{ parking.nb_space_free }}</p>
           </div>
         </div>
 

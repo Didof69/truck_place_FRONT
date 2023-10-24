@@ -17,3 +17,21 @@
     border-radius: 0.5rem;
     padding: 0.7rem;
 }
+
+.reliabilityDanger {
+    font-weight: bolder;
+    color: #BC3030;
+    font-size: 32px;
+}
+
+.reliabilitySafe {
+    font-weight: bolder;
+    color: #337551;
+    font-size: 32px;
+}
+
+.reliabilityMedium {
+    font-weight: bolder;
+    color: #996c2c;
+    font-size: 32px;
+}

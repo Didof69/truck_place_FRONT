@@ -20,6 +20,7 @@ import { MapComponent } from './components/map/map.component';
 import { ParkingComponent } from './components/parking/parking.component';
 import { ParkingModalComponent } from './components/modals/parking-modal/parking-modal.component';
 import { ServicesListComponent } from './components/services-list/services-list.component';
+import { UppercaseFirstPipe } from './pipes/uppercase-first.pipe';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ServicesListComponent } from './components/services-list/services-list.
     ParkingComponent,
     ParkingModalComponent,
     ServicesListComponent,
+    UppercaseFirstPipe,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +46,9 @@ import { ServicesListComponent } from './components/services-list/services-list.
     AppRoutingModule,
     FormsModule,
     NgSelectModule,
+  ],
+  exports: [
+    UppercaseFirstPipe
   ],
   providers: [],
   bootstrap: [AppComponent],
