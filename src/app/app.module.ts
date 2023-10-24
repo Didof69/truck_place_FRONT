@@ -17,6 +17,7 @@ import { PageAccountComponent } from './pages/page-account/page-account.componen
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { MapComponent } from './components/map/map.component';
+import { ParkingComponent } from './components/parking/parking.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { MapComponent } from './components/map/map.component';
     SignupComponent,
     LoginComponent,
     MapComponent,
+    ParkingComponent,
   ],
   imports: [
     BrowserModule,
