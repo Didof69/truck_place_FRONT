@@ -3,16 +3,24 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
+        <button type="button" class="btn-modal" data-bs-dismiss="modal" aria-label="Modify"><img src="../../../../assets/icones/modify_green.png" alt=""></button>
         <h1 class="modal-title fs-5" id="parkingModalLabel">{{parking.parking_name}}</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h2 class="modal-title fs-5" id="parkingNbSpaceAll">{{parking.insee_code}}</h2>
+        <h2 class="modal-title fs-5" id="parkingNbSpaceAll" *ngIf="parking.main_road">{{parking.main_road}} {{parking.direction}}</h2>
+        <button type="button" class="btn-modal" data-bs-dismiss="modal" aria-label="Close"><img src="../../../../assets/icones/reset_green.png" alt=""></button>
         
       </div>
       <div class="modal-body">
-         <h2 class="modal-title fs-5" id="parkingNbSpaceAll">{{parking.nb_space_all}}</h2>
+        <img src="../../../../assets/icones/park.png" alt="">
+         <h2 class="modal-title fs-5" id="parkingNbSpaceAll">Total {{parking.nb_space_all}}</h2>
+         <h2 class="modal-title fs-5" id="parkingNbSpaceAll">Libre {{parking.nb_space_free}}</h2>
+         <app-services-list *ngIf="parking.services.length>0" [services]="parking.services"></app-services-list>
+        
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button>S'abonner</button>
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>
   </div>

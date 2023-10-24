@@ -58,7 +58,6 @@ export class ParkingComponent {
         .bindPopup(popup)
         .addTo(myRoadmap)
         .openPopup();
-
     });
   }
 }

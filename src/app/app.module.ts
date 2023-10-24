@@ -19,6 +19,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { MapComponent } from './components/map/map.component';
 import { ParkingComponent } from './components/parking/parking.component';
 import { ParkingModalComponent } from './components/modals/parking-modal/parking-modal.component';
+import { ServicesListComponent } from './components/services-list/services-list.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ParkingModalComponent } from './components/modals/parking-modal/parking
     MapComponent,
     ParkingComponent,
     ParkingModalComponent,
+    ServicesListComponent,
   ],
   imports: [
     BrowserModule,
