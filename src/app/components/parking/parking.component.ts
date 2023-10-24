@@ -48,14 +48,14 @@ export class ParkingComponent {
           'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-icon.png',
       });
 
-      const popup = `<button type="button" data-bs-toggle="modal" data-bs-target="#parkingModal" style="font-size: 1rem;
-    color: #ffffff;
-    background-color: #337551;
-    border: none;
-    cursor: pointer;
-    border-radius: 0.5rem;
-    padding: 0.7rem;
-    width: 30vw;">
+      const popup = `<button type="button" data-bs-toggle="modal" data-bs-target="#parkingModal" 
+      style="font-size: 1rem;
+      color: #ffffff;
+      background-color: #337551;
+      border: none;
+      cursor: pointer;
+      border-radius: 0.5rem;
+      padding: 0.7rem;">
       ${this.parking.parking_name}</button>`;
 
       const marker = L.marker(
