@@ -16,6 +16,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { PageAccountComponent } from './pages/page-account/page-account.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { LoginComponent } from './components/auth/login/login.component';
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { LoginComponent } from './components/auth/login/login.component';
     PageAccountComponent,
     SignupComponent,
     LoginComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
