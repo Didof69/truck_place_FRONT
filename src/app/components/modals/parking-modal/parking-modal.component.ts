@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Parking } from 'src/app/models/parking';
+import { Router } from '@angular/router';
+import { Location } from 'src/app/models/location';
 
 @Component({
   selector: 'app-parking-modal',
@@ -8,4 +10,13 @@ import { Parking } from 'src/app/models/parking';
 })
 export class ParkingModalComponent {
   @Input() parking!: Parking;
+  @Input() location!: Location;
+
+  constructor(
+    private router: Router,
+  ) {}
+
+  returnMap() {
+    this.router.navigate(['/map']);
+  }
 }
