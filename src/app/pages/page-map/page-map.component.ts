@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 import * as L from 'leaflet';
 import { ParkingService } from 'src/app/services/parking.service';
@@ -16,7 +15,6 @@ export class PageMapComponent {
 
   constructor(
     private parkingService: ParkingService,
-    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -42,7 +40,7 @@ export class PageMapComponent {
           }
         )
           .bindPopup(
-            `<a href="map/parking/${i}">${this.parkingTab[i].parking_name} </a>`
+            `<a href="map/parking/${this.parkingTab[i].parking_id}">${this.parkingTab[i].parking_name} </a>`
           )
           .addTo(myRoadmap)
           .openPopup();
