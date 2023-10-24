@@ -1,0 +1,20 @@
+.modal-header button {
+    border: none;
+    background-color: white;
+    height: 30px;
+}
+
+.icone {
+    width: 30px;
+}
+
+.btn-subscribe {
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #337551;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    padding: 0.7rem;
+    width: 30vw;
+}

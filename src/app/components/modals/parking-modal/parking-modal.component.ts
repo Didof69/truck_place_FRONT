@@ -8,8 +8,4 @@ import { Parking } from 'src/app/models/parking';
 })
 export class ParkingModalComponent {
   @Input() parking!: Parking;
-
-  ngOnInit() {
-
-  }
 }

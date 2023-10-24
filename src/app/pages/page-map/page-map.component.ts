@@ -13,9 +13,7 @@ import { Parking } from '../../models/parking';
 export class PageMapComponent {
   parkingTab!: Parking[];
 
-  constructor(
-    private parkingService: ParkingService,
-  ) {}
+  constructor(private parkingService: ParkingService) {}
 
   ngOnInit() {
     // Déclaration de la carte avec les coordonnées du centre et le niveau de zoom.
@@ -40,7 +38,8 @@ export class PageMapComponent {
           }
         )
           .bindPopup(
-            `<a href="map/parking/${this.parkingTab[i].parking_id}">${this.parkingTab[i].parking_name} </a>`
+            `<a href="map/parking/${this.parkingTab[i].parking_id}" 
+            style="font-size: 1rem;color: #337551;">Accéder au parking : ${this.parkingTab[i].parking_name}</a>`
           )
           .addTo(myRoadmap)
           .openPopup();

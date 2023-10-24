@@ -1,0 +1,11 @@
+.btn-parking {
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #337551;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    margin-top: 2rem;
+    padding: 0.7rem;
+    width: 30vw;
+}

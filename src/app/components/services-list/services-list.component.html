@@ -1,1 +1,8 @@
-<p *ngFor="let service of services">{{service.service_name}}</p>
+<div class="d-flex flex-row justify-content-center">
+    <div *ngFor="let service of services">
+    <img *ngIf="service.service_name=='douches'" src="../../../assets/icones/shower_ok.png" alt="">
+    <img *ngIf="service.service_name=='toilettes'" src="../../../assets/icones/wc_ok.png" alt="">
+    <img *ngIf="service.service_name=='restauration'" src="../../../assets/icones/catering_ok.png" alt="">
+    <img *ngIf="service.service_name=='wifi'" src="../../../assets/icones/wifi_ok.png" alt="">
+</div>
+</div>

@@ -7,5 +7,5 @@ import { Service } from 'src/app/models/service';
   styleUrls: ['./services-list.component.css']
 })
 export class ServicesListComponent {
-@Input() services! :Service[]
+  @Input() services!: Service[]
 }
