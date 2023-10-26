@@ -12,12 +12,12 @@ export class ParkingModalComponent {
   @Input() parking!: Parking;
   @Input() location!: Location;
   @Input() reliabilityStatus!: string;
+  @Input() numberOpinions!: number;
+  @Input() averageParking!: number;
 
   constructor(private router: Router) {}
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
   returnMap() {
     this.router.navigate(['/map']);
   }

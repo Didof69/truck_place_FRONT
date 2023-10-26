@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <ul class="navbar-nav d-flex flex-row">
       <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="#">
+        <a class="nav-link" aria-current="page" [routerLink]="['home']">
           <img
             class="icone"
             src="../../../assets/icones/home_green.png"
@@ -12,8 +12,8 @@
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"
-          ><img
+        <a class="nav-link" [routerLink]="['']">
+          <img
             class="icone"
             src="../../../assets/icones/notif_off.png"
             alt=""
@@ -22,8 +22,8 @@
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"
-          ><img
+        <a class="nav-link" [routerLink]="['map']">
+          <img
             class="icone"
             src="../../../assets/icones/map_green.png"
             alt=""
@@ -32,7 +32,7 @@
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link">
+        <a class="nav-link" [routerLink]="['account']">
           <img
             class="icone"
             src="../../../assets/icones/account_green.png"

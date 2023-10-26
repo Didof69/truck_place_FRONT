@@ -4,20 +4,15 @@
     height: 30px;
 }
 
+/* ----------------- modal-header ----------------- */
 .icone {
     width: 30px;
 }
 
-.btn-subscribe {
-    font-size: 1rem;
-    color: #ffffff;
-    background-color: #337551;
-    border: none;
-    cursor: pointer;
-    border-radius: 0.5rem;
-    padding: 0.7rem;
-}
+/*------------------- modal-body --------------------*/
+/* members-opinion */
 
+/* zone-info */
 .reliabilityDanger {
     font-weight: bolder;
     color: #BC3030;
@@ -34,4 +29,15 @@
     font-weight: bolder;
     color: #996c2c;
     font-size: 32px;
+}
+
+/*---------------------- modal-footer --------------------*/
+.btn-subscribe {
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #337551;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    padding: 0.7rem;
 }

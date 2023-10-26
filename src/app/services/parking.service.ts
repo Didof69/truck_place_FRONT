@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Parking } from '../models/parking';
+import { Opinion } from '../models/opinion';
 
 @Injectable({
   providedIn: 'root',
@@ -25,4 +26,9 @@ export class ParkingService {
   getParkingById(parking_id: number): Observable<Parking> {
     return this.http.get<Parking>(`${this.urlAPI}/${parking_id}`);
   }
+
+  getOpinionsByParkingId(parking_id:number): Observable<Opinion[]>{
+  return this.http.get<Opinion[]>(`http://localhost:3000/api/opinions/parking/${parking_id}`)
+  }
+  
 }

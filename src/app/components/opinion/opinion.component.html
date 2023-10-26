@@ -1,0 +1,15 @@
+<div *ngFor="let opinion of opinionsTab" class="card">
+  <div class="card-header d-flex justify-content-between">
+    <div>
+      <p>{{ opinion.pseudo }}</p>
+    </div>
+
+    <div>
+        <app-rating-bar [note]="opinion.note"></app-rating-bar>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <p>{{ opinion.opinion }}</p>
+  </div>
+</div>

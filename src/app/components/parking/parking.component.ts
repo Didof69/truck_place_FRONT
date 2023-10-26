@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as L from 'leaflet';
 import { Location } from 'src/app/models/location';
+import { Opinion } from 'src/app/models/opinion';
 import { Parking } from 'src/app/models/parking';
 import { LocationService } from 'src/app/services/location.service';
 import { ParkingService } from 'src/app/services/parking.service';
@@ -38,6 +39,11 @@ export class ParkingComponent {
   reliabilityStatus!: string;
   diffDates: number = 0;
 
+  //parametrer la moyenne du marking
+  opinionsTab!: Opinion[];
+  averageParking: number = 0;
+  numberOpinions: number = 0;
+
   constructor(
     private parkingService: ParkingService,
     private locationService: LocationService,
@@ -61,8 +67,8 @@ export class ParkingComponent {
         );
         this.getReliability(this.diffDates);
         console.log(this.diffDates, this.reliabilityStatus);
-        
 
+        //charger la map et le marqueur du parking
         const myRoadmap = L.map('map').setView(
           [+parking.latitude, +parking.longitude],
           12
@@ -94,16 +100,27 @@ export class ParkingComponent {
           .addTo(myRoadmap)
           .openPopup();
 
+        //récuperer le code postal et la ville grâce à insee_code
         this.locationService
           .getLocationByInseeCode(this.parking.insee_code)
           .subscribe((location) => {
-            console.log(this.parking.insee_code);
             this.location = location;
-            console.log('dans getLocation, la location est :', this.location);
+          });
+
+        //récupérer les avis d'un parking (demander s'il faut un service opinion???)
+        this.parkingService
+          .getOpinionsByParkingId(this.parking.parking_id)
+          .subscribe((opinions) => {
+            this.opinionsTab = [...opinions];
+            this.numberOpinions = this.opinionsTab.length;
+            if (this.opinionsTab.length>0) {
+              this.averageParking = this.getAverageParking(this.opinionsTab);
+            }
           });
       });
   }
 
+  //méthodes utiles
   differenceDateInMinuts(value: Date) {
     const today = new Date();
     const date = new Date(value);
@@ -111,8 +128,8 @@ export class ParkingComponent {
     return diff;
   }
 
+  //obtenir l'indicateur de fiabilité
   getReliability(value: number) {
-    
     if (value <= 30) {
       this.reliabilityStatus = 'reliabilitySafe';
       return;
@@ -120,9 +137,22 @@ export class ParkingComponent {
     if (value <= 60) {
       this.reliabilityStatus = 'reliabilityMedium';
       return;
-    }if (value > 60) {
+    }
+    if (value > 60) {
       this.reliabilityStatus = 'reliabilityDanger';
       return;
     }
+  }
+
+  //obtenir la moyenne d'un parking
+  getAverageParking(opinionsTab: Opinion[]): number {
+    const allNote: number[] = [];
+    for (let i = 0; i < opinionsTab.length; i++) {
+      allNote.push(opinionsTab[i].note);
+    }
+    const averageParking = Math.round(
+      allNote.reduce((bcc, v) => bcc + v) / allNote.length
+    );
+    return averageParking;
   }
 }

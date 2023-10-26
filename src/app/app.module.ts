@@ -21,6 +21,9 @@ import { ParkingComponent } from './components/parking/parking.component';
 import { ParkingModalComponent } from './components/modals/parking-modal/parking-modal.component';
 import { ServicesListComponent } from './components/services-list/services-list.component';
 import { UppercaseFirstPipe } from './pipes/uppercase-first.pipe';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { OpinionComponent } from './components/opinion/opinion.component';
+import { RatingBarComponent } from './components/rating-bar/rating-bar.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,9 @@ import { UppercaseFirstPipe } from './pipes/uppercase-first.pipe';
     ParkingModalComponent,
     ServicesListComponent,
     UppercaseFirstPipe,
+    SearchBarComponent,
+    OpinionComponent,
+    RatingBarComponent,
   ],
   imports: [
     BrowserModule,
