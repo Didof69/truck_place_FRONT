@@ -11,6 +11,14 @@
 
 /*------------------- modal-body --------------------*/
 /* members-opinion */
+.btn-opinion {
+    border: none;
+    background-color: none;
+    padding: 0;
+    height: 24px;
+    text-decoration: underline;
+    color: #337551;
+}
 
 /* zone-info */
 .reliabilityDanger {
@@ -40,4 +48,9 @@
     cursor: pointer;
     border-radius: 0.5rem;
     padding: 0.7rem;
+}
+
+.btn-subscribe:hover {
+    background-color: #234e35;
+    box-shadow: 0rem 0rem 0rem 0.05rem #234e35;
 }

@@ -7,14 +7,12 @@ import { PageAccountComponent } from './pages/page-account/page-account.componen
 import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { ParkingComponent } from './components/parking/parking.component';
-import { OpinionComponent } from './components/opinion/opinion.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: PageHomeComponent },
   { path: 'map', component: PageMapComponent },
   { path: 'map/parking/:id', component: ParkingComponent },
-  { path: 'map/parking/:id/opinion', component: OpinionComponent },
   { path: 'account', component: PageAccountComponent },
   { path: 'account/login', component: LoginComponent },
   { path: 'account/signup', component: SignupComponent },

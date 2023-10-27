@@ -6,6 +6,7 @@ import { Opinion } from 'src/app/models/opinion';
 import { Parking } from 'src/app/models/parking';
 import { LocationService } from 'src/app/services/location.service';
 import { ParkingService } from 'src/app/services/parking.service';
+import { OpinionByMember } from 'src/app/models/opinion-by-member';
 
 @Component({
   selector: 'app-parking',
@@ -41,6 +42,7 @@ export class ParkingComponent {
 
   //parametrer la moyenne du marking
   opinionsTab!: Opinion[];
+  opinionsMembersTab: OpinionByMember[] = [];
   averageParking: number = 0;
   numberOpinions: number = 0;
 
@@ -113,9 +115,21 @@ export class ParkingComponent {
           .subscribe((opinions) => {
             this.opinionsTab = [...opinions];
             this.numberOpinions = this.opinionsTab.length;
-            if (this.opinionsTab.length>0) {
+            if (this.opinionsTab.length > 0) {
               this.averageParking = this.getAverageParking(this.opinionsTab);
             }
+//parametrer les avis à afficher pour un parking
+            const opinionsFullTab = [...opinions];
+            for (let i = 0; i < opinionsFullTab.length; i++) {
+              const opinion = {
+                pseudo: opinionsFullTab[i].user.pseudo,
+                opinion: opinionsFullTab[i].opinion,
+                note: opinionsFullTab[i].note,
+              };
+              console.log(opinion);
+              this.opinionsMembersTab.push(opinion);
+            }
+            console.log(this.opinionsMembersTab);
           });
       });
   }

@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpClientModule } from '@angular/common/http';
+
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarDesktopComponent } from './components/navbar-desktop/navbar-desktop.component';
 import { NavbarPhoneComponent } from './components/navbar-phone/navbar-phone.component';
@@ -22,8 +23,8 @@ import { ParkingModalComponent } from './components/modals/parking-modal/parking
 import { ServicesListComponent } from './components/services-list/services-list.component';
 import { UppercaseFirstPipe } from './pipes/uppercase-first.pipe';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
-import { OpinionComponent } from './components/opinion/opinion.component';
 import { RatingBarComponent } from './components/rating-bar/rating-bar.component';
+import { OpinionModalComponent } from './components/modals/opinion-modal/opinion-modal.component';
 
 @NgModule({
   declarations: [
@@ -43,8 +44,8 @@ import { RatingBarComponent } from './components/rating-bar/rating-bar.component
     ServicesListComponent,
     UppercaseFirstPipe,
     SearchBarComponent,
-    OpinionComponent,
     RatingBarComponent,
+    OpinionModalComponent,
   ],
   imports: [
     BrowserModule,

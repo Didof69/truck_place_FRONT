@@ -28,15 +28,15 @@
           <h1 class="modal-title" id="parkingModalLabel">
             {{ parking.parking_name | uppercaseFirst }}
           </h1>
-          <h2 class="modal-title fs-5" id="parkingNbSpaceAll">
+          <h2 class="modal-title fs-5" id="parkingLocation">
             {{ location.zip_code }} {{ location.city_name | uppercaseFirst }}
           </h2>
           <h2
             class="modal-title fs-5"
-            id="parkingNbSpaceAll"
+            id="parkingMainroad"
             *ngIf="parking.main_road"
           >
-            {{ parking.main_road }} {{ parking.direction }}
+            {{ parking.main_road }} - Direction : {{ parking.direction }}
           </h2>
         </div>
 
@@ -63,7 +63,10 @@
             <p>{{ numberOpinions }} avis</p>
             <div *ngIf="numberOpinions > 0" class="d-flex">
               <p> - </p>
-              <a [routerLink]="'opinion'" data-bs-dismiss="modal">Voir les avis</a>
+              <!-- <a [routerLink]="'opinion'" data-bs-dismiss="modal" >Voir les avis</a> -->
+              <button type="button" class="btn btn-opinion" data-bs-toggle="modal" data-bs-target="#opinionModal">
+  Voir les avis
+</button>
             </div>
           </div>
         </div>

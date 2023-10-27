@@ -1,0 +1,77 @@
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#opinionModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="opinionModal"
+  tabindex="-1"
+  aria-labelledby="opinionModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="d-flex flex-column">
+          <div>
+            <h1 class="modal-title" id="parkingModalLabel">
+              {{ parking.parking_name | uppercaseFirst }}
+            </h1>
+          </div>
+          <div>
+            <h2 class="modal-title fs-5" id="parkingLocation">
+              {{ location.zip_code }} {{ location.city_name | uppercaseFirst }}
+            </h2>
+          </div>
+          <div>
+            <h2
+              class="modal-title fs-5"
+              id="parkingMainroad"
+              *ngIf="parking.main_road"
+            >
+              {{ parking.main_road }} - Direction : {{ parking.direction }}
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let opinion of opinionsMembersTab" class="card">
+          <div class="card-header d-flex justify-content-between">
+            <div class="d-flex">
+              <img
+                class="icone"
+                src="../../../../assets/icones/account_green.png"
+                alt=""
+              />
+              <p>{{ opinion.pseudo }}</p>
+            </div>
+
+            <div>
+              <app-rating-bar [note]="opinion.note"></app-rating-bar>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <p>"{{ opinion.opinion }}"</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-truck"
+          data-bs-toggle="modal"
+          data-bs-target="#parkingModal"
+        >
+          Retour
+        </button>
+        <button type="button" class="btn btn-truck">Evaluer</button>
+      </div>
+    </div>
+  </div>
+</div>
