@@ -25,6 +25,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { RatingBarComponent } from './components/rating-bar/rating-bar.component';
 import { OpinionModalComponent } from './components/modals/opinion-modal/opinion-modal.component';
 import { CreateOpinionModalComponent } from './components/modals/create-opinion-modal/create-opinion-modal.component';
+import { CreateParkingModalComponent } from './components/modals/create-parking-modal/create-parking-modal.component';
+import { UpdateParkingModalComponent } from './components/modals/update-parking-modal/update-parking-modal.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { CreateOpinionModalComponent } from './components/modals/create-opinion-
     RatingBarComponent,
     OpinionModalComponent,
     CreateOpinionModalComponent,
+    CreateParkingModalComponent,
+    UpdateParkingModalComponent,
   ],
   imports: [
     BrowserModule,

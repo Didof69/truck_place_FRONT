@@ -17,6 +17,8 @@ export class CreateOpinionModalComponent {
   @Input() opinionsMembersTab!: OpinionByMember[];
   @Input() parking!: Parking;
   @Input() location!: Location;
+  @Input() user!: User;
+  
   opinion: CreatedOpinion = {
     opinion: '',
     note: 0,
@@ -24,35 +26,16 @@ export class CreateOpinionModalComponent {
     parking_id: 0,
   };
 
-  user: User = {
-    user_id: 0,
-    pseudo: 'string',
-    user_name: 'string',
-    firstname: 'string',
-    email: 'string',
-    admin: true,
-  };
-
   constructor(
     private userService: UserService,
     private opinionService: OpinionService
   ) {}
 
-  ngOnInit() {
-    this.userService.getUserByPseudo().subscribe({
-      next: (response) => {
-        this.user = response;
-      },
-
-      error: (error) => {},
-    });
-  }
-
   onSubmit() {
     this.opinion.user_id = this.user.user_id;
     this.opinion.parking_id = this.parking.parking_id;
     this.opinion.note = +this.opinion.note
-    console.log(+this.opinion.note);
+    // console.log(+this.opinion.note);
     this.opinionService.createOpinion(this.opinion).subscribe({
       next: (response) => {
         location.reload();

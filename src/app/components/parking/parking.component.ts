@@ -7,6 +7,8 @@ import { Parking } from 'src/app/models/parking';
 import { LocationService } from 'src/app/services/location.service';
 import { ParkingService } from 'src/app/services/parking.service';
 import { OpinionByMember } from 'src/app/models/opinion-by-member';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-parking',
@@ -14,6 +16,7 @@ import { OpinionByMember } from 'src/app/models/opinion-by-member';
   styleUrls: ['./parking.component.css'],
 })
 export class ParkingComponent {
+  user!:User;
   parking: Parking = {
     parking_id: 0,
     parking_name: 'test',
@@ -49,7 +52,8 @@ export class ParkingComponent {
   constructor(
     private parkingService: ParkingService,
     private locationService: LocationService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -60,7 +64,15 @@ export class ParkingComponent {
     this.parkingService
       .getParkingById(parkingIdFromRoute)
       .subscribe((parking) => {
-        console.log(parking);
+        //recuperer le User
+        this.userService.getUserByPseudo().subscribe({
+           next: (response) => {
+             this.user = response;
+           },
+
+           error: (error) => {},
+         });
+        // console.log(parking);
         this.parking = parking;
 
         //mettre à jour l'indicateur de fiabilité
@@ -68,7 +80,7 @@ export class ParkingComponent {
           this.parking.registration_date
         );
         this.getReliability(this.diffDates);
-        console.log(this.diffDates, this.reliabilityStatus);
+        // console.log(this.diffDates, this.reliabilityStatus);
 
         //charger la map et le marqueur du parking
         const myRoadmap = L.map('map').setView(
@@ -118,7 +130,7 @@ export class ParkingComponent {
             if (this.opinionsTab.length > 0) {
               this.averageParking = this.getAverageParking(this.opinionsTab);
             }
-//parametrer les avis à afficher pour un parking
+            //parametrer les avis à afficher pour un parking
             const opinionsFullTab = [...opinions];
             for (let i = 0; i < opinionsFullTab.length; i++) {
               const opinion = {
@@ -126,23 +138,25 @@ export class ParkingComponent {
                 opinion: opinionsFullTab[i].opinion,
                 note: opinionsFullTab[i].note,
               };
-              console.log(opinion);
+              // console.log(opinion);
               this.opinionsMembersTab.push(opinion);
             }
-            console.log(this.opinionsMembersTab);
+            // console.log(this.opinionsMembersTab);
           });
+        
+      
       });
   }
 
   //méthodes utiles
+
+  //obtenir l'indicateur de fiabilité
   differenceDateInMinuts(value: Date) {
     const today = new Date();
     const date = new Date(value);
     const diff = (today.getTime() - date.getTime()) / 60000;
     return diff;
   }
-
-  //obtenir l'indicateur de fiabilité
   getReliability(value: number) {
     if (value <= 30) {
       this.reliabilityStatus = 'reliabilitySafe';

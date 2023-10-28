@@ -4,7 +4,7 @@ import { User } from '../models/user';
 import { Observable, tap } from 'rxjs';
 import { UserLog } from '../models/user-log';
 import { LogData } from '../models/log-data';
-import { CreatedUser } from '../models/user copy';
+import { CreatedUser } from '../models/created-user';
 
 @Injectable({
   providedIn: 'root',
@@ -22,13 +22,12 @@ export class UserService {
   }
 
   signUp(data: CreatedUser): Observable<CreatedUser> {
-    console.log(data);
+    // console.log(data);
     return this.http.post<CreatedUser>(`${this.urlAPI}auth/register`, data);
   }
 
   login(data: UserLog): Observable<LogData> {
-    console.log(data);
-    
+    // console.log(data);
     return this.http.post<LogData>(
       `${this.urlAPI}auth/login`,
       data

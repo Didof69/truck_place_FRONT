@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CreatedUser } from 'src/app/models/user copy';
-
+import { CreatedUser } from 'src/app/models/created-user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
