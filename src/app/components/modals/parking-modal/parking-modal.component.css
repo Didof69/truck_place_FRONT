@@ -21,6 +21,10 @@
 }
 
 /* zone-info */
+.allSpaces{
+    font-size: 32px;
+}
+
 .reliabilityDanger {
     font-weight: bolder;
     color: #BC3030;

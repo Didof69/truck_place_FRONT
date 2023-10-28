@@ -1,5 +1,4 @@
-export interface User {
-    user_id: number;
+export interface CreatedUser {
     pseudo: string;
     user_name: string;
     firstname: string;

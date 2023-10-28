@@ -1,0 +1,87 @@
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#opinionModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div
+  class="modal fade modal-zone"
+  id="createOpinionModal"
+  tabindex="-1"
+  aria-labelledby="opinionModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="d-flex flex-column">
+          <div>
+            <h1 class="modal-title" id="parkingModalLabel">
+              {{ parking.parking_name | uppercaseFirst }}
+            </h1>
+          </div>
+          <div>
+            <h2 class="modal-title fs-5" id="parkingLocation">
+              {{ location.zip_code }} {{ location.city_name | uppercaseFirst }}
+            </h2>
+          </div>
+          <div>
+            <h2
+              class="modal-title fs-5"
+              id="parkingMainroad"
+              *ngIf="parking.main_road"
+            >
+              {{ parking.main_road }} - Direction : {{ parking.direction }}
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmit()" #opinionForm="ngForm">
+        <label for="opinion" class="form-label">Votre avis :</label>
+          <textarea
+          class="form-control adaptive-input" 
+          id="opinion"
+            type="text"
+            name="opinion"
+            [(ngModel)]="opinion.opinion"
+            placeholder="..."
+            required
+          ></textarea>
+          <label for="note" class="form-label">Votre note sur 5:</label>
+          <select class="form-select" id="note" name="note" [(ngModel)]="opinion.note" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <button
+            type="submit"
+            class="btn btn-truck"
+            [disabled]="opinionForm.invalid"
+          >
+            Evaluer
+          </button>
+        </form>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-truck"
+            data-bs-toggle="modal"
+            data-bs-target="#parkingModal"
+          >
+            Retour
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

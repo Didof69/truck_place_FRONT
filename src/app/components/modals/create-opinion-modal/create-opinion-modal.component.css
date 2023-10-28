@@ -1,7 +1,3 @@
-.card{
-    margin-bottom: 10px;
-}
-
 .icone {
     width: 30px;
     height: 30px;
@@ -18,9 +14,14 @@
     background-color: #337551;
     border: none;
     cursor: pointer;
+    margin: 10px 0;
 }
 
 .btn-truck:hover {
     background-color: #234e35;
     box-shadow: 0rem 0rem 0rem 0.05rem #234e35;
+}
+
+#opinion{
+    height: 10rem;
 }

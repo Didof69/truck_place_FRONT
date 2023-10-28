@@ -7,7 +7,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarDesktopComponent } from './components/navbar-desktop/navbar-desktop.component';
 import { NavbarPhoneComponent } from './components/navbar-phone/navbar-phone.component';
@@ -25,6 +24,7 @@ import { UppercaseFirstPipe } from './pipes/uppercase-first.pipe';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { RatingBarComponent } from './components/rating-bar/rating-bar.component';
 import { OpinionModalComponent } from './components/modals/opinion-modal/opinion-modal.component';
+import { CreateOpinionModalComponent } from './components/modals/create-opinion-modal/create-opinion-modal.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +46,7 @@ import { OpinionModalComponent } from './components/modals/opinion-modal/opinion
     SearchBarComponent,
     RatingBarComponent,
     OpinionModalComponent,
+    CreateOpinionModalComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/user';
+import { CreatedUser } from 'src/app/models/user copy';
+
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
-  user: User = {
+  user: CreatedUser = {
     pseudo: '',
     user_name: '',
     firstname: '',
