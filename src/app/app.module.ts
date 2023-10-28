@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -58,10 +59,9 @@ import { UpdateParkingModalComponent } from './components/modals/update-parking-
     AppRoutingModule,
     FormsModule,
     NgSelectModule,
+    MatAutocompleteModule
   ],
-  exports: [
-    UppercaseFirstPipe
-  ],
+  exports: [UppercaseFirstPipe],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -1,1 +1,212 @@
-<p>create-parking-modal works!</p>
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createParkingModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="createParkingModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nouveau Parking</h5>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmit()" #createParkingForm="ngForm">
+          <div>
+            <label for="parking_name" class="form-label"
+              >Nom du Parking :</label
+            >
+            <input
+              class="form-control"
+              id="parking_name"
+              type="text"
+              name="parking_name"
+              [(ngModel)]="createdParking.parking_name"
+              placeholder="ex : Parking du Nord"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="latitude" class="form-label">Latitude :</label>
+            <input
+              class="form-control"
+              id="latitude"
+              type="text"
+              name="latitude"
+              [(ngModel)]="createdParking.latitude"
+              placeholder="ex : 46.584125"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="longitude" class="form-label">Longitude :</label>
+            <input
+              class="form-control"
+              id="longitude"
+              type="text"
+              name="longitude"
+              [(ngModel)]="createdParking.longitude"
+              placeholder="ex : 6.842374"
+              required
+            />
+          </div>
+
+          <div class="d-flex">
+            <div>
+              <label for="nb_space_all" class="form-label"
+                >Nombre de places totales :</label
+              >
+              <input
+                class="form-control"
+                id="nb_space_all"
+                type="number"
+                name="nb_space_all"
+                [(ngModel)]="createdParking.nb_space_all"
+                placeholder="ex : 24"
+                [class.input-error]="isNegative"
+                required
+              />
+              <div *ngIf="isNegative" class="alert">
+                <p class="alert">
+                  Le nombre de places libres doit être égal ou supérieur à 0.
+                </p>
+              </div>
+            </div>
+            <div>
+              <label for="nb_space_free" class="form-label"
+                >Nombre de places libres :</label
+              >
+              <input
+                class="form-control"
+                id="nb_space_free"
+                type="number"
+                name="nb_space_free"
+                [(ngModel)]="createdParking.nb_space_free"
+                placeholder="ex : 24"
+                [class.input-error]="!isValid || isNegative"
+                required
+              />
+              <div *ngIf="!isValid" class="alert">
+                <p class="alert">
+                  Le nombre de places libres ne peut exéder le nombre de places
+                  totales.
+                </p>
+              </div>
+              <div *ngIf="isNegative" class="alert">
+                <p class="alert">
+                  Le nombre de places libres doit être égal ou supérieur à 0.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label for="main_road" class="form-label">Axe principal :</label>
+            <input
+              class="form-control"
+              id="main_road"
+              type="text"
+              name="main_road"
+              [(ngModel)]="createdParking.main_road"
+              placeholder="ex : A6"
+            />
+          </div>
+
+          <div>
+            <label for="direction" class="form-label">Direction :</label>
+            <input
+              class="form-control"
+              id="direction"
+              type="text"
+              name="direction"
+              [(ngModel)]="createdParking.direction"
+              placeholder="ex : Nord"
+            />
+          </div>
+
+           <div>
+            <label for="insee_code" class="form-label">Code Postal et Ville :</label>
+            <input
+              class="form-control"
+              id="insee_code"
+              type="text"
+              name="insee_code"
+              [(ngModel)]="createdParking.insee_code"
+              placeholder="ex : 69003 Lyon"
+              required
+            />
+          </div>
+
+
+          <div>
+            <label for="note" class="form-label">Services disponibles :</label>
+            <div class="d-flex justify-content-around">
+              <div
+                *ngFor="let service of servicesTab"
+                class="d-flex flex-column"
+              >
+                <label class="checkbox-space" [for]="service.service_name">
+                  <img
+                    class="iconeService"
+                    *ngIf="service.service_name == 'douches'"
+                    src="../../../assets/icones/shower_ok.png"
+                    alt=""
+                  />
+                  <img
+                    class="iconeService"
+                    *ngIf="service.service_name == 'toilettes'"
+                    src="../../../assets/icones/wc_ok.png"
+                    alt=""
+                  />
+                  <img
+                    class="iconeService"
+                    *ngIf="service.service_name == 'restauration'"
+                    src="../../../assets/icones/catering_ok.png"
+                    alt=""
+                  />
+                  <img
+                    class="iconeService"
+                    *ngIf="service.service_name == 'wifi'"
+                    src="../../../assets/icones/wifi_ok.png"
+                    alt=""
+                  />
+                </label>
+                <input
+                  type="checkbox"
+                  value="{{ service | json }}"
+                  [id]="service.service_name"
+                  (change)="onChangeService($event)"
+                  class="width-check"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center btn-modify">
+            <button
+              type="submit"
+              class="btn btn-truck"
+              [disabled]="createParkingForm.invalid"
+            >
+              Créer
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          Annuler
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

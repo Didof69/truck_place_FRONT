@@ -8,8 +8,8 @@ export interface CreatedParking {
   nb_space_free: number;
   registration_date: Date;
   public_view: boolean;
-  main_road: string;
-  direction: string;
+  main_road?: string;
+  direction?: string;
   insee_code: string;
   user_id: number;
   photo_id?: number;

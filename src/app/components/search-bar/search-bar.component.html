@@ -1,1 +1,28 @@
-<p>search-bar works!</p>
+<div class="input-group rounded">
+  <input
+    #search
+    type="search"
+    class="form-control"
+    placeholder="Code Postal"
+    (input)="onSearch(search.value)"
+  />
+  <div *ngIf="search.value">
+    <div *ngFor="let location of filteredLocations">
+        <option value=`${location.insee_code}`> {{location.zip_code}} {{location.city_name}}</option>
+    
+  </div>
+  </div>
+
+  <!-- <mat-autocomplete #auto="matAutocomplete">
+  <mat-option *ngFor="let location of filteredOption | async" >
+    {{location.zip_code}}  {{location.city_name}}
+  </mat-option>
+</mat-autocomplete>
+<div class="input-group rounded">
+<input type="text"
+       placeholder="Pick one"
+       aria-label="Number"
+       matInput
+       [matAutocomplete]="auto"
+       [formControl="searchValue"></div>
+</div> -->

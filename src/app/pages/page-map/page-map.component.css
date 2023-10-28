@@ -1,0 +1,17 @@
+.btn {
+    position: absolute;
+    top: 74%;
+    left: 78%;
+    z-index: 401;
+}
+
+.searchBar {
+    position: absolute;
+    top: 5%;
+    left: 40%;
+    z-index: 401;
+}
+
+.icone {
+    width: 64px;
+}

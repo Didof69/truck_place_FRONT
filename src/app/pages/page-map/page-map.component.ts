@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import * as L from 'leaflet';
 import { ParkingService } from 'src/app/services/parking.service';
 import { Parking } from '../../models/parking';
+import { LocationService } from 'src/app/services/location.service';
+import { Location } from 'src/app/models/location';
 // import { GeolocationService } from '@ng-web-apis/geolocation';
 
 @Component({
@@ -12,8 +14,13 @@ import { Parking } from '../../models/parking';
 })
 export class PageMapComponent {
   parkingTab!: Parking[];
+  // locationsList!: Location[];
+  // filteredLocations: Location[] = [];
 
-  constructor(private parkingService: ParkingService) {}
+  constructor(
+    private parkingService: ParkingService,
+    // private locationService: LocationService
+  ) {}
 
   ngOnInit() {
     // Déclaration de la carte avec les coordonnées du centre et le niveau de zoom.
@@ -45,5 +52,17 @@ export class PageMapComponent {
           .openPopup();
       }
     });
+
+    // this.locationService.getLocations().subscribe((locations) => {
+    //   this.locationsList = [...locations];
+    //   console.log(this.locationsList);
+    // });
   }
+
+  // onSearch(value: string) {
+  //   this.filteredLocations = this.locationsList.filter((e) =>
+  //     e.zip_code.includes(value)
+  //   );
+  //   console.log('filteredLocation',this.filteredLocations);
+  // }
 }
