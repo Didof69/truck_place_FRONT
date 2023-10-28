@@ -56,46 +56,61 @@
       </div>
 
       <div class="modal-body">
-        <div class="members-opinion ">
+        <div class="members-opinion">
           <app-rating-bar [note]="averageParking"></app-rating-bar>
 
           <div class="opinion d-flex justify-content-center">
             <p>{{ numberOpinions }} avis</p>
             <div *ngIf="numberOpinions > 0" class="d-flex">
-              <p> - </p>
-              <!-- <a [routerLink]="'opinion'" data-bs-dismiss="modal" >Voir les avis</a> -->
-              <button type="button" class="btn btn-opinion" data-bs-toggle="modal" data-bs-target="#opinionModal">
-  Voir les avis
-</button>
+              <p>-</p>
+              <button
+                type="button"
+                class="btn btn-opinion"
+                data-bs-toggle="modal"
+                data-bs-target="#opinionModal"
+              >
+                Voir les avis
+              </button>
+            </div>
+            <div *ngIf="numberOpinions == 0" class="d-flex">
+              <p>-</p>
+              <button
+                type="button"
+                class="btn btn-opinion"
+                data-bs-toggle="modal"
+                data-bs-target="#createOpinionModal"
+              >
+                Ajouter le premier avis
+              </button>
             </div>
           </div>
-        </div>
 
-        <div class="d-flex justify-content-center">
-          <img src="../../../../assets/icones/park.png" alt="" />
-        </div>
-
-        <div class="info-zone d-flex flex-row justify-content-around">
-          <div class="text-center">
-            <p class="modal-title fs-5" id="parkingNbSpaceAll">Total</p>
-            <p class="allSpaces">{{ parking.nb_space_all }}</p>
+          <div class="d-flex justify-content-center">
+            <img src="../../../../assets/icones/park.png" alt="" />
           </div>
-          <div class="text-center">
-            <p class="modal-title fs-5" id="parkingNbSpaceFree">Libre</p>
-            <p [ngClass]="reliabilityStatus">{{ parking.nb_space_free }}</p>
+
+          <div class="info-zone d-flex flex-row justify-content-around">
+            <div class="text-center">
+              <p class="modal-title fs-5" id="parkingNbSpaceAll">Total</p>
+              <p class="allSpaces">{{ parking.nb_space_all }}</p>
+            </div>
+            <div class="text-center">
+              <p class="modal-title fs-5" id="parkingNbSpaceFree">Libre</p>
+              <p [ngClass]="reliabilityStatus">{{ parking.nb_space_free }}</p>
+            </div>
           </div>
+
+          <app-services-list
+            *ngIf="parking.services.length > 0"
+            [services]="parking.services"
+          ></app-services-list>
         </div>
 
-        <app-services-list
-          *ngIf="parking.services.length > 0"
-          [services]="parking.services"
-        ></app-services-list>
-      </div>
-
-      <div class="modal-footer d-flex flex-row justify-content-center">
-        <button class="btn-subscribe">S'abonner</button>
-        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <div class="modal-footer d-flex flex-row justify-content-center">
+          <button class="btn-subscribe">S'abonner</button>
+          <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
       </div>
     </div>
   </div>
