@@ -21,16 +21,16 @@ export class UserService {
     return headers;
   }
 
-  signUp(data: CreatedUser): Observable<CreatedUser> {
-    // console.log(data);
-    return this.http.post<CreatedUser>(`${this.urlAPI}auth/register`, data);
+  signUp(createdUser: CreatedUser): Observable<CreatedUser> {
+    // console.log(createdUser);
+    return this.http.post<CreatedUser>(`${this.urlAPI}auth/register`, createdUser);
   }
 
-  login(data: UserLog): Observable<LogData> {
-    // console.log(data);
+  login(userLog: UserLog): Observable<LogData> {
+    // console.log(userLog);
     return this.http.post<LogData>(
       `${this.urlAPI}auth/login`,
-      data
+      userLog
     );
   }
 

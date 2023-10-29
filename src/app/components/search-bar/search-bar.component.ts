@@ -21,16 +21,16 @@ export class SearchBarComponent {
     });
   }
 
+  //chercher par code postal commencant par la value
   onSearch(value: string) {
     console.log(value);
     this.filteredLocations = this.locationsList.filter((e) =>
-      e.zip_code.includes(value)
+      e.zip_code.startsWith(value)
     );
   }
 
   getSearchedLocation(location: Location) {
     // console.log('dans searchbar',location); 
     this.location.emit(location);
-    
   }
 }

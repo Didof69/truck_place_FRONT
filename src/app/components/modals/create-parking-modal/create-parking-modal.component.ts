@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CreatedParking } from 'src/app/models/created-parking';
+import { Location } from 'src/app/models/location';
 import { Service } from 'src/app/models/service';
 import { User } from 'src/app/models/user';
 import { ParkingService } from 'src/app/services/parking.service';
@@ -13,21 +15,23 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class CreateParkingModalComponent {
   isValid: Boolean = true;
-  isNegative: Boolean = false;
+  isNbAllNegative: Boolean = false;
+  isNbFreeNegative: Boolean = false;
+  isFormValid: Boolean = true;
 
   createdParking: CreatedParking = {
-      parking_name: "",
-  latitude: "",
-  longitude: "",
-  nb_space_all: 0,
-  nb_space_free: 0,
-  registration_date: new Date(),
-  public_view: true,
-  main_road: "",
-  direction: "",
-  insee_code: "",
-  user_id: 0,
-  services: [],
+    parking_name: '',
+    latitude: '',
+    longitude: '',
+    nb_space_all: 0,
+    nb_space_free: 0,
+    registration_date: new Date(),
+    public_view: true,
+    main_road: '',
+    direction: '',
+    insee_code: '',
+    user_id: 0,
+    services: [],
   };
 
   user!: User;
@@ -38,7 +42,8 @@ export class CreateParkingModalComponent {
   constructor(
     private serviceService: ServiceService,
     private parkingService: ParkingService,
-    private userService:UserService,
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -50,7 +55,8 @@ export class CreateParkingModalComponent {
     this.userService.getUserByPseudo().subscribe((user) => {
       this.user = user;
       console.log(this.user);
-    })
+      //gérer l'erreur qui renvoie vers le login
+    });
   }
 
   onSubmit() {
@@ -64,25 +70,29 @@ export class CreateParkingModalComponent {
 
     this.createdParking.services = this.checkedServices;
     // console.log(this.createdParking);
-    if (this.createdParking.nb_space_all < 0) {
-         this.isNegative = true;
-    }
 
-    if (this.createdParking.nb_space_free <= this.createdParking.nb_space_all) {
-      // this.parkingService.updateParking(this.createdParking).subscribe({
-      //   next: (response) => {
-      //     location.reload();
-      //   },
-      //   error: (error) => {
-      //     this.isNegative = true;
-      //   },
-      // });
+    if (this.createdParking.nb_space_all > 0) {
+      if (this.createdParking.nb_space_free < 0) {
+        this.isNbFreeNegative = true;
+      } else if (
+        this.createdParking.nb_space_free <= this.createdParking.nb_space_all
+      ) {
+        this.parkingService.createParking(this.createdParking).subscribe({
+          next: (response) => {
+            console.log(response);
+            this.router.navigate(['/map/parking/',response.parking_id]);
+          },
+          error: (error) => {
+            this.isFormValid = false;
+          },
+        });
+      } else {
+        this.isValid = false;
+      }
     } else {
-      this.isValid = false;
+      this.isNbAllNegative = true;
     }
-
     console.log(this.createdParking);
-    
   }
 
   onChangeService(e: Event): Number[] {
@@ -108,5 +118,10 @@ export class CreateParkingModalComponent {
       }
     }
     return this.checkedIdServices;
+  }
+
+  onSearchLocation(location: Location) {
+    this.createdParking.insee_code = location.insee_code;
+    console.log(this.createdParking);
   }
 }

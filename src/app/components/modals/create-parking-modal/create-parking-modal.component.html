@@ -71,10 +71,10 @@
                 name="nb_space_all"
                 [(ngModel)]="createdParking.nb_space_all"
                 placeholder="ex : 24"
-                [class.input-error]="isNegative"
+                [class.input-error]="isNbAllNegative"
                 required
               />
-              <div *ngIf="isNegative" class="alert">
+              <div *ngIf="isNbAllNegative" class="alert">
                 <p class="alert">
                   Le nombre de places libres doit être égal ou supérieur à 0.
                 </p>
@@ -91,7 +91,7 @@
                 name="nb_space_free"
                 [(ngModel)]="createdParking.nb_space_free"
                 placeholder="ex : 24"
-                [class.input-error]="!isValid || isNegative"
+                [class.input-error]="!isValid || isNbFreeNegative"
                 required
               />
               <div *ngIf="!isValid" class="alert">
@@ -100,7 +100,7 @@
                   totales.
                 </p>
               </div>
-              <div *ngIf="isNegative" class="alert">
+              <div *ngIf="isNbFreeNegative" class="alert">
                 <p class="alert">
                   Le nombre de places libres doit être égal ou supérieur à 0.
                 </p>
@@ -132,72 +132,74 @@
             />
           </div>
 
-           <div>
-            <label for="insee_code" class="form-label">Code Postal et Ville :</label>
-            <input
-              class="form-control"
-              id="insee_code"
-              type="text"
-              name="insee_code"
-              [(ngModel)]="createdParking.insee_code"
-              placeholder="ex : 69003 Lyon"
-              required
-            />
-          </div>
-
-
           <div>
-            <label for="note" class="form-label">Services disponibles :</label>
-            <div class="d-flex justify-content-around">
-              <div
-                *ngFor="let service of servicesTab"
-                class="d-flex flex-column"
+            <p>Code Postal et Ville :</p>
+            <app-search-bar
+              (location)="onSearchLocation($event)"
+            ></app-search-bar>
+            <div *ngIf="!isFormValid" class="alert">
+              <p class="alert">Merci de renseigner une commune</p>
+            </div>
+     
+
+            <div>
+              <label for="note" class="form-label"
+                >Services disponibles :</label
               >
-                <label class="checkbox-space" [for]="service.service_name">
-                  <img
-                    class="iconeService"
-                    *ngIf="service.service_name == 'douches'"
-                    src="../../../assets/icones/shower_ok.png"
-                    alt=""
+              <div class="d-flex justify-content-around">
+                <div
+                  *ngFor="let service of servicesTab"
+                  class="d-flex flex-column"
+                >
+                  <label class="checkbox-space" [for]="service.service_name">
+                    <img
+                      class="iconeService"
+                      *ngIf="service.service_name == 'douches'"
+                      src="../../../assets/icones/shower_ok.png"
+                      alt=""
+                    />
+                    <img
+                      class="iconeService"
+                      *ngIf="service.service_name == 'toilettes'"
+                      src="../../../assets/icones/wc_ok.png"
+                      alt=""
+                    />
+                    <img
+                      class="iconeService"
+                      *ngIf="service.service_name == 'restauration'"
+                      src="../../../assets/icones/catering_ok.png"
+                      alt=""
+                    />
+                    <img
+                      class="iconeService"
+                      *ngIf="service.service_name == 'wifi'"
+                      src="../../../assets/icones/wifi_ok.png"
+                      alt=""
+                    />
+                  </label>
+                  <input
+                    type="checkbox"
+                    value="{{ service | json }}"
+                    [id]="service.service_name"
+                    (change)="onChangeService($event)"
+                    class="width-check"
                   />
-                  <img
-                    class="iconeService"
-                    *ngIf="service.service_name == 'toilettes'"
-                    src="../../../assets/icones/wc_ok.png"
-                    alt=""
-                  />
-                  <img
-                    class="iconeService"
-                    *ngIf="service.service_name == 'restauration'"
-                    src="../../../assets/icones/catering_ok.png"
-                    alt=""
-                  />
-                  <img
-                    class="iconeService"
-                    *ngIf="service.service_name == 'wifi'"
-                    src="../../../assets/icones/wifi_ok.png"
-                    alt=""
-                  />
-                </label>
-                <input
-                  type="checkbox"
-                  value="{{ service | json }}"
-                  [id]="service.service_name"
-                  (change)="onChangeService($event)"
-                  class="width-check"
-                />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="d-flex justify-content-center btn-modify">
-            <button
+       <div class="d-flex justify-content-center btn-create">
+
+                 <button
               type="submit"
               class="btn btn-truck"
+              data-bs-dismiss="modal"
               [disabled]="createParkingForm.invalid"
             >
               Créer
             </button>
+       </div>
+   
           </div>
         </form>
       </div>

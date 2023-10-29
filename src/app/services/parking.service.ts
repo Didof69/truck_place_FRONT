@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Parking } from '../models/parking';
 import { Opinion } from '../models/opinion';
 import { CreatedParking } from '../models/created-parking';
+import { UpdatedParking } from '../models/updated-parking';
 
 @Injectable({
   providedIn: 'root',
@@ -35,11 +36,11 @@ export class ParkingService {
   }
 
   createParking(createdParking: CreatedParking): Observable<Parking> {
-    const headers = this.setHeaders();
+    const headers = this.setHeaders();  
     return this.http.post<Parking>(`${this.urlAPI}`, createdParking, { headers });
   }
 
-  updateParking(updatedParking: any): Observable<Parking> {
+  updateParking(updatedParking: UpdatedParking): Observable<Parking> {
     const headers = this.setHeaders();
     return this.http.patch<Parking>(
       `${this.urlAPI}/${updatedParking.parking_id}`,
