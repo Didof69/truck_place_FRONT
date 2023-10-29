@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { Location } from 'src/app/models/location';
 import { LocationService } from 'src/app/services/location.service';
 
@@ -10,7 +8,7 @@ import { LocationService } from 'src/app/services/location.service';
   styleUrls: ['./search-bar.component.css'],
 })
 export class SearchBarComponent {
-  @Output() searchFilter = new EventEmitter<string>();
+  @Output() location = new EventEmitter<Location>();
   locationsList!: Location[];
   filteredLocations: Location[] = [];
 
@@ -28,6 +26,11 @@ export class SearchBarComponent {
     this.filteredLocations = this.locationsList.filter((e) =>
       e.zip_code.includes(value)
     );
-    console.log(this.filteredLocations);
+  }
+
+  getSearchedLocation(location: Location) {
+    // console.log('dans searchbar',location); 
+    this.location.emit(location);
+    
   }
 }

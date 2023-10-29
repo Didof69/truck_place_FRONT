@@ -1,4 +1,5 @@
-<div class="input-group rounded">
+<form>
+  <div class="input-group rounded">
   <input
     #search
     type="search"
@@ -6,12 +7,16 @@
     placeholder="Code Postal"
     (input)="onSearch(search.value)"
   />
-  <div *ngIf="search.value">
+ 
+  </div>
+ <div *ngIf="search.value">
     <div *ngFor="let location of filteredLocations">
-        <option value=`${location.insee_code}`> {{location.zip_code}} {{location.city_name}}</option>
-    
+      <button type="reset" class="btn-location" (click)="getSearchedLocation(location)">
+        {{location.zip_code}} {{location.city_name}}
+      </button>
   </div>
   </div>
+</form>
 
   <!-- <mat-autocomplete #auto="matAutocomplete">
   <mat-option *ngFor="let location of filteredOption | async" >

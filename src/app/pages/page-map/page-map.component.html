@@ -1,4 +1,4 @@
 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#createParkingModal"><img src="../../../assets/icones/create_green.png" alt="" class="icone" ></button>
 <app-create-parking-modal></app-create-parking-modal>
 <app-map></app-map>
-<app-search-bar class="searchBar"></app-search-bar>
+<app-search-bar class="searchBar" (location)="onSearchLocation($event)"></app-search-bar>

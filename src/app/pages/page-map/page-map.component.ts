@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import * as L from 'leaflet';
 import { ParkingService } from 'src/app/services/parking.service';
 import { Parking } from '../../models/parking';
-import { LocationService } from 'src/app/services/location.service';
 import { Location } from 'src/app/models/location';
 // import { GeolocationService } from '@ng-web-apis/geolocation';
 
@@ -16,22 +15,20 @@ export class PageMapComponent {
   parkingTab!: Parking[];
   // locationsList!: Location[];
   // filteredLocations: Location[] = [];
-
-  constructor(
-    private parkingService: ParkingService,
-    // private locationService: LocationService
-  ) {}
+  myRoadmap!: L.Map;
+  
+  constructor(private parkingService: ParkingService){}
 
   ngOnInit() {
     // Déclaration de la carte avec les coordonnées du centre et le niveau de zoom.
-    const myRoadmap = L.map('map').setView([45.75, 4.85], 12);
+    this.myRoadmap = L.map('map').setView([45.75, 4.85], 12);
 
     this.parkingService.getParkings().subscribe((parkings) => {
       this.parkingTab = parkings;
       // console.log(this.parkingTab[1].latitude);
       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: 'Truck Place',
-      }).addTo(myRoadmap);
+      }).addTo(this.myRoadmap);
 
       for (let i = 0; i < this.parkingTab.length; i++) {
         const myIcon = L.icon({
@@ -48,21 +45,22 @@ export class PageMapComponent {
             `<a href="map/parking/${this.parkingTab[i].parking_id}" 
             style="font-size: 1rem;color: #337551;">Accéder au parking : ${this.parkingTab[i].parking_name}</a>`
           )
-          .addTo(myRoadmap)
+          .addTo(this.myRoadmap)
           .openPopup();
       }
     });
-
-    // this.locationService.getLocations().subscribe((locations) => {
-    //   this.locationsList = [...locations];
-    //   console.log(this.locationsList);
-    // });
   }
 
-  // onSearch(value: string) {
-  //   this.filteredLocations = this.locationsList.filter((e) =>
-  //     e.zip_code.includes(value)
-  //   );
-  //   console.log('filteredLocation',this.filteredLocations);
-  // }
+  onSearchLocation(location: Location) {
+    const myIcon = L.icon({
+      iconUrl:
+        'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-icon.png',
+    });
+    L.marker([+location.latitude, +location.longitude], {
+      icon: myIcon,
+    })
+      .bindPopup(`${location.city_name}`)
+      .addTo(this.myRoadmap)
+      .openPopup();
+  }
 }
