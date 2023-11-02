@@ -30,7 +30,7 @@ export class LoginComponent {
       this.userService.login(this.user).subscribe({
         next: (response) => {
           sessionStorage.setItem('token', response.accessToken);
-          location.reload(); //recharge la page actuelle
+          this.router.navigate(['/account']); //recharge la page actuelle
         },
         error: (error) => {
           this.connexionKO = true;

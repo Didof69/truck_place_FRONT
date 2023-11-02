@@ -43,7 +43,7 @@ export class ParkingComponent {
   reliabilityStatus!: string;
   diffDates: number = 0;
 
-  //parametrer la moyenne du marking
+  //parametrer la moyenne du parking
   opinionsTab!: Opinion[];
   opinionsMembersTab: OpinionByMember[] = [];
   averageParking: number = 0;
