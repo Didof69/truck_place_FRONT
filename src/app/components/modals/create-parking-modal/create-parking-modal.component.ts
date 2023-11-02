@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CreatedParking } from 'src/app/models/created-parking';
 import { Location } from 'src/app/models/location';
@@ -14,6 +14,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./create-parking-modal.component.css'],
 })
 export class CreateParkingModalComponent {
+
   isValid: Boolean = true;
   isNbAllNegative: Boolean = false;
   isNbFreeNegative: Boolean = false;
@@ -47,6 +48,13 @@ export class CreateParkingModalComponent {
   ) {}
 
   ngOnInit() {
+    if (navigator.geolocation) {
+     navigator.geolocation.getCurrentPosition((position) => {
+        this.createdParking.latitude = position.coords.latitude.toString();
+        this.createdParking.longitude = position.coords.longitude.toString();
+     });
+    } 
+    
     this.serviceService.getAllService().subscribe((services) => {
       this.servicesTab = services;
       // console.log('dans on init createParking', this.servicesTab);
@@ -80,7 +88,7 @@ export class CreateParkingModalComponent {
         this.parkingService.createParking(this.createdParking).subscribe({
           next: (response) => {
             // console.log(response);
-            this.router.navigate(['/map/parking/',response.parking_id]);
+            this.router.navigate(['/map/parking/', response.parking_id]);
           },
           error: (error) => {
             this.isFormValid = false;

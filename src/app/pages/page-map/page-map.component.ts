@@ -13,9 +13,14 @@ import { Location } from 'src/app/models/location';
 })
 export class PageMapComponent {
   parkingTab!: Parking[];
-  // locationsList!: Location[];
-  // filteredLocations: Location[] = [];
   myRoadmap!: L.Map;
+
+  //paramètre selon le token l'état de la connexion
+  isLog: Boolean = false;
+
+  //parametre de la géolocalisation
+  latitude!: number;
+  longitude!: number;
 
   constructor(
     private parkingService: ParkingService,
@@ -23,13 +28,24 @@ export class PageMapComponent {
   ) {}
 
   ngOnInit() {
+    if (sessionStorage.getItem('token')) {
+      this.isLog=true
+    }
+
     // Déclaration de la carte en fonction de la geolocalisation
     if (!navigator.geolocation) {
-      this.myRoadmap = L.map('map').setView([45.75, 4.85], 12);
+      this.latitude = 45.75;
+      this.longitude = 4.85;
+      this.myRoadmap = L.map('map').setView(
+        [this.latitude, this.longitude],
+        12
+      );
     } else {
       navigator.geolocation.getCurrentPosition((position) => {
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
         this.myRoadmap = L.map('map').setView(
-          [position.coords.latitude, position.coords.longitude],
+          [this.latitude, this.longitude],
           12
         );
         const myIcon = L.icon({
