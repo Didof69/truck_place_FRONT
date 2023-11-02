@@ -77,16 +77,18 @@
 
           <form (ngSubmit)="onSubmit()" #updateParkingForm="ngForm">
             <div>
-              <label for="opinion" class="form-label"
+              <label for="nb_space_free" class="form-label"
                 >Nombre de places libres :</label
               >
               <input
                 class="form-control"
-                id="opinion"
+                id="nb_space_free"
                 type="number"
-                name="opinion"
+                min="0"
+                name="nb_space_free"
                 [(ngModel)]="updatedParking.nb_space_free"
                 placeholder="ex : 24"
+                [class.input-error]="!isValid || isNegative"
                 [class.input-error]="!isValid || isNegative"
                 required
               />

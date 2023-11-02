@@ -68,9 +68,9 @@
                 class="form-control"
                 id="nb_space_all"
                 type="number"
+                min="1"
                 name="nb_space_all"
                 [(ngModel)]="createdParking.nb_space_all"
-                placeholder="ex : 24"
                 [class.input-error]="isNbAllNegative"
                 required
               />
@@ -88,6 +88,7 @@
                 class="form-control"
                 id="nb_space_free"
                 type="number"
+                min="0"
                 name="nb_space_free"
                 [(ngModel)]="createdParking.nb_space_free"
                 placeholder="ex : 24"

@@ -31,7 +31,9 @@ export class UpdateParkingModalComponent {
     services: [],
   };
 
+  //initialise le tableau des id des services déjà cochés
   parkingServicesAlreadyChecked: number[] = [];
+
   servicesTab: Service[] = [];
   checkedServices: Service[] = [];
   checkedIdServices: number[] = [];
@@ -46,6 +48,8 @@ export class UpdateParkingModalComponent {
     this.serviceService.getAllService().subscribe((services) => {
       this.servicesTab = services;
       // console.log('dans on init updateParking', this.servicesTab);
+
+      //récupère les id des services déjà cochés
       for (let i = 0; i < this.parking.services.length; i++) {
         this.parkingServicesAlreadyChecked.push(
           this.parking.services[i].service_id
