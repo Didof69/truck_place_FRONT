@@ -1,3 +1,4 @@
+import { NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from 'src/app/models/location';
@@ -30,6 +31,7 @@ export class UpdateParkingModalComponent {
     services: [],
   };
 
+  parkingServicesAlreadyChecked: number[] = [];
   servicesTab: Service[] = [];
   checkedServices: Service[] = [];
   checkedIdServices: number[] = [];
@@ -44,6 +46,12 @@ export class UpdateParkingModalComponent {
     this.serviceService.getAllService().subscribe((services) => {
       this.servicesTab = services;
       // console.log('dans on init updateParking', this.servicesTab);
+      for (let i = 0; i < this.parking.services.length; i++) {
+        this.parkingServicesAlreadyChecked.push(
+          this.parking.services[i].service_id
+        );
+      }
+      this.checkedIdServices = this.parkingServicesAlreadyChecked;
     });
   }
 
