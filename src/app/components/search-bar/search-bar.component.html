@@ -2,13 +2,15 @@
   <div class="input-group rounded">
     <input
       #search
+      id="search"
       type="search"
       class="form-control"
-      placeholder="Code Postal"
+      [value]="[locationValue]"
+      placeholder="Code postal"
       (input)="onSearch(search.value)"
     />
   </div>
-  <div *ngIf="search.value">
+  <div *ngIf="search.value && !buttonClicked">
     <div *ngFor="let location of filteredLocations">
       <button
         type="submit"
