@@ -18,7 +18,7 @@ export class CreateOpinionModalComponent {
   @Input() parking!: Parking;
   @Input() location!: Location;
   @Input() user!: User;
-  
+  noteTab:number[] =[1,2,3,4,5]
   opinion: CreatedOpinion = {
     opinion: '',
     note: 0,

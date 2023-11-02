@@ -92,8 +92,7 @@ export class ParkingComponent {
         }).addTo(myRoadmap);
 
         const myIcon = L.icon({
-          iconUrl:
-            'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-icon.png',
+          iconUrl: '../../../../assets/icones/pin_park.png',
         });
 
         const popup = `<button type="button" data-bs-toggle="modal" data-bs-target="#parkingModal" style="
@@ -121,7 +120,7 @@ export class ParkingComponent {
             this.location = location;
           });
 
-        //récupérer les avis d'un parking (demander s'il faut un service opinion???)
+        //récupérer les avis d'un parking
         this.parkingService
           .getOpinionsByParkingId(this.parking.parking_id)
           .subscribe((opinions) => {

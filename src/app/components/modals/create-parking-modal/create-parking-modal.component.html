@@ -136,7 +136,7 @@
           <div>
             <p>Code Postal et Ville :</p>
             <app-search-bar
-              (location)="onSearchLocation($event)"
+              (location)="onValidateLocation($event)"
             ></app-search-bar>
             <div *ngIf="!isFormValid" class="alert">
               <p class="alert">Merci de renseigner une commune</p>

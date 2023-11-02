@@ -235,6 +235,10 @@ ul {
     margin-bottom: 10px;
 }
 
+.slogan {
+    background-color: #C8E5CE;
+}
+
 .desc p {
     width: 250px;
     font-size: 18px;
@@ -370,6 +374,10 @@ ul {
     .text p .hidetext2 {
         position: absolute;
         margin-top: 2rem;
+    }
+
+    .under-title {
+        font-size: 14px;
     }
 
     .bottomnav .next {

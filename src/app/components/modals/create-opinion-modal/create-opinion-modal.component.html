@@ -50,11 +50,7 @@
           ></textarea>
           <label for="note" class="form-label">Votre note sur 5:</label>
           <select class="form-select" id="note" name="note" [(ngModel)]="opinion.note" required>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
+            <option *ngFor="let note of noteTab" [value]="note">{{note}}</option>
           </select>
           <button
             type="submit"

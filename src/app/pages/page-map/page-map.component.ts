@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
+import { GeolocationService } from '@ng-web-apis/geolocation';
 
 import * as L from 'leaflet';
 import { ParkingService } from 'src/app/services/parking.service';
 import { Parking } from '../../models/parking';
 import { Location } from 'src/app/models/location';
-// import { GeolocationService } from '@ng-web-apis/geolocation';
 
 @Component({
   selector: 'app-page-map',
@@ -16,12 +16,34 @@ export class PageMapComponent {
   // locationsList!: Location[];
   // filteredLocations: Location[] = [];
   myRoadmap!: L.Map;
-  
-  constructor(private parkingService: ParkingService){}
+
+  constructor(
+    private parkingService: ParkingService,
+    private readonly geolocation$: GeolocationService
+  ) {}
 
   ngOnInit() {
-    // Déclaration de la carte avec les coordonnées du centre et le niveau de zoom.
-    this.myRoadmap = L.map('map').setView([45.75, 4.85], 12);
+    // Déclaration de la carte en fonction de la geolocalisation
+    if (!navigator.geolocation) {
+      this.myRoadmap = L.map('map').setView([45.75, 4.85], 12);
+    } else {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.myRoadmap = L.map('map').setView(
+          [position.coords.latitude, position.coords.longitude],
+          12
+        );
+        const myIcon = L.icon({
+          iconUrl: '../../../../assets/icones/target.png',
+        });
+        const popup = 'Vous êtes ici';
+        L.marker([position.coords.latitude, position.coords.longitude], {
+          icon: myIcon,
+        })
+          .bindPopup(popup)
+          .addTo(this.myRoadmap)
+          .openPopup(); 
+      });
+    }
 
     this.parkingService.getParkings().subscribe((parkings) => {
       this.parkingTab = parkings;
@@ -30,35 +52,31 @@ export class PageMapComponent {
         attribution: 'Truck Place',
       }).addTo(this.myRoadmap);
 
+      //pointe les parking de carte
       for (let i = 0; i < this.parkingTab.length; i++) {
         const myIcon = L.icon({
-          iconUrl:
-            'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-icon.png',
+          iconUrl: '../../../../assets/icones/pin_park.png',
         });
         L.marker(
           [+this.parkingTab[i].latitude, +this.parkingTab[i].longitude],
-          {
-            icon: myIcon,
-          }
+          { icon: myIcon,}
         )
           .bindPopup(
             `<a href="map/parking/${this.parkingTab[i].parking_id}" 
             style="font-size: 1rem;color: #337551;">Accéder au parking : ${this.parkingTab[i].parking_name}</a>`
           )
           .addTo(this.myRoadmap)
-          .openPopup();
       }
     });
   }
+  getPosition() {}
 
   onSearchLocation(location: Location) {
     const myIcon = L.icon({
-      iconUrl:
-        'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-icon.png',
+      iconUrl: '../../../../assets/icones/pin_park.png',
     });
-    L.marker([+location.latitude, +location.longitude], {
-      icon: myIcon,
-    })
+
+    L.marker([+location.latitude, +location.longitude], { icon: myIcon, })
       .bindPopup(`${location.city_name}`)
       .addTo(this.myRoadmap)
       .openPopup();
