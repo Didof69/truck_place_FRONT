@@ -1,9 +1,9 @@
-<ng-container *ngIf="display">
-  <div *ngIf="user" class="background">
+<ng-container>
+  <div *ngIf="isLog" class="background">
    
-<p>{{user.pseudo}}</p>
+    <app-user-profile [user]="user"></app-user-profile>
 
   </div>
 
-  <app-login *ngIf="!user"></app-login>
+  <app-login *ngIf="!isLog"></app-login>
 </ng-container>

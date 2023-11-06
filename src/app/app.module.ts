@@ -3,14 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { FooterComponent } from './components/footer/footer.component';
-import { NavbarDesktopComponent } from './components/navbar-desktop/navbar-desktop.component';
-import { NavbarPhoneComponent } from './components/navbar-phone/navbar-phone.component';
+import { FooterComponent } from './components/footer-navbar/footer/footer.component';
+import { NavbarDesktopComponent } from './components/footer-navbar/navbar-desktop/navbar-desktop.component';
+import { NavbarPhoneComponent } from './components/footer-navbar/navbar-phone/navbar-phone.component';
 import { PageHomeComponent } from './pages/page-home/page-home.component';
 import { PageMapComponent } from './pages/page-map/page-map.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
@@ -28,6 +27,8 @@ import { OpinionModalComponent } from './components/modals/opinion-modal/opinion
 import { CreateOpinionModalComponent } from './components/modals/create-opinion-modal/create-opinion-modal.component';
 import { CreateParkingModalComponent } from './components/modals/create-parking-modal/create-parking-modal.component';
 import { UpdateParkingModalComponent } from './components/modals/update-parking-modal/update-parking-modal.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ParkingLikedCardComponent } from './components/parking-liked-card/parking-liked-card.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,8 @@ import { UpdateParkingModalComponent } from './components/modals/update-parking-
     CreateOpinionModalComponent,
     CreateParkingModalComponent,
     UpdateParkingModalComponent,
+    UserProfileComponent,
+    ParkingLikedCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,6 @@ import { UpdateParkingModalComponent } from './components/modals/update-parking-
     AppRoutingModule,
     FormsModule,
     NgSelectModule,
-    MatAutocompleteModule
   ],
   exports: [UppercaseFirstPipe],
   providers: [],

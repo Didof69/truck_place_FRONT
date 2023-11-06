@@ -70,7 +70,7 @@
         >
           Retour
         </button>
-        <button type="button" class="btn btn-truck" data-bs-toggle="modal" data-bs-target="#createOpinionModal">
+        <button *ngIf="user" type="button" class="btn btn-truck" data-bs-toggle="modal" data-bs-target="#createOpinionModal">
 Evaluer
 </button>
       </div>

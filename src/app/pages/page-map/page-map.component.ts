@@ -89,7 +89,7 @@ export class PageMapComponent {
 
   onSearchLocation(location: Location) {
     const myIcon = L.icon({
-      iconUrl: '../../../../assets/icones/pin_park.png',
+      iconUrl: '../../../../assets/icones/marker.png',
     });
 
     L.marker([+location.latitude, +location.longitude], { icon: myIcon, })

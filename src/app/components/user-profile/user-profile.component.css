@@ -1,0 +1,23 @@
+.container-fluid {
+    padding: 0;
+}
+
+.banner {
+    background: linear-gradient(#337551, #C8E5CE);
+    height: 20vh;
+}
+
+.btn-modify {
+    border: none;
+    background-color: transparent;
+    height: 30px;
+}
+
+.icone{
+    width: 30px;
+}
+
+.parking-zone{
+    height: 16rem;
+    overflow: auto;
+}

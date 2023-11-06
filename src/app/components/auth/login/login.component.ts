@@ -31,6 +31,7 @@ export class LoginComponent {
         next: (response) => {
           sessionStorage.setItem('token', response.accessToken);
           this.router.navigate(['/account']); //recharge la page actuelle
+          this.userService.isLog$.next(true);
         },
         error: (error) => {
           this.connexionKO = true;

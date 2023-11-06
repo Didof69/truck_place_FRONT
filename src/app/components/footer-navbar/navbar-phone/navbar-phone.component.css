@@ -1,0 +1,23 @@
+.navbar{
+    height: 4rem;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+li{
+    margin-left: 10px;
+    margin-right: 10px;
+    justify-content: center;
+}
+
+a{
+    padding: 0;   
+    width: 50px; 
+}
+
+p{
+    margin: 0;
+}
+.icone {
+    width: 2rem
+}

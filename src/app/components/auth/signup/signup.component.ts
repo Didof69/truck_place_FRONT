@@ -18,6 +18,7 @@ export class SignupComponent {
     password: '',
     password_confirm:'',
     admin: false,
+    is_delete: false,
   };
 
   confirmMdpError = false;

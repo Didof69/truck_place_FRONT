@@ -1,0 +1,19 @@
+p{
+    margin:0
+}
+
+img{
+    width: 50px;
+}
+
+.parking-name{
+    font-weight: 600;
+    color: #357751;
+}
+
+.location{
+    font-size: 14px;
+}
+.road{
+    font-size: 12px;
+}

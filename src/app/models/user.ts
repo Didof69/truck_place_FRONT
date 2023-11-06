@@ -7,4 +7,5 @@ export interface User {
     password?: string;
     password_confirm?: string;
     admin: boolean;
+    is_delete: boolean;
 }

@@ -9,21 +9,26 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class PageAccountComponent {
   user!: User;
+  isLog!: boolean;
   display: boolean = false;
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    // this.subUser$ = this.utilisateurService.getProfilUtilisateur(); //à creuser
-    this.userService.getUserByPseudo().subscribe({
+    this.userService.isLog$.subscribe((resp) => {
+      this.isLog = resp;
+      if (this.isLog) {
+      this.userService.getUserByPseudo().subscribe({
       next: (response) => {
-        this.display = true; //modifie le composant à afficher
-        this.user = response;
+          this.user = response;
       },
-      
-      error: (error) => {
-        this.display = true; //modifie le composant à afficher
+        error: (error) => {
+        //géréer l'erreur
       },
     });
+    }
+    });
+
+    
   }
 }

@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="banner d-flex">
+    <button class="btn-modify align-self-end ms-auto"><img src="../../../assets/icones/modify_green.png" alt="" class="icone"></button>
+  </div>
+  <div class="user-icon">
+    <div>
+        <img src="../../../assets/icones/account_green.png" alt="">
+    </div>
+  </div>
+  <div class="user-profile">
+    <div>Pseudo {{user.pseudo}}</div>
+    <div>Nom Prénom {{user.firstname}} {{user.user_name}}</div>
+    <div>Email {{user.email}}</div>
+  </div>
+  <div *ngIf="parkingsLiked.length>0" class="parking-liked">Parkings Favoris
+    <div class="card m-2 d-flex flex-row parking-zone">
+      <app-parking-liked-card *ngFor="let parking of parkingsLiked" [parking]="parking"></app-parking-liked-card>
+    </div>
+    
+  </div>
+  <div class="delete-profile">
+    <button class="btn btn-danger" (click)="onDelete()">Supprimer mon compte</button>
+  </div>
+</div>
