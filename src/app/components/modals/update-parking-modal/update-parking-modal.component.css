@@ -12,8 +12,18 @@
 /*------------------- modal-body --------------------*/
 
 /* zone-info */
+.modal-body{
+    padding: 12px;
+}
+
 .allSpaces {
     font-size: 32px;
+    margin-bottom: 0;
+    height: 61.6px;
+padding: 6px 12px ;}
+
+.space{
+width: 40%;
 }
 
 .reliabilityDanger {
