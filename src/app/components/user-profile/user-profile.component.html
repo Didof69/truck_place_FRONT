@@ -122,9 +122,10 @@
     <div class="card m-2 parking-zone">
       <p>Parkings Favoris</p>
       <div class="d-flex flex-row">
-        <app-parking-liked-card
+        <app-parking-liked-card 
           *ngFor="let parking of user.likedParkings"
           [parking]="parking"
+          [user]="user"
         ></app-parking-liked-card>
       </div>
     </div>

@@ -4,8 +4,14 @@
   [routerLink]="['/map/parking/', parking.parking_id]"
 >
   <div class="d-flex flex-column justify-content-around text-center">
-    <div>
-      <img src="../../../assets/icones/park.png" alt="" />
+    <div class="d-flex justify-content-around">
+      <div style="width: 20px;"></div>
+      <div>
+        <img src="../../../assets/icones/park.png" alt="" />
+      </div>
+          <div>
+      <button class="btn btn-danger" (click)="onClick()">x</button>
+    </div>
     </div>
 
     <div>
