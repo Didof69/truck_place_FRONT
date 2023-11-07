@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { UserLog } from '../models/user-log';
 import { LogData } from '../models/log-data';
 import { CreatedUser } from '../models/created-user';
+import { UpdatedUser } from '../models/updated-user';
 
 @Injectable({
   providedIn: 'root',
@@ -50,6 +51,11 @@ export class UserService {
         sessionStorage.setItem('user_admin', user.admin.toString());
       })
     );
+  }
+
+  updateUser(user: UpdatedUser): Observable<User>{
+    const headers = this.setHeaders();
+    return this.http.patch<User>(`${this.urlAPI}users/${user.user_id}`, user, {headers})
   }
 
   deleteUser(pseudo: string): Observable<User> {

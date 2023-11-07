@@ -58,42 +58,41 @@
             <img src="../../../../assets/icones/park.png" alt="" />
           </div>
 
-
-
-          <div class="modal-body">          
-
+          <div class="modal-body">
             <p class="text-center">
-              Vous pouvez mettre à jour le nombre de places
-              disponibles ainsi que les services dont dispose le parking.
+              Vous pouvez mettre à jour le nombre de places disponibles ainsi
+              que les services dont dispose le parking.
             </p>
 
             <form (ngSubmit)="onSubmit()" #updateParkingForm="ngForm">
-                          <div class="info-zone d-flex flex-row justify-content-around">
-            <div class="space text-center">
-              <p class="modal-title fs-5" id="parkingNbSpaceAll">Total</p>
-              <p class="allSpaces">{{ parking.nb_space_all }}</p>
-            </div>
-            <div class="space text-center">                
-              <label class="modal-title fs-5" id="parkingNbSpaceFree" for="nb_space_free"
-                  >Libre</label
-                >
-                <input
-                  class="form-control text-center"
-                  id="nb_space_free"
-                  type="number"
-                  min="0"
-                  name="nb_space_free"
-                  [(ngModel)]="updatedParking.nb_space_free"
-                  [value]="parking.nb_space_free"
-                  [ngClass]="reliabilityStatus"
-                  [class.input-error]="!isValid || isNegative"
-                  [class.input-error]="!isValid || isNegative"
-                  required
-                />
-            </div>
-          </div>
+              <div class="info-zone d-flex flex-row justify-content-around">
+                <div class="space text-center">
+                  <p class="modal-title fs-5">Total</p>
+                  <p class="allSpaces">{{ parking.nb_space_all }}</p>
+                </div>
+                <div class="space text-center">
+                  <label
+                    class="modal-title fs-5"
+                    id="parkingNbSpaceFree"
+                    for="nb_space_free"
+                    >Libre</label
+                  >
+                  <input
+                    class="form-control text-center"
+                    id="nb_space_free"
+                    type="number"
+                    min="0"
+                    name="nb_space_free"
+                    [(ngModel)]="updatedParking.nb_space_free"
+                    [value]="parking.nb_space_free"
+                    [ngClass]="reliabilityStatus"
+                    [class.input-error]="!isValid || isNegative"
+                    [class.input-error]="!isValid || isNegative"
+                    required
+                  />
+                </div>
+              </div>
               <div>
-
                 <div *ngIf="!isValid" class="alert">
                   <p class="alert">
                     Le nombre de places libres ne peut exéder le nombre de

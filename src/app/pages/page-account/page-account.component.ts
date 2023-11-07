@@ -21,6 +21,8 @@ export class PageAccountComponent {
       this.userService.getUserByPseudo().subscribe({
       next: (response) => {
           this.user = response;
+          console.log("user",this.user.likedParkings);
+          
       },
         error: (error) => {
         //géréer l'erreur

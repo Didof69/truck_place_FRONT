@@ -1,9 +1,11 @@
-<ng-container>
-  <div *ngIf="isLog" class="background">
-   
-    <app-user-profile [user]="user"></app-user-profile>
+<ng-container class="mainContainer">
 
+  <div *ngIf="isLog" >
+    <app-user-profile [user]="user"></app-user-profile>
   </div>
 
-  <app-login *ngIf="!isLog"></app-login>
+  <div *ngIf="!isLog" >
+   <app-login></app-login>
+  </div>
+  
 </ng-container>

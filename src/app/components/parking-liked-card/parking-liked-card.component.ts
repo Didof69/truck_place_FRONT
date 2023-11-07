@@ -10,7 +10,13 @@ import { LocationService } from 'src/app/services/location.service';
 })
 export class ParkingLikedCardComponent {
   @Input() parking!: Parking;
-  location!: Location;
+  location: Location = {
+    insee_code: '',
+    zip_code: '',
+    city_name: '',
+    longitude: '',
+    latitude: '',
+  };
 
   constructor(private locationService: LocationService) {}
 

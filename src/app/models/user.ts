@@ -1,3 +1,5 @@
+import { Parking } from "./parking";
+
 export interface User {
     user_id: number;
     pseudo: string;
@@ -8,4 +10,5 @@ export interface User {
     password_confirm?: string;
     admin: boolean;
     is_delete: boolean;
+    likedParkings: Parking[];
 }
