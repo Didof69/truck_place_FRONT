@@ -10,52 +10,78 @@
 >
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header d-flex align-items-stretch">
-        <button
-          type="button"
-          class="btn-modal"
-          data-bs-dismiss="modal"
-          aria-label="modify"
-          data-bs-toggle="modal" 
-          data-bs-target="#updateParkingModal"
-        >
-          <img
-          *ngIf="user"
-            class="icone"
-            src="../../../../assets/icones/modify_green.png"
-            alt=""
-          />
-        </button>
-
-        <div class="d-flex flex-column text-center">
-          <h1 class="modal-title" id="parkingModalLabel">
-            {{ parking.parking_name | uppercaseFirst }}
-          </h1>
-          <h2 class="modal-title fs-5" id="parkingLocation">
-            {{ location.zip_code }} {{ location.city_name | uppercaseFirst }}
-          </h2>
-          <h2
-            class="modal-title fs-5"
-            id="parkingMainroad"
-            *ngIf="parking.main_road"
+      <div>
+        <div class="modal-header d-flex align-items-stretch">
+          <button
+            *ngIf="user"
+            type="button"
+            class="btn-modal"
+            data-bs-dismiss="modal"
+            aria-label="modify"
+            data-bs-toggle="modal"
+            data-bs-target="#updateParkingModal"
           >
-            {{ parking.main_road }} - Direction : {{ parking.direction }}
-          </h2>
-        </div>
+            <img
+              class="icone"
+              src="../../../../assets/icones/modify_green.png"
+              alt=""
+            />
+          </button>
 
-        <button
-          type="button"
-          class="btn-modal"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-          (click)="returnMap()"
-        >
-          <img
-            class="icone"
-            src="../../../../assets/icones/close_green.png"
-            alt=""
-          />
-        </button>
+          <div class="d-flex flex-column text-center">
+            <div>
+              <h1 class="modal-title" id="parkingModalLabel">
+                {{ parking.parking_name | uppercaseFirst }}
+              </h1>
+              <h2 class="modal-title fs-5" id="parkingLocation">
+                {{ location.zip_code }}
+                {{ location.city_name | uppercaseFirst }}
+              </h2>
+              <h2
+                class="modal-title fs-5"
+                id="parkingMainroad"
+                *ngIf="parking.main_road"
+              >
+                {{ parking.main_road }} - Direction : {{ parking.direction }}
+              </h2>
+            </div>
+            <div *ngIf="user" class="btn-zone">
+              <button
+                type="button"
+                class="btn-like"
+                aria-label="modify"
+                (click)="onLikeBtn()"
+              >
+                <img 
+                  *ngIf="isParkingLiked"
+                  class="icone"
+                  src="../../../../assets/icones/like_on.png"
+                  alt=""
+                />     
+                <img
+                  *ngIf="!isParkingLiked"
+                  class="icone"
+                  src="../../../../assets/icones/like_off.png"
+                  alt=""
+                />
+              </button>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="btn-modal"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="returnMap()"
+          >
+            <img
+              class="icone"
+              src="../../../../assets/icones/close_green.png"
+              alt=""
+            />
+          </button>
+        </div>
       </div>
 
       <div class="modal-body">
@@ -111,9 +137,29 @@
 
         <div class="modal-footer d-flex flex-row justify-content-center">
           <button *ngIf="user" class="btn-subscribe">S'abonner</button>
-          <button *ngIf="!user" class="btn-subscribe" [routerLink]="'/account/login'" data-bs-dismiss="modal">Se connecter</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <p *ngIf="!user" class="text-center" style="font-size: 12px; color: #BC3030" >Pour modifier et donner son avis sur ce parking merci de vous connecter</p>
+          <button
+            *ngIf="!user"
+            class="btn-subscribe"
+            [routerLink]="'/account/login'"
+            data-bs-dismiss="modal"
+          >
+            Se connecter
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <p
+            *ngIf="!user"
+            class="text-center"
+            style="font-size: 12px; color: #bc3030"
+          >
+            Pour modifier et donner son avis sur ce parking merci de vous
+            connecter
+          </p>
         </div>
       </div>
     </div>

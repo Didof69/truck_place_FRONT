@@ -1,5 +1,5 @@
 <app-map></app-map>
-<app-parking-modal [parking]="parking" [location]="location" [reliabilityStatus]="reliabilityStatus" [numberOpinions]="numberOpinions" [averageParking]="averageParking" [user]="user"></app-parking-modal>
+<app-parking-modal [isParkingLiked]="isParkingLiked" [parking]="parking" [location]="location" [reliabilityStatus]="reliabilityStatus" [numberOpinions]="numberOpinions" [averageParking]="averageParking" [user]="user" (likeEvent)="onClickLike()"></app-parking-modal>
 <app-opinion-modal [user]='user' [parking]="parking" [location]="location" [opinionsMembersTab]="opinionsMembersTab"></app-opinion-modal>
 <app-create-opinion-modal [user]='user' [parking]="parking" [location]="location" [opinionsMembersTab]="opinionsMembersTab"></app-create-opinion-modal>
 <app-update-parking-modal [parking]="parking" [location]="location" [reliabilityStatus]="reliabilityStatus" [numberOpinions]="numberOpinions" [averageParking]="averageParking"></app-update-parking-modal>
