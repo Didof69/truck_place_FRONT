@@ -26,4 +26,14 @@ export class SubscribeService {
       headers,
     });
   }
+
+  getSubscriptionUser(): Observable<Subscribe[]>{
+    const headers = this.setHeaders();
+    return this.http.get<Subscribe[]>(`${this.urlAPI}`, {headers});
+  }
+
+  deleteSubscribe(subscribe_id :number): Observable<Subscribe>{
+    const headers = this.setHeaders();
+    return this.http.delete<Subscribe>(`${this.urlAPI}/${subscribe_id}`, { headers });
+  }
 }

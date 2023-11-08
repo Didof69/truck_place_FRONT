@@ -40,8 +40,8 @@ export class ParkingLikedCardComponent {
   }
 
   //supprime le parking des favoris du user
-  onClick() {
-    let index: number = -1;
+  onClickDelete() {
+    let index: number = 0;
 
     //retire le parking du tableau des favoris
     for (let i = 0; i < this.user.likedParkings.length; i++) {

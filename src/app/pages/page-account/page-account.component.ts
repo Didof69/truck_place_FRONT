@@ -20,9 +20,7 @@ export class PageAccountComponent {
       if (this.isLog) {
       this.userService.getUserByPseudo().subscribe({
       next: (response) => {
-          this.user = response;
-          console.log("user",this.user.likedParkings);
-          
+          this.user = response;    
       },
         error: (error) => {
         //géréer l'erreur

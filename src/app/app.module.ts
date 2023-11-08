@@ -29,6 +29,7 @@ import { CreateParkingModalComponent } from './components/modals/create-parking-
 import { UpdateParkingModalComponent } from './components/modals/update-parking-modal/update-parking-modal.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ParkingLikedCardComponent } from './components/parking-liked-card/parking-liked-card.component';
+import { SubscriptionCardComponent } from './components/subscription-card/subscription-card.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { ParkingLikedCardComponent } from './components/parking-liked-card/parki
     UpdateParkingModalComponent,
     UserProfileComponent,
     ParkingLikedCardComponent,
+    SubscriptionCardComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,9 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscribe } from 'src/app/models/subscribe';
 import { UpdatedUser } from 'src/app/models/updated-user';
 import { User } from 'src/app/models/user';
+import { SubscribeService } from 'src/app/services/subscribe.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,6 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserProfileComponent implements OnChanges {
   @Input() user!: User;
+  userSubscriptions: Subscribe[] = [];
 
   updatedUser: UpdatedUser = {
     user_id: 0,
@@ -25,20 +28,32 @@ export class UserProfileComponent implements OnChanges {
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private subscribeService :SubscribeService
   ) {}
 
+  ngOnInit(){
+      this.subscribeService.getSubscriptionUser().subscribe({
+        next: (response) => { 
+          this.userSubscriptions = response;        
+        },
+        error:(error) =>{}
+    })
+  }
+
   ngOnChanges() {
-    this.updatedUser = {
+    if (this.user) {
+       this.updatedUser = {
         user_id: this.user.user_id,
         pseudo: this.user.pseudo,
         user_name: this.user.user_name,
         firstname: this.user.firstname,
         email: this.user.email,
       };
+    }
   }
 
-  onDelete() {
+  onUserDelete() {
     this.userService.deleteUser(this.user.pseudo).subscribe({
       next: (response) => {
         this.router.navigate(['/account']); //recharge la page actuelle;
@@ -51,12 +66,32 @@ export class UserProfileComponent implements OnChanges {
     });
   }
 
-  onUpdate() {
+  onUserUpdate() {
     this.updateMode = !this.updateMode;
   }
 
-  onSubmit() {
+  onUserSubmit() {
     this.updatedUser.user_id = this.user.user_id;
     this.userService.updateUser(this.updatedUser).subscribe((response)=>console.log(response))
+  }
+
+  onSubscribeDelete(subscribe_id:number) {
+     this.subscribeService
+       .deleteSubscribe(subscribe_id)
+       .subscribe({
+         next: (response) => {
+           this.subscribeService.getSubscriptionUser().subscribe({
+             next: (subscriptions) => {
+               this.userSubscriptions = subscriptions
+             },
+             error: (error) => {
+               //gerer l'erreur
+             },
+           });
+         },
+         error: (error) => {
+           //gerer l'erreur
+         },
+       });
   }
 }

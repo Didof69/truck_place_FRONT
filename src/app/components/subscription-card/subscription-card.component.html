@@ -1,7 +1,6 @@
-<div
+<div *ngIf="parking"
   class="card m-2"
   style="width: 8rem; margin: 10px; height: 13rem"
-  [routerLink]="['/map/parking/', parking.parking_id]"
 >
   <div class="d-flex flex-column justify-content-around text-center">
     <div class="d-flex justify-content-around">
@@ -18,7 +17,7 @@
       <p class="parking-name">
         {{ parking.parking_name | uppercaseFirst }}
       </p>
-      <p class="location">
+      <p *ngIf="location" class="location">
         {{ location.zip_code }} {{ location.city_name | uppercaseFirst }}
       </p>
     </div>
@@ -34,6 +33,11 @@
         <span *ngIf="!(parking.nb_space_free > 1)">place libre</span>
         <span *ngIf="parking.nb_space_free > 1">places libres</span>
       </p>
+    </div>
+
+    <div *ngIf="remainingHours">
+        <p>Fin d'abonnement dans :</p>
+        <p>{{remainingHours}}</p>
     </div>
   </div>
 </div>
