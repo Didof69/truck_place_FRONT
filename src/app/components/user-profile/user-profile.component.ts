@@ -17,10 +17,10 @@ export class UserProfileComponent implements OnChanges {
 
   updatedUser: UpdatedUser = {
     user_id: 0,
-    pseudo: "",
-    user_name: "",
-    firstname: "",
-    email:"",
+    pseudo: '',
+    user_name: '',
+    firstname: '',
+    email: '',
   };
 
   //paramètre pour gérer l'édition du UserProfil
@@ -29,21 +29,24 @@ export class UserProfileComponent implements OnChanges {
   constructor(
     private userService: UserService,
     private router: Router,
-    private subscribeService :SubscribeService
+    private subscribeService: SubscribeService
   ) {}
 
-  ngOnInit(){
-      this.subscribeService.getSubscriptionUser().subscribe({
-        next: (response) => { 
-          this.userSubscriptions = response;        
-        },
-        error:(error) =>{}
-    })
+  ngOnInit() {
+    this.subscribeService.userSubscription$.subscribe(
+      (data) => (this.userSubscriptions = data)
+    );
+    this.subscribeService.getSubscriptionUser().subscribe({
+      next: (response) => {
+        this.subscribeService.userSubscription$.next(response);
+      },
+      error: (error) => {},
+    });
   }
 
   ngOnChanges() {
     if (this.user) {
-       this.updatedUser = {
+      this.updatedUser = {
         user_id: this.user.user_id,
         pseudo: this.user.pseudo,
         user_name: this.user.user_name,
@@ -72,26 +75,26 @@ export class UserProfileComponent implements OnChanges {
 
   onUserSubmit() {
     this.updatedUser.user_id = this.user.user_id;
-    this.userService.updateUser(this.updatedUser).subscribe((response)=>console.log(response))
+    this.userService
+      .updateUser(this.updatedUser)
+      .subscribe((response) => console.log(response));
   }
 
-  onSubscribeDelete(subscribe_id:number) {
-     this.subscribeService
-       .deleteSubscribe(subscribe_id)
-       .subscribe({
-         next: (response) => {
-           this.subscribeService.getSubscriptionUser().subscribe({
-             next: (subscriptions) => {
-               this.userSubscriptions = subscriptions
-             },
-             error: (error) => {
-               //gerer l'erreur
-             },
-           });
-         },
-         error: (error) => {
-           //gerer l'erreur
-         },
-       });
+  onSubscribeDelete(subscribe_id: number) {
+    this.subscribeService.deleteSubscribe(subscribe_id).subscribe({
+      next: (response) => {
+        this.subscribeService.getSubscriptionUser().subscribe({
+          next: (subscriptions) => {
+            this.userSubscriptions = subscriptions;
+          },
+          error: (error) => {
+            //gerer l'erreur
+          },
+        });
+      },
+      error: (error) => {
+        //gerer l'erreur
+      },
+    });
   }
 }

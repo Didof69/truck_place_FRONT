@@ -136,15 +136,25 @@
         </div>
 
         <div class="modal-footer d-flex flex-column justify-content-center">
-          <div>
-            <button
-              *ngIf="user"
-              type="button"
-              class="btn-truck"
-              (click)="onSubscribeBtn()"
-            >
-              S'abonner
-            </button>
+          <div class="d-flex">
+            <div *ngIf="user">
+              <button
+                *ngIf="!isSubscribed"
+                type="button"
+                class="btn btn-truck"
+                (click)="onSubscribeBtn()"
+              >
+                S'abonner
+              </button>
+              <button
+                *ngIf="isSubscribed"
+                type="button"
+                class="btn btn-danger"
+                (click)="onUnsubscribeBtn()"
+              >
+                Se désabonner
+              </button>
+            </div>
 
             <button
               *ngIf="!user"
@@ -175,7 +185,10 @@
             class="container-fluid d-flex justify-content-center"
             *ngIf="isClicked"
           >
-            <form (ngSubmit)="onSubscribeSubmit(+nbHourSubscribed.value)" #subscribeForm="ngForm">
+            <form
+              (ngSubmit)="onSubscribeSubmit(+nbHourSubscribed.value)"
+              #subscribeForm="ngForm"
+            >
               <div class="d-flex" style="width: 100%">
                 <div class="flex-fill align-self-end">
                   <p class="p-subscribe">S'abonner pour :</p>

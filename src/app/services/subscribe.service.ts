@@ -2,14 +2,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CreatedSubscribe } from '../models/created-subscribe';
 import { Subscribe } from '../models/subscribe';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SubscribeService {
   urlAPI: string = 'http://localhost:3000/api/subscribes';
-
+public userSubscription$= new Subject<Subscribe[]>
+  
   constructor(private http: HttpClient) {}
 
   setHeaders() {

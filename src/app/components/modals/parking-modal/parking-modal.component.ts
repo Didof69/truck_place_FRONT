@@ -21,9 +21,30 @@ export class ParkingModalComponent {
   @Input() user!: User;
   isClicked: boolean = false;
   isValid: boolean = true;
+  isSubscribed: boolean = false;
 
   @Output() likeEvent = new EventEmitter();
-  constructor(private router: Router, private subscribeService:SubscribeService) {}
+  constructor(
+    private router: Router,
+    private subscribeService: SubscribeService
+  ) {}
+
+  ngOnInit() {
+    this.subscribeService
+      .getSubscriptionUser()
+      .subscribe((userSubscriptions) => {
+        userSubscriptions.forEach((susbcription) => {
+          if (
+            this.isEqualParking(
+              susbcription.parking_id,
+              this.parking.parking_id
+            )
+          ) {
+            this.isSubscribed = true;
+          }
+        });
+      });
+  }
 
   returnMap() {
     this.router.navigate(['/map']);
@@ -38,33 +59,63 @@ export class ParkingModalComponent {
     this.isClicked = !this.isClicked;
   }
 
-  onChangeHourSubscribe(nbHour:number) {
-  if (nbHour>12) {
-    this.isValid = false
-  } else {
-    this.isValid = true
+  onChangeHourSubscribe(nbHour: number) {
+    if (nbHour > 12) {
+      this.isValid = false;
+    } else {
+      this.isValid = true;
+    }
   }
-};
-  onSubscribeSubmit(nb:number) {
+
+  onSubscribeSubmit(nb: number) {
     let unsubscribe_date = new Date();
-    unsubscribe_date.setHours(unsubscribe_date.getHours() + nb)
-     
+    unsubscribe_date.setHours(unsubscribe_date.getHours() + nb);
+
     const newSubscribe: CreatedSubscribe = {
       unsubscribe_date: unsubscribe_date,
       user_id: this.user.user_id,
-      parking_id:this.parking.parking_id
-    }
+      parking_id: this.parking.parking_id,
+    };
 
     this.subscribeService.createSubscribe(newSubscribe).subscribe({
       next: (response) => {
         console.log(response);
-        this.isClicked = false
-       },
+        this.isClicked = false;
+        this.isSubscribed = true;
+      },
       error: (error) => {
         //gérer l'erreur
-      }
-    })
+      },
+    });
   }
 
-  
+  //vérifier qu'un parking soit égal à un autre
+  isEqualParking(parking_id1: number, parking_id2: number): boolean {
+    return parking_id1 === parking_id2;
+  }
+
+  onUnsubscribeBtn() {
+    //désabonne du parking
+    this.subscribeService
+      .getSubscriptionUser()
+      .subscribe((userSubscriptions) => {
+        userSubscriptions.forEach((susbcription) => {
+          if (
+            this.isEqualParking(
+              susbcription.parking_id,
+              this.parking.parking_id
+            )
+          ) {
+            this.subscribeService
+              .deleteSubscribe(susbcription.subscribe_id)
+              .subscribe({
+                next: (response) => {
+                  this.isSubscribed = false;
+                },
+                error: (error) => {},
+              });
+          }
+        });
+      });
+  }
 }

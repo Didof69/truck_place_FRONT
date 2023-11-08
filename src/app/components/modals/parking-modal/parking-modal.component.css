@@ -74,6 +74,10 @@
     height: 38px;
 }
 
+.btn-danger {
+    margin-right: 10px;
+}
+
 .btn-truck {
     font-size: 1rem;
     color: #ffffff;
