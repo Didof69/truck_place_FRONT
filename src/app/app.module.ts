@@ -30,6 +30,7 @@ import { UpdateParkingModalComponent } from './components/modals/update-parking-
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ParkingLikedCardComponent } from './components/parking-liked-card/parking-liked-card.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

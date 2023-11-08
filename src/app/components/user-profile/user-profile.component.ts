@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
-import { Parking } from 'src/app/models/parking';
 import { UpdatedUser } from 'src/app/models/updated-user';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
@@ -10,9 +9,8 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css'],
 })
-export class UserProfileComponent {
+export class UserProfileComponent implements OnChanges {
   @Input() user!: User;
-  parkingsLiked: Parking[] = [];
 
   updatedUser: UpdatedUser = {
     user_id: 0,
@@ -30,14 +28,14 @@ export class UserProfileComponent {
     private router: Router
   ) {}
 
-  ngOnInit() {
-    // this.updatedUser = {
-    //     user_id: this.user.user_id,
-    //     pseudo: this.user.pseudo,
-    //     user_name: this.user.user_name,
-    //     firstname: this.user.firstname,
-    //     email: this.user.email,
-    //   };
+  ngOnChanges() {
+    this.updatedUser = {
+        user_id: this.user.user_id,
+        pseudo: this.user.pseudo,
+        user_name: this.user.user_name,
+        firstname: this.user.firstname,
+        email: this.user.email,
+      };
   }
 
   onDelete() {

@@ -21,7 +21,7 @@
 }
 
 /* zone-info */
-.allSpaces{
+.allSpaces {
     font-size: 32px;
 }
 
@@ -43,8 +43,38 @@
     font-size: 32px;
 }
 
+.p-subscribe {
+    margin-bottom: 0;
+}
+
+#nbHourSubscribed {
+    margin: 0 10px;
+    width: 60px;
+}
+
+.input-error {
+    border: 0.13rem solid #BC3030;
+}
+
+.alert {
+    color: #BC3030;
+    font-size: 0.8rem;
+    padding: 0;
+    margin: 0;
+}
+
+.btn-zone {
+    margin-top: 10px;
+}
+
+
+
 /*---------------------- modal-footer --------------------*/
-.btn-subscribe {
+.btn-secondary {
+    height: 38px;
+}
+
+.btn-truck {
     font-size: 1rem;
     color: #ffffff;
     background-color: #337551;
@@ -52,9 +82,10 @@
     cursor: pointer;
     border-radius: 0.5rem;
     height: 38px;
+    margin-right: 10px;
 }
 
-.btn-subscribe:hover {
+.btn-truck:hover {
     background-color: #234e35;
     box-shadow: 0rem 0rem 0rem 0.05rem #234e35;
 }
