@@ -57,6 +57,8 @@ export class UpdateParkingModalComponent {
     }
 
     this.parking.services = this.checkedServices;
+    this.parking.registration_date = new Date();
+    
     // console.log(this.updatedParking);
     if (this.parking.nb_space_free <= this.parking.nb_space_all) {
       this.parkingService.updateParking(this.parking).subscribe({

@@ -15,14 +15,6 @@ export class UserProfileComponent implements OnChanges {
   @Input() user!: User;
   userSubscriptions: Subscribe[] = [];
 
-  updatedUser: UpdatedUser = {
-    user_id: 0,
-    pseudo: '',
-    user_name: '',
-    firstname: '',
-    email: '',
-  };
-
   //paramètre pour gérer l'édition du UserProfil
   updateMode: boolean = false;
 
@@ -45,15 +37,7 @@ export class UserProfileComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    if (this.user) {
-      this.updatedUser = {
-        user_id: this.user.user_id,
-        pseudo: this.user.pseudo,
-        user_name: this.user.user_name,
-        firstname: this.user.firstname,
-        email: this.user.email,
-      };
-    }
+
   }
 
   onUserDelete() {
@@ -74,8 +58,7 @@ export class UserProfileComponent implements OnChanges {
   }
 
   onUserSubmit() {
-    this.updatedUser.user_id = this.user.user_id;
-    this.userService.updateUser(this.updatedUser).subscribe((response) => {
+    this.userService.updateUser(this.user).subscribe((response) => {
       this.updateMode = false;
     });
   }
