@@ -2,6 +2,10 @@
     box-shadow: #337551 0px 3px 8px;
 }
 
+.card-parking{
+height: 100%;
+}
+
 p {
     margin: 0
 }

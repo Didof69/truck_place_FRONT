@@ -50,7 +50,7 @@ export class SubscriptionCardComponent {
   calculateRemainingHours(date: Date): number {
     const today = new Date();
     const unsubscribe_date = new Date(date);
-    const reaminingHours = Math.round(
+    const reaminingHours = Math.ceil(
       (unsubscribe_date.getTime() - today.getTime()) / 3600000
     );
     return reaminingHours;

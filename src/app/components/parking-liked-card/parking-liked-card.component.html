@@ -1,31 +1,40 @@
 <div
-  class="card m-2"
-  style="width: 8rem; margin: 10px; height: 13rem"
+  class="card m-1"
+  style="width: 8rem; height: 11rem"
   [routerLink]="['/map/parking/', parking.parking_id]"
 >
-  <div class="d-flex flex-column justify-content-around text-center">
-    <div class="d-flex justify-content-around">
-      <div style="width: 20px"></div>
-      <div>
-        <img src="../../../assets/icones/park.png" alt="" />
+  <div
+    class="card-parking d-flex flex-column justify-content-between text-center"
+  >
+    <div class="d-flex flex-column justify-content-around">
+      <div class="d-flex justify-content-around">
+        <div style="width: 20px"></div>
+        <div>
+          <img src="../../../assets/icones/park.png" alt="" />
+        </div>
+        <div>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="onClickDelete()"
+          >
+            x
+          </button>
+        </div>
       </div>
+
       <div>
-        <button type="button" class="btn btn-danger" (click)="onClickDelete()">x</button>
+        <p class="parking-name">
+          {{ parking.parking_name | uppercaseFirst }}
+        </p>
+        <p class="location">
+          {{ location.zip_code }} {{ location.city_name | uppercaseFirst }}
+        </p>
       </div>
-    </div>
-
-    <div>
-      <p class="parking-name">
-        {{ parking.parking_name | uppercaseFirst }}
-      </p>
-      <p class="location">
-        {{ location.zip_code }} {{ location.city_name | uppercaseFirst }}
-      </p>
-    </div>
-
-    <div class="road" *ngIf="parking.main_road">
-      <p>{{ parking.main_road }}</p>
-      <p>Direction : {{ parking.direction }}</p>
+      <div class="road" *ngIf="parking.main_road">
+        <p>{{ parking.main_road }}</p>
+        <p>Direction : {{ parking.direction }}</p>
+      </div>
     </div>
 
     <div class="space-free">

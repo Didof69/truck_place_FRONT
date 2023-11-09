@@ -65,14 +65,23 @@
 }
 
 .parking-zone {
-    height: 16rem;
-    overflow: auto;
+    height: 13.4rem;
     background-color: #C8E5CE;
 }
 
-.parking-zone p {
+.parking-zone p,
+.subscription-zone p {
     padding-left: 8px;
     margin-bottom: 0;
+}
+
+.subscription-zone {
+    height: 16rem;
+    background-color: #C8E5CE;
+}
+
+.parking-scroll {
+    overflow: auto;
 }
 
 h1 {
@@ -80,13 +89,25 @@ h1 {
     margin: 2em 0 1.5em;
 }
 
+.btn-danger {
+    margin-bottom: 10px;
+}
+
 @media only screen and (max-width: 48rem) {
+    .container-fluid {
+        padding-bottom: 60px;
+    }
+
     .banner {
         height: 18vh;
     }
 
     .parking-zone {
-        height: 17rem;
+        height: 13.2rem;
+    }
+
+    .subscription-zone {
+        height: 15.4rem;
     }
 
     .btn-danger {

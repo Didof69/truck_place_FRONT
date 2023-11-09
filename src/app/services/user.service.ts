@@ -13,7 +13,7 @@ import { UpdatedUser } from '../models/updated-user';
 export class UserService {
   urlAPI = 'http://localhost:3000/api/';
   public isLog$: BehaviorSubject<boolean>;
-
+  
   constructor(private http: HttpClient) {
     const token = sessionStorage.getItem('token');
     if (token) {

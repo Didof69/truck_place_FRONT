@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Location } from 'src/app/models/location';
 import { Parking } from 'src/app/models/parking';
 import { Service } from 'src/app/models/service';
-import { UpdatedParking } from 'src/app/models/updated-parking';
 import { ParkingService } from 'src/app/services/parking.service';
 import { ServiceService } from 'src/app/services/service.service';
 
@@ -21,14 +20,6 @@ export class UpdateParkingModalComponent {
 
   isValid: Boolean = true;
   isNegative: Boolean = false;
-
-  updatedParking: UpdatedParking = {
-    parking_id: 0,
-    nb_space_free: 0,
-    registration_date: new Date(),
-    public_view: true,
-    services: [],
-  };
 
   //initialise le tableau des id des services déjà cochés
   parkingServicesAlreadyChecked: number[] = [];
@@ -59,18 +50,16 @@ export class UpdateParkingModalComponent {
   }
 
   onSubmit() {
-    this.updatedParking.parking_id = this.parking.parking_id;
-
     for (let i = 0; i < this.checkedIdServices.length; i++) {
       this.checkedServices.push(
         this.servicesTab[this.checkedIdServices[i] - 1]
       );
     }
 
-    this.updatedParking.services = this.checkedServices;
+    this.parking.services = this.checkedServices;
     // console.log(this.updatedParking);
-    if (this.updatedParking.nb_space_free <= this.parking.nb_space_all) {
-      this.parkingService.updateParking(this.updatedParking).subscribe({
+    if (this.parking.nb_space_free <= this.parking.nb_space_all) {
+      this.parkingService.updateParking(this.parking).subscribe({
         next: (response) => {
           location.reload();
         },

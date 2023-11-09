@@ -2,6 +2,10 @@
     box-shadow: #337551 0px 3px 8px;
 }
 
+.card-parking {
+    height: 100%;
+}
+
 p {
     margin: 0
 }
@@ -21,6 +25,15 @@ img {
 
 .road {
     font-size: 12px;
+}
+
+.remainingHours p {
+    color: #337551;
+    font-weight: bolder;
+}
+
+.p-remainingHours {
+    font-size: 10px;
 }
 
 .btn-danger {

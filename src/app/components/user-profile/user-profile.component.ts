@@ -75,9 +75,9 @@ export class UserProfileComponent implements OnChanges {
 
   onUserSubmit() {
     this.updatedUser.user_id = this.user.user_id;
-    this.userService
-      .updateUser(this.updatedUser)
-      .subscribe((response) => console.log(response));
+    this.userService.updateUser(this.updatedUser).subscribe((response) => {
+      this.updateMode = false;
+    });
   }
 
   onSubscribeDelete(subscribe_id: number) {

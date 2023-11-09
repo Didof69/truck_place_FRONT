@@ -118,7 +118,7 @@
   <div *ngIf="user.likedParkings.length > 0" class="parking-liked">
     <div class="card m-2 parking-zone">
       <p>Parkings Favoris</p>
-      <div class="d-flex flex-row">
+      <div class="d-flex flex-row parking-scroll">
         <app-parking-liked-card
           *ngFor="let parking of user.likedParkings"
           [parking]="parking"
@@ -129,7 +129,7 @@
   </div>
 
     <div *ngIf="userSubscriptions.length > 0" class="parking-liked">
-    <div class="card m-2 parking-zone">
+    <div class="card m-2 subscription-zone">
       <p>Abonnements</p>
       <div class="d-flex flex-row">
         <app-subscription-card

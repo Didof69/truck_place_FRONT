@@ -1,19 +1,18 @@
-<div *ngIf="parking"
-  class="card m-2"
-  style="width: 8rem; margin: 10px; height: 13rem"
->
-  <div class="d-flex flex-column justify-content-around text-center">
+<div *ngIf="parking" class="card m-1" style="width: 8rem; height: 13rem">
+  <div class="card-parking d-flex d-flex flex-column justify-content-between text-center">
+    <div class="d-flex flex-column justify-content-around">
     <div class="d-flex justify-content-around">
       <div style="width: 20px"></div>
       <div>
         <img src="../../../assets/icones/park.png" alt="" />
       </div>
       <div>
-        <button type="submit" class="btn btn-danger" (click)="onClickDelete()">x</button>
+        <button type="submit" class="btn btn-danger" (click)="onClickDelete()">
+          x
+        </button>
       </div>
     </div>
-
-    <div>
+        <div>
       <p class="parking-name">
         {{ parking.parking_name | uppercaseFirst }}
       </p>
@@ -21,13 +20,14 @@
         {{ location.zip_code }} {{ location.city_name | uppercaseFirst }}
       </p>
     </div>
-
-    <div class="road" *ngIf="parking.main_road">
+        <div class="road" *ngIf="parking.main_road">
       <p>{{ parking.main_road }}</p>
       <p>Direction : {{ parking.direction }}</p>
     </div>
+    </div>
 
-    <div class="space-free">
+    <div>
+          <div class="space-free">
       <p>
         {{ parking.nb_space_free }}
         <span *ngIf="!(parking.nb_space_free > 1)">place libre</span>
@@ -35,9 +35,14 @@
       </p>
     </div>
 
-    <div *ngIf="remainingHours">
-        <p>Fin d'abonnement dans :</p>
-        <p>{{remainingHours}}</p>
+    <div class="remainingHours">
+      <p class="p-remainingHours">Fin d'abonnement dans :</p>
+      <p>
+        {{ remainingHours }} <span *ngIf="remainingHours == 1">heure</span
+        ><span *ngIf="remainingHours > 1">heures</span>
+      </p>
     </div>
+    </div>
+
   </div>
 </div>
