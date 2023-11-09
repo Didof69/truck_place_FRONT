@@ -27,12 +27,12 @@ img {
     font-size: 12px;
 }
 
-.remainingHours p {
+.remainingTime p {
     color: #337551;
     font-weight: bolder;
 }
 
-.p-remainingHours {
+.p-remainingTime {
     font-size: 10px;
 }
 

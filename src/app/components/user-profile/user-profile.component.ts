@@ -16,6 +16,7 @@ export class UserProfileComponent {
 
   //paramètre pour gérer l'édition du UserProfil
   updateMode: boolean = false;
+  isValid: boolean = true;
 
   constructor(
     private userService: UserService,
@@ -37,8 +38,9 @@ export class UserProfileComponent {
 
   onDeconnexion() {
     this.userService.isLog$.next(false);
-    sessionStorage.clear()
+    sessionStorage.clear();
   }
+
   onUserDelete() {
     this.userService.deleteUser(this.user.pseudo).subscribe({
       next: (response) => {
@@ -56,9 +58,15 @@ export class UserProfileComponent {
     this.updateMode = !this.updateMode;
   }
 
-  onUserSubmit() {
-    this.userService.updateUser(this.user).subscribe((response) => {
-      this.updateMode = false;
+  onUserUpdateSubmit() {
+    this.userService.updateUser(this.user).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.updateMode = false;
+      },
+      error: (error) => {
+        this.isValid=false
+      },
     });
   }
 

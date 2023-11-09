@@ -21,6 +21,10 @@ export class ParkingLikedCardComponent {
     latitude: '',
   };
 
+  //parametrer l'indicateur de fiabilité
+  reliabilityStatus!: string;
+  diffDates: number = 0;
+
   constructor(
     private locationService: LocationService,
     private userService: UserService
@@ -32,6 +36,12 @@ export class ParkingLikedCardComponent {
       .subscribe((location) => {
         this.location = location;
       });
+
+    //mettre à jour l'indicateur de fiabilité
+    this.diffDates = this.differenceDateInMinuts(
+      this.parking.registration_date
+    );
+    this.getReliability(this.diffDates);
   }
 
   //vérifier qu'un parking soit égal à un autre
@@ -61,5 +71,27 @@ export class ParkingLikedCardComponent {
         //gérer l'erreur
       },
     });
+  }
+
+  //obtenir l'indicateur de fiabilité
+  differenceDateInMinuts(value: Date) {
+    const today = new Date();
+    const date = new Date(value);
+    const diff = (today.getTime() - date.getTime()) / 60000;
+    return diff;
+  }
+  getReliability(value: number) {
+    if (value <= 30) {
+      this.reliabilityStatus = 'reliabilitySafe';
+      return;
+    }
+    if (value <= 60) {
+      this.reliabilityStatus = 'reliabilityMedium';
+      return;
+    }
+    if (value > 60) {
+      this.reliabilityStatus = 'reliabilityDanger';
+      return;
+    }
   }
 }

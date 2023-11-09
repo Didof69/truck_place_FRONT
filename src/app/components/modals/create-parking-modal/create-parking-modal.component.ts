@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CreatedParking } from 'src/app/models/created-parking';
 import { Location } from 'src/app/models/location';
@@ -14,17 +14,16 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./create-parking-modal.component.css'],
 })
 export class CreateParkingModalComponent {
-
   isValid: Boolean = true;
   isNbAllNegative: Boolean = false;
   isNbFreeNegative: Boolean = false;
-  isFormValid: Boolean = true;
+  isCityValid: Boolean = true;
 
   createdParking: CreatedParking = {
     parking_name: '',
     latitude: '',
     longitude: '',
-    nb_space_all: 0,
+    nb_space_all: 1,
     nb_space_free: 0,
     registration_date: new Date(),
     public_view: true,
@@ -49,12 +48,12 @@ export class CreateParkingModalComponent {
 
   ngOnInit() {
     if (navigator.geolocation) {
-     navigator.geolocation.getCurrentPosition((position) => {
+      navigator.geolocation.getCurrentPosition((position) => {
         this.createdParking.latitude = position.coords.latitude.toString();
         this.createdParking.longitude = position.coords.longitude.toString();
-     });
-    } 
-    
+      });
+    }
+
     this.serviceService.getAllService().subscribe((services) => {
       this.servicesTab = services;
       // console.log('dans on init createParking', this.servicesTab);
@@ -77,7 +76,6 @@ export class CreateParkingModalComponent {
     }
 
     this.createdParking.services = this.checkedServices;
-    // console.log(this.createdParking);
 
     if (this.createdParking.nb_space_all > 0) {
       if (this.createdParking.nb_space_free < 0) {
@@ -91,7 +89,7 @@ export class CreateParkingModalComponent {
             this.router.navigate(['/map/parking/', response.parking_id]);
           },
           error: (error) => {
-            this.isFormValid = false;
+            this.isCityValid = false;
           },
         });
       } else {
@@ -100,7 +98,6 @@ export class CreateParkingModalComponent {
     } else {
       this.isNbAllNegative = true;
     }
-    // console.log(this.createdParking);
   }
 
   onChangeService(e: Event): Number[] {

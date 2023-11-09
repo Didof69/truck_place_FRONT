@@ -2,8 +2,8 @@
     box-shadow: #337551 0px 3px 8px;
 }
 
-.card-parking{
-height: 100%;
+.card-parking {
+    height: 100%;
 }
 
 p {
@@ -27,9 +27,21 @@ img {
     font-size: 12px;
 }
 
-.btn-danger{
+.btn-danger {
     height: 20px;
     width: 20px;
     padding: 0 5px;
     font-size: 10px;
+}
+
+.reliabilityDanger {
+    color: #BC3030;
+}
+
+.reliabilitySafe {
+    color: #337551;
+}
+
+.reliabilityMedium {
+    color: #996c2c;
 }

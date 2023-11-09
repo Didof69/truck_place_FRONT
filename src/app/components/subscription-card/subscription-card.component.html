@@ -35,11 +35,15 @@
       </p>
     </div>
 
-    <div class="remainingHours">
-      <p class="p-remainingHours">Fin d'abonnement dans :</p>
-      <p>
-        {{ remainingHours }} <span *ngIf="remainingHours == 1">heure</span
-        ><span *ngIf="remainingHours > 1">heures</span>
+    <div class="remainingTime">
+      <p class="p-remainingTime">Fin d'abonnement dans :</p>
+      <p *ngIf="isMinute">
+        {{ remainingTime }} <span *ngIf="remainingTime == 1">minute</span
+        ><span *ngIf="remainingTime">minutes</span>
+      </p>
+            <p *ngIf="!isMinute">
+        {{ remainingTime }} <span *ngIf="remainingTime == 1">heure</span
+        ><span *ngIf="remainingTime">heures</span>
       </p>
     </div>
     </div>

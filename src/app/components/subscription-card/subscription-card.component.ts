@@ -16,8 +16,8 @@ export class SubscriptionCardComponent {
   @Input() userSubscriptions!: Subscribe[];
   parking!: Parking;
   location!: Location;
-  remainingHours!: number;
-
+  remainingTime!: number;
+  isMinute = true
   constructor(
     private parkingService: ParkingService,
     private locationService: LocationService,
@@ -25,9 +25,14 @@ export class SubscriptionCardComponent {
   ) {}
 
   ngOnInit() {
-    this.remainingHours = this.calculateRemainingHours(
+    this.remainingTime = this.calculateRemainingMinutes(
       this.subscription.unsubscribe_date
     );
+    if (this.remainingTime>60) {
+      this.remainingTime = Math.round(this.remainingTime / 60)
+      this.isMinute = false
+    }
+    
     this.parkingService.getParkingById(this.subscription.parking_id).subscribe({
       next: (parking) => {
         this.parking = parking;
@@ -47,13 +52,13 @@ export class SubscriptionCardComponent {
   }
 
   //calcul le temps en heure restant de subscription
-  calculateRemainingHours(date: Date): number {
+  calculateRemainingMinutes(date: Date): number {
     const today = new Date();
     const unsubscribe_date = new Date(date);
-    const reaminingHours = Math.ceil(
-      (unsubscribe_date.getTime() - today.getTime()) / 3600000
+    const remainingTime = Math.ceil(
+      (unsubscribe_date.getTime() - today.getTime()) / 60000
     );
-    return reaminingHours;
+    return remainingTime;
   }
 
   onClickDelete() {

@@ -38,7 +38,7 @@
     </div>
 
     <div class="space-free">
-      <p>
+      <p [ngClass]="reliabilityStatus">
         {{ parking.nb_space_free }}
         <span *ngIf="!(parking.nb_space_free > 1)">place libre</span>
         <span *ngIf="parking.nb_space_free > 1">places libres</span>

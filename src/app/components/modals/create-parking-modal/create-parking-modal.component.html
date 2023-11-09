@@ -66,7 +66,7 @@
               >
               <input
                 class="form-control"
-                id="nb_space_all"
+                #nb_space_all
                 type="number"
                 min="1"
                 name="nb_space_all"
@@ -86,16 +86,15 @@
               >
               <input
                 class="form-control"
-                id="nb_space_free"
+                #nb_space_free
                 type="number"
                 min="0"
                 name="nb_space_free"
                 [(ngModel)]="createdParking.nb_space_free"
-                placeholder="ex : 24"
-                [class.input-error]="!isValid || isNbFreeNegative"
+                [class.input-error]="!isValid || isNbFreeNegative || nb_space_free.value>nb_space_all.value"
                 required
               />
-              <div *ngIf="!isValid" class="alert">
+              <div *ngIf="!isValid || nb_space_free.value>nb_space_all.value" class="alert">
                 <p class="alert">
                   Le nombre de places libres ne peut exéder le nombre de places
                   totales.
@@ -138,7 +137,7 @@
             <app-search-bar
               (location)="onValidateLocation($event)"
             ></app-search-bar>
-            <div *ngIf="!isFormValid" class="alert">
+            <div *ngIf="!isCityValid" class="alert">
               <p class="alert">Merci de renseigner une commune</p>
             </div>
      
@@ -195,7 +194,7 @@
               type="submit"
               class="btn btn-truck"
               data-bs-dismiss="modal"
-              [disabled]="createParkingForm.invalid"
+              [disabled]="createParkingForm.invalid || nb_space_free.value>nb_space_all.value"
             >
               Créer
             </button>
