@@ -1,6 +1,8 @@
 <div *ngIf="user" class="container-fluid">
   <div class="banner d-flex">
-    <button class="btn-modify align-self-end ms-auto">
+    <div class="d-flex flex-column-reverse align-self-end ms-auto"> 
+      <p style="margin-bottom: 0;" (click)="onDeconnexion()">Se déconnecter</p>  
+        <button class="btn-modify align-self-end ms-auto">
       <img
         src="../../../assets/icones/modify_green.png"
         alt="bouton pour modifier le profil"
@@ -8,6 +10,9 @@
         (click)="onUserUpdate()"
       />
     </button>
+   
+    </div>
+
   </div>
 
   <div class="user-icon d-flex justify-content-center">

@@ -1,7 +1,6 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscribe } from 'src/app/models/subscribe';
-import { UpdatedUser } from 'src/app/models/updated-user';
 import { User } from 'src/app/models/user';
 import { SubscribeService } from 'src/app/services/subscribe.service';
 import { UserService } from 'src/app/services/user.service';
@@ -11,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css'],
 })
-export class UserProfileComponent implements OnChanges {
+export class UserProfileComponent {
   @Input() user!: User;
   userSubscriptions: Subscribe[] = [];
 
@@ -36,10 +35,10 @@ export class UserProfileComponent implements OnChanges {
     });
   }
 
-  ngOnChanges() {
-
+  onDeconnexion() {
+    this.userService.isLog$.next(false);
+    sessionStorage.clear()
   }
-
   onUserDelete() {
     this.userService.deleteUser(this.user.pseudo).subscribe({
       next: (response) => {
