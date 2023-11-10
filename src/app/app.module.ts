@@ -32,6 +32,7 @@ import { SubscriptionCardComponent } from './components/subscription-card/subscr
 import { PageAdminComponent } from './pages/page-admin/page-admin.component';
 import { DeleteParkingModalComponent } from './components/modals/delete-parking-modal/delete-parking-modal.component';
 import { SearchBarLocationComponent } from './components/search-bar-location/search-bar-location.component';
+import { SearchBarAdminComponent } from './components/search-bar-admin/search-bar-admin.component';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { SearchBarLocationComponent } from './components/search-bar-location/sea
     PageAdminComponent,
     DeleteParkingModalComponent,
     SearchBarLocationComponent,
+    SearchBarAdminComponent,
   ],
   imports: [
     BrowserModule,

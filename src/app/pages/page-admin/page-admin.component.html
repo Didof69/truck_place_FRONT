@@ -43,7 +43,9 @@
           </button>
         </div>
         <div class="collapse" id="userList">
+          <app-search-bar-admin (searchFilter)="onSearchUser($event)"></app-search-bar-admin>
           <div class="card card-body card-users">
+            
             <table class="table table-sm">
               <thead>
                 <tr>
@@ -54,7 +56,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let user of usersTab">
+                <tr *ngFor="let user of usersTabFilter">
                   <th scope="row">{{ user.pseudo }}</th>
                   <td>{{ user.user_name }}</td>
                   <td>{{ user.firstname }}</td>
@@ -162,6 +164,8 @@
           </button>
         </div>
         <div class="collapse" id="parkingList">
+                    <app-search-bar-admin (searchFilter)="onSearchParking($event)"></app-search-bar-admin>
+
           <div class="card card-body card-parkings">
             <table class="table table-sm">
               <thead>
@@ -172,7 +176,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let parking of parkingsTab">
+                <tr *ngFor="let parking of parkingsTabFilter">
                   <th scope="row">{{ parking.parking_id }}</th>
                   <td>{{ parking.parking_name }}</td>
                   <td>
