@@ -21,13 +21,13 @@ export class ParkingService {
     return headers;
   }
 
-  getParkings(): Observable<Parking[]> {
+  getAllParkings(): Observable<Parking[]> {
     return this.http.get<Parking[]>(`${this.urlAPI}`);
   }
 
   getParkingsLikedByUser(): Observable<Parking[]> {
     const headers = this.setHeaders();
-    return this.http.get<Parking[]>(`${this.urlAPI}/liked`, {headers});
+    return this.http.get<Parking[]>(`${this.urlAPI}/liked`, { headers });
   }
 
   getParkingById(parking_id: number): Observable<Parking> {
@@ -56,5 +56,10 @@ export class ParkingService {
         headers,
       }
     );
+  }
+
+  deleteParking(parking_id: number): Observable<Parking> {
+    const headers = this.setHeaders();
+    return this.http.delete<Parking>(`${this.urlAPI}/${parking_id}`, { headers });
   }
 }

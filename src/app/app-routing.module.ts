@@ -7,6 +7,7 @@ import { PageAccountComponent } from './pages/page-account/page-account.componen
 import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { ParkingComponent } from './components/parking/parking.component';
+import { PageAdminComponent } from './pages/page-admin/page-admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'account', component: PageAccountComponent },
   { path: 'account/login', component: LoginComponent },
   { path: 'account/signup', component: SignupComponent },
+  { path: 'admin', component: PageAdminComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
 import { UserLog } from '../models/user-log';
 import { LogData } from '../models/log-data';
 import { CreatedUser } from '../models/created-user';
@@ -13,7 +13,8 @@ import { UpdatedUser } from '../models/updated-user';
 export class UserService {
   urlAPI = 'http://localhost:3000/api/';
   public isLog$: BehaviorSubject<boolean>;
-  
+  public isAdmin$ = new Subject<boolean>();
+
   constructor(private http: HttpClient) {
     const token = sessionStorage.getItem('token');
     if (token) {
@@ -44,6 +45,11 @@ export class UserService {
     return this.http.post<LogData>(`${this.urlAPI}auth/login`, userLog);
   }
 
+  getAllUsers(): Observable<User[]> {
+    const headers = this.setHeaders();
+    return this.http.get<User[]>(`${this.urlAPI}users/admin`, { headers });
+  }
+
   getUserByPseudo(): Observable<User> {
     const headers = this.setHeaders();
     return this.http.get<User>(`${this.urlAPI}users`, { headers }).pipe(
@@ -53,9 +59,11 @@ export class UserService {
     );
   }
 
-  updateUser(user: UpdatedUser): Observable<User>{
+  updateUser(user: UpdatedUser): Observable<User> {
     const headers = this.setHeaders();
-    return this.http.patch<User>(`${this.urlAPI}users/${user.user_id}`, user, {headers})
+    return this.http.patch<User>(`${this.urlAPI}users/${user.user_id}`, user, {
+      headers,
+    });
   }
 
   deleteUser(pseudo: string): Observable<User> {

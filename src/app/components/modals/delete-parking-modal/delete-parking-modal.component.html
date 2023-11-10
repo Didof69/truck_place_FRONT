@@ -1,0 +1,54 @@
+<div
+  class="modal fade"
+  id="deleteParkingModal"
+  tabindex="-1"
+  aria-labelledby="deleteParkingModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: #b68686">
+      <div class="modal-header d-flex flex-column">
+        <h1 class="modal-title fs-5" id="deleteParkingModalLabel">
+          Suppression du parking #{{ parking.parking_id }}
+        </h1>
+        <div class="d-flex justify-content-center" style="width: 100%">
+          <img
+            class="icone"
+            src="../../../assets/icones/warning.png"
+            alt="panneau attention"
+          />
+          <p class="align-self-end">Toute suppression est définitive.</p>
+          <img
+            class="icone"
+            src="../../../assets/icones/warning.png"
+            alt="panneau attention"
+          />
+        </div>
+
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-toggle="modal"
+          data-bs-target="#parkingModal"
+        >
+          Annuler
+        </button>
+        <button
+          class="btn btn-danger"
+          (click)="onParkingDelete(parking.parking_id)"
+          data-bs-dismiss="modal"
+        >
+          Confirmer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

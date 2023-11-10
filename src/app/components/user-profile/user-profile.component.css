@@ -39,6 +39,15 @@
     border-bottom: 1px solid black
 }
 
+.btn-admin {
+    font-size: 1rem;
+    height: 38px;
+    color: #ffffff;
+    background-color: #337551;
+    border: none;
+    cursor: pointer;
+}
+
 .empty-div {
     width: 28px;
 }

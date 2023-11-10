@@ -30,6 +30,8 @@ import { UpdateParkingModalComponent } from './components/modals/update-parking-
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ParkingLikedCardComponent } from './components/parking-liked-card/parking-liked-card.component';
 import { SubscriptionCardComponent } from './components/subscription-card/subscription-card.component';
+import { PageAdminComponent } from './pages/page-admin/page-admin.component';
+import { DeleteParkingModalComponent } from './components/modals/delete-parking-modal/delete-parking-modal.component';
 
 
 @NgModule({
@@ -58,6 +60,8 @@ import { SubscriptionCardComponent } from './components/subscription-card/subscr
     UserProfileComponent,
     ParkingLikedCardComponent,
     SubscriptionCardComponent,
+    PageAdminComponent,
+    DeleteParkingModalComponent,
   ],
   imports: [
     BrowserModule,

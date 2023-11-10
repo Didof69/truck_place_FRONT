@@ -12,8 +12,10 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserProfileComponent {
   @Input() user!: User;
-  userSubscriptions: Subscribe[] = [];
+  isAdmin!: boolean;
 
+  userSubscriptions: Subscribe[] = [];
+ 
   //paramètre pour gérer l'édition du UserProfil
   updateMode: boolean = false;
   isValid: boolean = true;
@@ -25,6 +27,10 @@ export class UserProfileComponent {
   ) {}
 
   ngOnInit() {
+    this.userService.isAdmin$.subscribe(
+      (data) => (this.isAdmin = data)
+    );
+
     this.subscribeService.userSubscription$.subscribe(
       (data) => (this.userSubscriptions = data)
     );
@@ -38,6 +44,7 @@ export class UserProfileComponent {
 
   onDeconnexion() {
     this.userService.isLog$.next(false);
+    this.userService.isAdmin$.next(false);
     sessionStorage.clear();
   }
 

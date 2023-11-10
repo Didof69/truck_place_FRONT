@@ -61,7 +61,7 @@ export class PageMapComponent {
       });
     }
 
-    this.parkingService.getParkings().subscribe((parkings) => {
+    this.parkingService.getAllParkings().subscribe((parkings) => {
       this.parkingTab = parkings;
       // console.log(this.parkingTab[1].latitude);
       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {

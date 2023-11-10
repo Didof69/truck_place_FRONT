@@ -1,0 +1,51 @@
+.container-fluid {
+    padding: 0;
+}
+
+.banner {
+    background: linear-gradient(#337551, #C8E5CE);
+    height: 14vh;
+}
+
+#iconUser {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: #337551 0px 3px 8px;
+    display: flex;
+    justify-content: center;
+    margin-top: -40px;
+    overflow: hidden;
+}
+
+.btn-profile {
+    font-size: 1rem;
+    height: 38px;
+    color: #ffffff;
+    background-color: #337551;
+    border: none;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.btn-delete{
+    padding: 0;
+    width: 30px;
+}
+
+.icone{
+width: 30px;
+height: 30px;
+}
+
+@media only screen and (max-width: 48rem) {
+    .container-fluid {
+        padding-bottom: 60px;
+    }
+
+    .banner {
+        height: 18vh;
+    }
+
+}

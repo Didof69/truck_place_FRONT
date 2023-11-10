@@ -3,3 +3,4 @@
 <app-opinion-modal [user]='user' [parking]="parking" [location]="location" [opinionsMembersTab]="opinionsMembersTab"></app-opinion-modal>
 <app-create-opinion-modal [user]='user' [parking]="parking" [location]="location" [opinionsMembersTab]="opinionsMembersTab"></app-create-opinion-modal>
 <app-update-parking-modal [parking]="parking" [location]="location" [reliabilityStatus]="reliabilityStatus" [numberOpinions]="numberOpinions" [averageParking]="averageParking"></app-update-parking-modal>
+<app-delete-parking-modal *ngIf="user.admin" [parking]="parking"></app-delete-parking-modal>

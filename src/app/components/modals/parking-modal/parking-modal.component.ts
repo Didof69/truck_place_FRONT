@@ -5,6 +5,7 @@ import { Location } from 'src/app/models/location';
 import { User } from 'src/app/models/user';
 import { SubscribeService } from 'src/app/services/subscribe.service';
 import { CreatedSubscribe } from 'src/app/models/created-subscribe';
+import { ParkingService } from 'src/app/services/parking.service';
 
 @Component({
   selector: 'app-parking-modal',
@@ -19,6 +20,7 @@ export class ParkingModalComponent {
   @Input() numberOpinions!: number;
   @Input() averageParking!: number;
   @Input() user!: User;
+
   isClicked: boolean = false;
   isValid: boolean = true;
   isSubscribed: boolean = false;
@@ -26,7 +28,8 @@ export class ParkingModalComponent {
   @Output() likeEvent = new EventEmitter();
   constructor(
     private router: Router,
-    private subscribeService: SubscribeService
+    private subscribeService: SubscribeService,
+    private parkingService: ParkingService
   ) {}
 
   ngOnInit() {
@@ -118,4 +121,6 @@ export class ParkingModalComponent {
         });
       });
   }
+
+
 }

@@ -20,7 +20,8 @@ export class PageAccountComponent {
       if (this.isLog) {
       this.userService.getUserByPseudo().subscribe({
       next: (response) => {
-          this.user = response;    
+          this.user = response;
+          this.userService.isAdmin$.next(this.user.admin)
       },
         error: (error) => {
         //géréer l'erreur

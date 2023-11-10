@@ -1,0 +1,203 @@
+<div class="container-fluid">
+  <div class="banner d-flex">
+    <div class="d-flex align-self-end ms-auto" style="height: 100%">
+      <div class="d-flex flex-column justify-content-between btn-zone"></div>
+    </div>
+  </div>
+
+  <div class="user-icon d-flex justify-content-center">
+    <div id="iconUser">
+      <img src="../../../assets/icones/account_admin.png" alt="" />
+    </div>
+  </div>
+
+  <div class="user-zone">
+    <div class="user-profile d-flex flex-column justify-content-center">
+      <div class="d-flex justify-content-center">
+        <button [routerLink]="['/account']" class="btn btn-profile">
+          Espace Profil
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="users-management">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Pseudo</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Prénom</th>
+          <th scope="col">Gestion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of usersTab">
+          <th scope="row">{{ user.user_id }}</th>
+          <td>{{ user.pseudo }}</td>
+          <td>{{ user.user_name }}</td>
+          <td>{{ user.firstname }}</td>
+          <td>
+            <button
+              class="btn btn-delete"
+              data-bs-toggle="modal"
+              [attr.data-bs-target]="'#deleteUserModal' + user.user_id"
+            >
+              <img
+                class="icone"
+                src="../../../assets/icones/delete.png"
+                alt="supprimer"
+              />
+            </button>
+            <div
+              class="modal fade"
+              [id]="'deleteUserModal' + user.user_id"
+              tabindex="-1"
+              aria-labelledby="deleteUserModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content" style="background-color: #b68686">
+                  <div class="modal-header d-flex flex-column">
+                    <h1 class="modal-title fs-5" id="deleteUserModalLabel">
+                      Suppression de #{{ user.pseudo }}
+                    </h1>
+                    <div
+                      class="d-flex justify-content-center"
+                      style="width: 100%"
+                    >
+                      <img
+                        class="icone"
+                        src="../../../assets/icones/warning.png"
+                        alt="panneau attention"
+                      />
+                      <p class="align-self-end">
+                        Toute suppression est définitive.
+                      </p>
+                      <img
+                        class="icone"
+                        src="../../../assets/icones/warning.png"
+                        alt="panneau attention"
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Annuler
+                    </button>
+                    <button
+                      class="btn btn-danger"
+                      (click)="onUserDelete(user.pseudo)"
+                      data-bs-dismiss="modal"
+                    >
+                      Confirmer
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="parkings-management">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nom</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let parking of parkingsTab">
+          <th scope="row">{{ parking.parking_id }}</th>
+          <td>{{ parking.parking_name }}</td>
+          <td>
+            <button
+              class="btn btn-delete"
+              data-bs-toggle="modal"
+              [attr.data-bs-target]="'#deleteParkingModal' + parking.parking_id"
+            >
+              <img
+                class="icone"
+                src="../../../assets/icones/delete.png"
+                alt="supprimer"
+              />
+            </button>
+            <div
+              class="modal fade"
+              [id]="'deleteParkingModal' + parking.parking_id"
+              tabindex="-1"
+              aria-labelledby="deleteParkingModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content" style="background-color: #b68686">
+                  <div class="modal-header d-flex flex-column">
+                    <h1 class="modal-title fs-5" id="deleteParkingModalLabel">
+                      Suppression du parking #{{ parking.parking_id }}
+                    </h1>
+                    <div
+                      class="d-flex justify-content-center"
+                      style="width: 100%"
+                    >
+                      <img
+                        class="icone"
+                        src="../../../assets/icones/warning.png"
+                        alt="panneau attention"
+                      />
+                      <p class="align-self-end">
+                        Toute suppression est définitive.
+                      </p>
+                      <img
+                        class="icone"
+                        src="../../../assets/icones/warning.png"
+                        alt="panneau attention"
+                      />
+                    </div>
+
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Annuler
+                    </button>
+                    <button
+                      class="btn btn-danger"
+                      (click)="onParkingDelete(parking.parking_id)"
+                      data-bs-dismiss="modal"
+                    >
+                      Confirmer
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
