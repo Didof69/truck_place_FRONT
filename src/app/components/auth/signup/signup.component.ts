@@ -43,8 +43,6 @@ export class SignupComponent {
             this.router.navigate(['/account']);
           },
           error: (error) => {
-            console.log(error);
-            
             this.inscriptionOK = false;
           },
         });

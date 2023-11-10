@@ -35,7 +35,6 @@ export class CreateOpinionModalComponent {
     this.opinion.user_id = this.user.user_id;
     this.opinion.parking_id = this.parking.parking_id;
     this.opinion.note = +this.opinion.note
-    // console.log(+this.opinion.note);
     this.opinionService.createOpinion(this.opinion).subscribe({
       next: (response) => {
         location.reload();

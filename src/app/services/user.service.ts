@@ -33,7 +33,6 @@ export class UserService {
   }
 
   signUp(createdUser: CreatedUser): Observable<CreatedUser> {
-    // console.log(createdUser);
     return this.http.post<CreatedUser>(
       `${this.urlAPI}auth/register`,
       createdUser
@@ -41,7 +40,6 @@ export class UserService {
   }
 
   login(userLog: UserLog): Observable<LogData> {
-    // console.log(userLog);
     return this.http.post<LogData>(`${this.urlAPI}auth/login`, userLog);
   }
 

@@ -21,7 +21,6 @@ import { ParkingComponent } from './components/parking/parking.component';
 import { ParkingModalComponent } from './components/modals/parking-modal/parking-modal.component';
 import { ServicesListComponent } from './components/services-list/services-list.component';
 import { UppercaseFirstPipe } from './pipes/uppercase-first.pipe';
-import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { RatingBarComponent } from './components/rating-bar/rating-bar.component';
 import { OpinionModalComponent } from './components/modals/opinion-modal/opinion-modal.component';
 import { CreateOpinionModalComponent } from './components/modals/create-opinion-modal/create-opinion-modal.component';
@@ -32,6 +31,7 @@ import { ParkingLikedCardComponent } from './components/parking-liked-card/parki
 import { SubscriptionCardComponent } from './components/subscription-card/subscription-card.component';
 import { PageAdminComponent } from './pages/page-admin/page-admin.component';
 import { DeleteParkingModalComponent } from './components/modals/delete-parking-modal/delete-parking-modal.component';
+import { SearchBarLocationComponent } from './components/search-bar-location/search-bar-location.component';
 
 
 @NgModule({
@@ -51,7 +51,6 @@ import { DeleteParkingModalComponent } from './components/modals/delete-parking-
     ParkingModalComponent,
     ServicesListComponent,
     UppercaseFirstPipe,
-    SearchBarComponent,
     RatingBarComponent,
     OpinionModalComponent,
     CreateOpinionModalComponent,
@@ -62,6 +61,7 @@ import { DeleteParkingModalComponent } from './components/modals/delete-parking-
     SubscriptionCardComponent,
     PageAdminComponent,
     DeleteParkingModalComponent,
+    SearchBarLocationComponent,
   ],
   imports: [
     BrowserModule,

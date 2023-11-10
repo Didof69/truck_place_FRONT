@@ -19,7 +19,7 @@
     overflow: hidden;
 }
 
-.btn-profile {
+.btn-truck {
     font-size: 1rem;
     height: 38px;
     color: #ffffff;
@@ -39,6 +39,24 @@ width: 30px;
 height: 30px;
 }
 
+.card{
+    width: 95%;
+    margin: 10px;
+}
+
+.card-management{
+    width: 95%;
+ background-color: #C8E5CE;
+}
+
+.card-users,
+.card-parkings{
+    max-height: 300px;
+    overflow: scroll;
+}
+ p{
+    margin: 0;
+ }
 @media only screen and (max-width: 48rem) {
     .container-fluid {
         padding-bottom: 60px;

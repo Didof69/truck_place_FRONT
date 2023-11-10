@@ -1,9 +1,3 @@
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createParkingModal">
-  Launch demo modal
-</button> -->
-
-<!-- Modal -->
 <div
   class="modal fade"
   id="createParkingModal"
@@ -134,9 +128,9 @@
 
           <div>
             <p>Code Postal et Ville :</p>
-            <app-search-bar
+            <app-search-bar-location
               (location)="onValidateLocation($event)"
-            ></app-search-bar>
+            ></app-search-bar-location>
             <div *ngIf="!isCityValid" class="alert">
               <p class="alert">Merci de renseigner une commune</p>
             </div>

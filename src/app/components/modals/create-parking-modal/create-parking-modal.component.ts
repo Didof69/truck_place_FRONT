@@ -56,12 +56,10 @@ export class CreateParkingModalComponent {
 
     this.serviceService.getAllService().subscribe((services) => {
       this.servicesTab = services;
-      // console.log('dans on init createParking', this.servicesTab);
     });
 
     this.userService.getUserByPseudo().subscribe((user) => {
       this.user = user;
-      // console.log(this.user);
       //gérer l'erreur qui renvoie vers le login
     });
   }
@@ -85,7 +83,6 @@ export class CreateParkingModalComponent {
       ) {
         this.parkingService.createParking(this.createdParking).subscribe({
           next: (response) => {
-            // console.log(response);
             this.router.navigate(['/map/parking/', response.parking_id]);
           },
           error: (error) => {
@@ -127,6 +124,5 @@ export class CreateParkingModalComponent {
 
   onValidateLocation(location: Location) {
     this.createdParking.insee_code = location.insee_code;
-    // console.log(this.createdParking);
   }
 }

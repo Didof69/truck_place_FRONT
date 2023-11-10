@@ -15,7 +15,6 @@ export class DeleteParkingModalComponent {
   onParkingDelete(parking_id: number) {    
     this.parkingService.deleteParking(parking_id).subscribe({
       next: (response) => {
-        console.log('supprimé');
         this.router.navigate(['map']);
       },
       error: (error) => {

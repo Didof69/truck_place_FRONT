@@ -56,7 +56,6 @@ export class ParkingLikedCardComponent {
     //retire le parking du tableau des favoris
     for (let i = 0; i < this.user.likedParkings.length; i++) {
       if (this.isEqualParking(this.user.likedParkings[i], this.parking)) {
-        console.log('dans le parent', i);
         index = i;
       }
     }

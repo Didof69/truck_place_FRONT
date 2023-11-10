@@ -68,7 +68,6 @@ export class UserProfileComponent {
   onUserUpdateSubmit() {
     this.userService.updateUser(this.user).subscribe({
       next: (response) => {
-        console.log(response);
         this.updateMode = false;
       },
       error: (error) => {

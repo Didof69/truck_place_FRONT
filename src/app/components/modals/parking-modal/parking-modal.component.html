@@ -32,7 +32,7 @@
                 {{ parking.parking_name | uppercaseFirst }}
               </h1>
                        <button
-                       *ngIf="user.admin"
+                       *ngIf="isAdmin"
               class="btn btn-delete"
               data-bs-toggle="modal"
               data-bs-target="#deleteParkingModal"

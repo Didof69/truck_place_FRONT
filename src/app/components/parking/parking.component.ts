@@ -17,6 +17,8 @@ import { User } from 'src/app/models/user';
 })
 export class ParkingComponent {
   user!: User;
+  isAdmin!: boolean;
+
   parking: Parking = {
     parking_id: 0,
     parking_name: 'test',
@@ -59,7 +61,6 @@ export class ParkingComponent {
   ) {}
 
   ngOnInit() {
-    // let myRoadmap = L.map('map').setView([45.75, 4.85], 12);
     const routeParam = this.route.snapshot.paramMap;
     const parkingIdFromRoute = Number(routeParam.get('id'));
 
@@ -70,17 +71,20 @@ export class ParkingComponent {
         this.userService.getUserByPseudo().subscribe({
           next: (response) => {
             this.user = response;
-
+            this.isAdmin = this.user.admin;
+ 
             //vérifie si le parking est dans les favoris
-            if ((this.user.likedParkings.some((parking)=>this.isEqualParking(parking,this.parking)))) {
+            if (
+              this.user.likedParkings.some((parking) =>
+                this.isEqualParking(parking, this.parking)
+              )
+            ) {
               this.isParkingLiked = true;
             }
-            console.log("ce parking est il dans les favoris?",this.isParkingLiked, this.parking, this.user.likedParkings);
           },
 
           error: (error) => {},
         });
-        // console.log(parking);
         this.parking = parking;
 
         //mettre à jour l'indicateur de fiabilité
@@ -88,7 +92,6 @@ export class ParkingComponent {
           this.parking.registration_date
         );
         this.getReliability(this.diffDates);
-        // console.log(this.diffDates, this.reliabilityStatus);
 
         //charger la map et le marqueur du parking
         const myRoadmap = L.map('map').setView(
@@ -137,6 +140,7 @@ export class ParkingComponent {
             if (this.opinionsTab.length > 0) {
               this.averageParking = this.getAverageParking(this.opinionsTab);
             }
+
             //parametrer les avis à afficher pour un parking
             const opinionsFullTab = [...opinions];
             for (let i = 0; i < opinionsFullTab.length; i++) {
@@ -145,10 +149,8 @@ export class ParkingComponent {
                 opinion: opinionsFullTab[i].opinion,
                 note: opinionsFullTab[i].note,
               };
-              // console.log(opinion);
               this.opinionsMembersTab.push(opinion);
             }
-            // console.log(this.opinionsMembersTab);
           });
       });
   }
@@ -190,45 +192,41 @@ export class ParkingComponent {
   }
 
   //vérifier qu'un parking soit égal à un autre
-  isEqualParking(parking1: Parking, parking2:Parking):boolean {
+  isEqualParking(parking1: Parking, parking2: Parking): boolean {
     return parking1.parking_id === parking2.parking_id;
   }
 
   //gère la mise en favori du parking
   onClickLike() {
-    let index:number=-1
-        
-     if (
-       this.user.likedParkings.some((parking) =>
-         this.isEqualParking(parking, this.parking)
-       )
-     ) {
-       //retire le parking du tableau des favoris
-       for (let i = 0; i < this.user.likedParkings.length; i++) {
-         if (this.isEqualParking(this.user.likedParkings[i], this.parking)) {
-           console.log('dans le parent', i);
-           index = i;
-         } 
-       }
-       this.user.likedParkings.splice(index,1)
-       this.isParkingLiked = false;
-       console.log('supprimer',this.user.likedParkings);
-       
-     } else {
-       //ajoute le parking du tableau des favoris
-       this.user.likedParkings.push(this.parking)
-       this.isParkingLiked = true;
-       console.log('ajouter',this.user.likedParkings);
-    } 
+    let index: number = -1;
+
+    if (
+      this.user.likedParkings.some((parking) =>
+        this.isEqualParking(parking, this.parking)
+      )
+    ) {
+      //retire le parking du tableau des favoris
+      for (let i = 0; i < this.user.likedParkings.length; i++) {
+        if (this.isEqualParking(this.user.likedParkings[i], this.parking)) {
+          index = i;
+        }
+      }
+      this.user.likedParkings.splice(index, 1);
+      this.isParkingLiked = false;
+    } else {
+      //ajoute le parking du tableau des favoris
+      this.user.likedParkings.push(this.parking);
+      this.isParkingLiked = true;
+    }
 
     // met à jour le user
     this.userService.updateUser(this.user).subscribe({
-        next: (response) => {
-          //ajouter toast pour confirmer l'ajout ou suppression dans favoris
-        },
+      next: (response) => {
+        //ajouter toast pour confirmer l'ajout ou suppression dans favoris
+      },
       error: (error) => {
-          //gérer l'erreur
-        },
-      })
+        //gérer l'erreur
+      },
+    });
   }
 }
