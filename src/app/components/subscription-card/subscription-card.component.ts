@@ -17,7 +17,12 @@ export class SubscriptionCardComponent {
   parking!: Parking;
   location!: Location;
   remainingTime!: number;
-  isMinute = true
+  isMinute = true;
+
+  //parametrer l'indicateur de fiabilité
+  reliabilityStatus!: string;
+  diffDates: number = 0;
+
   constructor(
     private parkingService: ParkingService,
     private locationService: LocationService,
@@ -28,14 +33,22 @@ export class SubscriptionCardComponent {
     this.remainingTime = this.calculateRemainingMinutes(
       this.subscription.unsubscribe_date
     );
-    if (this.remainingTime>60) {
-      this.remainingTime = Math.round(this.remainingTime / 60)
-      this.isMinute = false
+    if (this.remainingTime > 60) {
+      this.remainingTime = Math.round(this.remainingTime / 60);
+      this.isMinute = false;
     }
-    
+
     this.parkingService.getParkingById(this.subscription.parking_id).subscribe({
       next: (parking) => {
         this.parking = parking;
+
+        //mettre à jour l'indicateur de fiabilité
+        this.diffDates = this.differenceDateInMinuts(
+          this.parking.registration_date
+        );
+        this.getReliability(this.diffDates);
+
+        //récupère le code postal et le nom de la vill
         this.locationService
           .getLocationByInseeCode(this.parking.insee_code)
           .subscribe({
@@ -69,6 +82,7 @@ export class SubscriptionCardComponent {
           this.subscribeService.getSubscriptionUser().subscribe({
             next: (subscriptions) => {
               this.subscribeService.userSubscription$.next(subscriptions);
+              
             },
             error: (error) => {
               //gerer l'erreur
@@ -79,5 +93,27 @@ export class SubscriptionCardComponent {
           //gerer l'erreur
         },
       });
+  }
+
+  //obtenir l'indicateur de fiabilité
+  differenceDateInMinuts(value: Date) {
+    const today = new Date();
+    const date = new Date(value);
+    const diff = (today.getTime() - date.getTime()) / 60000;
+    return diff;
+  }
+  getReliability(value: number) {
+    if (value <= 30) {
+      this.reliabilityStatus = 'reliabilitySafe';
+      return;
+    }
+    if (value <= 60) {
+      this.reliabilityStatus = 'reliabilityMedium';
+      return;
+    }
+    if (value > 60) {
+      this.reliabilityStatus = 'reliabilityDanger';
+      return;
+    }
   }
 }

@@ -42,3 +42,15 @@ img {
     padding: 0 5px;
     font-size: 10px;
 }
+
+.reliabilityDanger {
+    color: #BC3030;
+}
+
+.reliabilitySafe {
+    color: #337551;
+}
+
+.reliabilityMedium {
+    color: #996c2c;
+}

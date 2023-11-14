@@ -68,7 +68,7 @@ export class PageAdminComponent {
     });
   }
 
-  //permet de trier par ordre croissant tableau User
+  //permet de trier par ordre croissant tableau Parking
   sortParkingsTab(tab: Parking[]) {
     tab.sort((a, b) => {
       const parking_idA = a.parking_id;
@@ -113,6 +113,8 @@ export class PageAdminComponent {
                 this.usersTab.push(user);
               }
             });
+            this.usersTabFilter = [...this.usersTab];
+            this.sortUsersTab(this.usersTabFilter);
           },
           error: (error) => {
             //gérer les erreurs
@@ -129,7 +131,11 @@ export class PageAdminComponent {
     this.parkingService.deleteParking(parking_id).subscribe({
       next: (response) => {
         this.parkingService.getAllParkings().subscribe({
-          next: (parkings) => (this.parkingsTab = parkings),
+          next: (parkings) => {
+            this.parkingsTab = parkings;
+            this.parkingsTabFilter = [...this.parkingsTab]
+            this.sortParkingsTab(this.parkingsTabFilter);
+          },
           error: (error) => {
             //gérer les erreurs
           },

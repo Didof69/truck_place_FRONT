@@ -29,11 +29,28 @@ export class SearchBarLocationComponent {
     this.filteredLocations = this.locationsList.filter((e) =>
       e.zip_code.startsWith(value)
     );
+    this.sortLocationsTab(this.filteredLocations)
   }
 
   getSearchedLocation(location: Location) {
     this.buttonClicked = true;
     this.locationValue = `${location.zip_code} ${location.city_name}`;
     this.location.emit(location);
+  }
+
+  //permet de trier par ordre alpha tableau User
+  sortLocationsTab(tab: Location[]) {
+    tab.sort((a, b) => {
+      const city_nameA = a.city_name.toLowerCase();
+      const city_nameB = b.city_name.toLowerCase();
+
+      if (city_nameA < city_nameB) {
+        return -1;
+      } else if (city_nameA > city_nameB) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
   }
 }

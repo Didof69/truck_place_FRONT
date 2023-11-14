@@ -72,6 +72,7 @@
 /*---------------------- modal-footer --------------------*/
 .btn-secondary {
     height: 38px;
+    border-radius: 0.5rem;
 }
 
 .btn-danger {

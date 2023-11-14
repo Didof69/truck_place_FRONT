@@ -1,5 +1,7 @@
 .container-fluid {
     padding: 0;
+    width: 100%;
+    padding-bottom: 70px;
 }
 
 .banner {
@@ -29,39 +31,53 @@
     margin: 10px 0;
 }
 
-.btn-delete{
+.btn-delete {
     padding: 0;
     width: 30px;
 }
 
-.icone{
-width: 30px;
-height: 30px;
+.btn-delete-modal {
+    font-size: 1rem;
+    height: 38px;
+    color: #BC3030;
+    font-weight: 500;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 4px;
 }
 
-.card{
+.btn-delete-modal:hover {
+    background-color: #bdbdbd;
+    box-shadow: 0rem 0rem 0rem 0.05rem #bdbdbd;
+}
+
+.icone {
+    width: 30px;
+    height: 30px;
+}
+
+.card {
     width: 95%;
     margin: 10px;
 }
 
-.card-management{
+.card-management {
     width: 95%;
- background-color: #C8E5CE;
+    background-color: #C8E5CE;
 }
 
 .card-users,
-.card-parkings{
+.card-parkings {
     max-height: 300px;
     overflow: scroll;
 }
- p{
-    margin: 0;
- }
-@media only screen and (max-width: 48rem) {
-    .container-fluid {
-        padding-bottom: 60px;
-    }
 
+p {
+    margin: 0 0 0 10px;
+}
+
+@media only screen and (max-width: 48rem) {
     .banner {
         height: 18vh;
     }

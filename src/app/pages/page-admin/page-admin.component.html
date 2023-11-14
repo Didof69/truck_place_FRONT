@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <div class="card card-management">
+  <div class="card card-management d-flex flex-column justify-content-center">
 
     <div *ngIf="usersTab" class="card users-management">
       <div>
@@ -58,8 +58,8 @@
               <tbody>
                 <tr *ngFor="let user of usersTabFilter">
                   <th scope="row">{{ user.pseudo }}</th>
-                  <td>{{ user.user_name }}</td>
-                  <td>{{ user.firstname }}</td>
+                  <td>{{ user.user_name |uppercaseFirst }}</td>
+                  <td>{{ user.firstname | uppercaseFirst }}</td>
                   <td>
                     <button
                       class="btn btn-delete"
@@ -82,7 +82,7 @@
                       <div class="modal-dialog">
                         <div
                           class="modal-content"
-                          style="background-color: #b68686"
+                          style="background-color: #BC3030; color: white;"
                         >
                           <div class="modal-header d-flex flex-column">
                             <h1
@@ -125,7 +125,7 @@
                               Annuler
                             </button>
                             <button
-                              class="btn btn-danger"
+                              class="btn btn-delete-modal"
                               (click)="onUserDelete(user.pseudo)"
                               data-bs-dismiss="modal"
                             >
@@ -178,7 +178,7 @@
               <tbody>
                 <tr *ngFor="let parking of parkingsTabFilter">
                   <th scope="row">{{ parking.parking_id }}</th>
-                  <td>{{ parking.parking_name }}</td>
+                  <td [routerLink]="['/map/parking/', parking.parking_id]">{{ parking.parking_name | uppercaseFirst }}</td>
                   <td>
                     <button
                       class="btn btn-delete"
@@ -203,7 +203,7 @@
                       <div class="modal-dialog">
                         <div
                           class="modal-content"
-                          style="background-color: #b68686"
+                          style="background-color: #BC3030; color: white;"
                         >
                           <div class="modal-header d-flex flex-column">
                             <h1
@@ -247,7 +247,7 @@
                               Annuler
                             </button>
                             <button
-                              class="btn btn-danger"
+                              class="btn btn-delete-modal"
                               (click)="onParkingDelete(parking.parking_id)"
                               data-bs-dismiss="modal"
                             >

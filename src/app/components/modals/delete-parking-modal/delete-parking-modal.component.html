@@ -6,7 +6,7 @@
   aria-hidden="true"
 >
   <div class="modal-dialog">
-    <div class="modal-content" style="background-color: #b68686">
+    <div class="modal-content" style="background-color: #BC3030; color: white;">
       <div class="modal-header d-flex flex-column">
         <h1 class="modal-title fs-5" id="deleteParkingModalLabel">
           Suppression du parking #{{ parking.parking_id }}
@@ -42,7 +42,7 @@
           Annuler
         </button>
         <button
-          class="btn btn-danger"
+          class="btn btn-delete-modal"
           (click)="onParkingDelete(parking.parking_id)"
           data-bs-dismiss="modal"
         >

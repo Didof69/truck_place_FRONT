@@ -1,4 +1,4 @@
-<div *ngIf="parking" class="card m-1" style="width: 8rem; height: 13rem">
+<div *ngIf="parking" class="card m-1" style="width: 8rem; height: 13.5rem">
   <div class="card-parking d-flex d-flex flex-column justify-content-between text-center">
     <div class="d-flex flex-column justify-content-around">
     <div class="d-flex justify-content-around">
@@ -12,7 +12,7 @@
         </button>
       </div>
     </div>
-        <div>
+        <div [routerLink]="['/map/parking/', parking.parking_id]">
       <p class="parking-name">
         {{ parking.parking_name | uppercaseFirst }}
       </p>
@@ -28,7 +28,7 @@
 
     <div>
           <div class="space-free">
-      <p>
+      <p [ngClass]="reliabilityStatus">
         {{ parking.nb_space_free }}
         <span *ngIf="!(parking.nb_space_free > 1)">place libre</span>
         <span *ngIf="parking.nb_space_free > 1">places libres</span>
