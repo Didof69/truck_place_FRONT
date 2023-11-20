@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { CreatedUser } from 'src/app/models/created-user';
 import { UserService } from 'src/app/services/user.service';
 
@@ -16,7 +17,7 @@ export class SignupComponent {
     firstname: '',
     email: '',
     password: '',
-    password_confirm:'',
+    password_confirm: '',
     admin: false,
     is_delete: false,
   };
@@ -25,27 +26,35 @@ export class SignupComponent {
   inscriptionOK = true;
   isFormSubmit = false;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private messageService : MessageService
+  ) { }
 
   signUp(inscriptionForm: NgForm) {
     this.isFormSubmit = true;
 
     // Verifier si les mots de passe correspondent
-    this.confirmMdpError =
-      this.user.password !== this.user.password_confirm;
+    this.confirmMdpError = this.user.password !== this.user.password_confirm;
 
     if (inscriptionForm.valid && !this.confirmMdpError) {
       // Si tous les champs sont valides, alors continuez avec l'inscription.
-      this.userService
-        .signUp(this.user)
-        .subscribe({
-          next: (response) => {
-            this.router.navigate(['/account']);
-          },
-          error: (error) => {
-            this.inscriptionOK = false;
-          },
-        });
+      this.userService.signUp(this.user).subscribe({
+        next: (response) => {
+           this.messageService.add({
+             severity: 'success',
+             summary: 'Félicitations! Vous êtes inscrit(e)!',
+             detail: 'Merci de vous connectez.',
+           });
+           setTimeout(() => {
+             this.router.navigate(['/account']);
+           }, 2000);
+        },
+        error: (error) => {
+          this.inscriptionOK = false;
+        },
+      });
     }
   }
 }

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 import { UserLog } from 'src/app/models/user-log';
 import { UserService } from 'src/app/services/user.service';
 
@@ -20,7 +19,6 @@ export class LoginComponent {
 
   constructor(
     private userService: UserService,
-    private router: Router
   ) {}
 
   login(connexionForm: NgForm) {
@@ -30,7 +28,6 @@ export class LoginComponent {
       this.userService.login(this.user).subscribe({
         next: (response) => {
           sessionStorage.setItem('token', response.accessToken);
-          this.router.navigate(['/account']); //recharge la page actuelle
           this.userService.isLog$.next(true);
         },
         error: (error) => {

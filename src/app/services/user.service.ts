@@ -14,6 +14,7 @@ export class UserService {
   urlAPI = 'http://localhost:3000/api/';
   public isLog$: BehaviorSubject<boolean>;
   public isAdmin$ = new Subject<boolean>();
+  isAdmin = false
 
   constructor(private http: HttpClient) {
     const token = sessionStorage.getItem('token');
@@ -22,6 +23,12 @@ export class UserService {
     } else {
       this.isLog$ = new BehaviorSubject(false);
     }
+  }
+
+  getIsAdmin() {
+    console.log(this.isAdmin$,'dans le service');
+    
+    return this.isAdmin
   }
 
   setHeaders() {
@@ -52,7 +59,8 @@ export class UserService {
     const headers = this.setHeaders();
     return this.http.get<User>(`${this.urlAPI}users`, { headers }).pipe(
       tap((user: User) => {
-        sessionStorage.setItem('user_admin', user.admin.toString());
+        this.isAdmin$.next(user.admin);
+        this.isAdmin = user.admin
       })
     );
   }

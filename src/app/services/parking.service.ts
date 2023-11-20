@@ -1,16 +1,21 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Parking } from '../models/parking';
 import { Opinion } from '../models/opinion';
 import { CreatedParking } from '../models/created-parking';
 import { UpdatedParking } from '../models/updated-parking';
+import { OpinionByMember } from '../models/opinion-by-member';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ParkingService {
   urlAPI = 'http://localhost:3000/api/parkings';
+  opinionsMembersTab$ = new Subject<OpinionByMember[]>();
+  averageParking$ = new Subject<number>();
+  numberOpinions$ = new Subject<number>();
+
   constructor(private http: HttpClient) {}
 
   setHeaders() {
@@ -60,6 +65,8 @@ export class ParkingService {
 
   deleteParking(parking_id: number): Observable<Parking> {
     const headers = this.setHeaders();
-    return this.http.delete<Parking>(`${this.urlAPI}/${parking_id}`, { headers });
+    return this.http.delete<Parking>(`${this.urlAPI}/${parking_id}`, {
+      headers,
+    });
   }
 }

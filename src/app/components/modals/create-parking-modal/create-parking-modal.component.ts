@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { CreatedParking } from 'src/app/models/created-parking';
 import { Location } from 'src/app/models/location';
 import { Service } from 'src/app/models/service';
@@ -43,7 +44,8 @@ export class CreateParkingModalComponent {
     private serviceService: ServiceService,
     private parkingService: ParkingService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -83,9 +85,21 @@ export class CreateParkingModalComponent {
       ) {
         this.parkingService.createParking(this.createdParking).subscribe({
           next: (response) => {
-            this.router.navigate(['/map/parking/', response.parking_id]);
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Création de parking',
+              detail: 'Parking ajouté avec succès',
+            });
+            setTimeout(() => {
+              this.router.navigate(['/map/parking/', response.parking_id]);
+            }, 2000);
           },
           error: (error) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Création de parking',
+              detail: 'Une erreur est survenue.',
+            });
             this.isCityValid = false;
           },
         });

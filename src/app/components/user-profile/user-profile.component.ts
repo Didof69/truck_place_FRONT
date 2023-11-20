@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Subscribe } from 'src/app/models/subscribe';
 import { User } from 'src/app/models/user';
 import { SubscribeService } from 'src/app/services/subscribe.service';
@@ -15,7 +16,7 @@ export class UserProfileComponent {
   isAdmin!: boolean;
 
   userSubscriptions: Subscribe[] = [];
- 
+
   //paramètre pour gérer l'édition du UserProfil
   updateMode: boolean = false;
   isValid: boolean = true;
@@ -23,13 +24,12 @@ export class UserProfileComponent {
   constructor(
     private userService: UserService,
     private router: Router,
-    private subscribeService: SubscribeService
+    private subscribeService: SubscribeService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
-    this.userService.isAdmin$.subscribe(
-      (data) => (this.isAdmin = data)
-    );
+    this.userService.isAdmin$.subscribe((data) => (this.isAdmin = data));
 
     this.subscribeService.userSubscription$.subscribe(
       (data) => (this.userSubscriptions = data)
@@ -43,6 +43,11 @@ export class UserProfileComponent {
   }
 
   onDeconnexion() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Déconnexion',
+      detail: 'Vous êtes déconnecté(e).',
+    });
     this.userService.isLog$.next(false);
     this.userService.isAdmin$.next(false);
     sessionStorage.clear();
@@ -51,12 +56,22 @@ export class UserProfileComponent {
   onUserDelete() {
     this.userService.deleteUser(this.user.pseudo).subscribe({
       next: (response) => {
-        this.router.navigate(['/account']); //recharge la page actuelle;
-        sessionStorage.clear();
-        this.userService.isLog$.next(false);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Suppression de compte',
+          detail: 'Votre compte a été supprimé avec succès.',
+        });
+        setTimeout(() => {
+          sessionStorage.clear();
+          this.userService.isLog$.next(false);
+        }, 1500);
       },
       error: (error) => {
-        //à definir;
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Suppression de compte',
+          detail: 'Une erreur est survenue.',
+        });
       },
     });
   }
@@ -68,10 +83,21 @@ export class UserProfileComponent {
   onUserUpdateSubmit() {
     this.userService.updateUser(this.user).subscribe({
       next: (response) => {
+               this.messageService.add({
+                 severity: 'success',
+                 summary: 'Mise à jour ',
+                 detail: 'Votre compte a été mis à jour avec succès.',
+               });
         this.updateMode = false;
+        this.isValid = true;
       },
       error: (error) => {
-        this.isValid=false
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Mise à jour ',
+            detail: 'Une erreur est survenue.',
+          });
+        this.isValid = false;
       },
     });
   }

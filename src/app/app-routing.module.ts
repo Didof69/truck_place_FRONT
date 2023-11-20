@@ -8,6 +8,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { ParkingComponent } from './components/parking/parking.component';
 import { PageAdminComponent } from './pages/page-admin/page-admin.component';
+import { adminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'account', component: PageAccountComponent },
   { path: 'account/login', component: LoginComponent },
   { path: 'account/signup', component: SignupComponent },
-  { path: 'admin', component: PageAdminComponent },
+  { path: 'admin', component: PageAdminComponent, canActivate: [adminGuard] },
   { path: '**', component: PageNotFoundComponent },
 ];
 

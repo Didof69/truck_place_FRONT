@@ -1,9 +1,5 @@
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#opinionModal">
-  Launch demo modal
-</button> -->
+<p-toast [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"></p-toast>
 
-<!-- Modal -->
 <div
   class="modal fade modal-zone"
   id="createOpinionModal"
@@ -56,6 +52,7 @@
             type="submit"
             class="btn btn-truck"
             [disabled]="opinionForm.invalid"
+             data-bs-dismiss="modal"
           >
             Evaluer
           </button>

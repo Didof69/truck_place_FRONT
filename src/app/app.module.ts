@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastModule } from 'primeng/toast';
+import { MessagesModule } from 'primeng/messages';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,6 +36,7 @@ import { PageAdminComponent } from './pages/page-admin/page-admin.component';
 import { DeleteParkingModalComponent } from './components/modals/delete-parking-modal/delete-parking-modal.component';
 import { SearchBarLocationComponent } from './components/search-bar-location/search-bar-location.component';
 import { SearchBarAdminComponent } from './components/search-bar-admin/search-bar-admin.component';
+import { MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -71,9 +75,12 @@ import { SearchBarAdminComponent } from './components/search-bar-admin/search-ba
     AppRoutingModule,
     FormsModule,
     NgSelectModule,
+    BrowserAnimationsModule,
+    ToastModule,
+    MessagesModule
   ],
   exports: [UppercaseFirstPipe],
-  providers: [],
+  providers: [MessageService],//lié à primeng
   bootstrap: [AppComponent],
 })
 export class AppModule {}

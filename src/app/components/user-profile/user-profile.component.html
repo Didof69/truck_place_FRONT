@@ -1,9 +1,13 @@
+<p-toast
+  [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }"
+></p-toast>
+
 <div *ngIf="user" class="container-fluid">
   <div class="banner d-flex">
     <div class="d-flex align-self-end ms-auto" style="height: 100%">
       <div class="d-flex flex-column justify-content-between btn-zone">
-        <div style="margin-right: 10px;">
-          <button class="btn-modify" style="margin-top: 15px;">
+        <div style="margin-right: 10px">
+          <button class="btn-modify" style="margin-top: 15px">
             <img
               src="../../../assets/icones/logout.png"
               alt="bouton pour modifier le profil"
@@ -28,15 +32,25 @@
 
   <div class="user-icon d-flex justify-content-center">
     <div id="iconUser">
-      <img *ngIf="!isAdmin" src="../../../assets/icones/account_green.png" alt="" />
-      <img *ngIf="isAdmin" src="../../../assets/icones/account_admin.png" alt="" />
+      <img
+        *ngIf="!isAdmin"
+        src="../../../assets/icones/account_green.png"
+        alt=""
+      />
+      <img
+        *ngIf="isAdmin"
+        src="../../../assets/icones/account_admin.png"
+        alt=""
+      />
     </div>
   </div>
 
   <div class="user-zone" *ngIf="!updateMode">
     <div class="user-profile d-flex flex-column justify-content-center">
       <div *ngIf="isAdmin" class="d-flex justify-content-center">
-        <button [routerLink]="['/admin']" class="btn btn-admin">Espace Admin</button>
+        <button [routerLink]="['/admin']" class="btn btn-admin">
+          Espace Admin
+        </button>
       </div>
       <div class="d-flex justify-content-center">
         <div style="width: 25px"></div>
@@ -188,7 +202,10 @@
       aria-hidden="true"
     >
       <div class="modal-dialog">
-        <div class="modal-content" style="background-color: #be4343; color: white">
+        <div
+          class="modal-content"
+          style="background-color: #be4343; color: white"
+        >
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="deleteModalLabel">
               Suppression de mon compte
@@ -212,7 +229,11 @@
             >
               Annuler
             </button>
-            <button class="btn btn-danger btn-delete-modal" (click)="onUserDelete()">
+            <button
+              class="btn btn-danger btn-delete-modal"
+              (click)="onUserDelete()"
+              data-bs-dismiss="modal"
+            >
               Confirmer
             </button>
           </div>

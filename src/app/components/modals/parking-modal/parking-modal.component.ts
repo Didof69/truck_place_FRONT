@@ -5,6 +5,7 @@ import { Location } from 'src/app/models/location';
 import { User } from 'src/app/models/user';
 import { SubscribeService } from 'src/app/services/subscribe.service';
 import { CreatedSubscribe } from 'src/app/models/created-subscribe';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-parking-modal',
@@ -24,11 +25,12 @@ export class ParkingModalComponent {
   isClicked: boolean = false;
   isValid: boolean = true;
   isSubscribed: boolean = false;
-  
+
   @Output() likeEvent = new EventEmitter();
   constructor(
     private router: Router,
     private subscribeService: SubscribeService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -45,7 +47,7 @@ export class ParkingModalComponent {
             this.isSubscribed = true;
           }
         });
-      });  
+      });
   }
 
   returnMap() {
@@ -69,6 +71,7 @@ export class ParkingModalComponent {
     }
   }
 
+  //s'abonne au parking
   onSubscribeSubmit(nb: number) {
     let unsubscribe_date = new Date();
     unsubscribe_date.setHours(unsubscribe_date.getHours() + nb);
@@ -81,11 +84,21 @@ export class ParkingModalComponent {
 
     this.subscribeService.createSubscribe(newSubscribe).subscribe({
       next: (response) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Abonnement',
+          detail: `L'abonnement a été pris en compte pour ${nb} heure(s)`,
+        });
+        
         this.isClicked = false;
         this.isSubscribed = true;
       },
       error: (error) => {
-        //gérer l'erreur
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Abonnement',
+          detail: 'Une erreur est survenue.',
+        });
       },
     });
   }
@@ -95,8 +108,8 @@ export class ParkingModalComponent {
     return parking_id1 === parking_id2;
   }
 
+ //désabonne du parking
   onUnsubscribeBtn() {
-    //désabonne du parking
     this.subscribeService
       .getSubscriptionUser()
       .subscribe((userSubscriptions) => {
@@ -111,14 +124,23 @@ export class ParkingModalComponent {
               .deleteSubscribe(susbcription.subscribe_id)
               .subscribe({
                 next: (response) => {
+                  this.messageService.add({
+                    severity: 'warn',
+                    summary: 'Abonnement',
+                    detail: "L'abonnement a été supprimé.",
+                  });
                   this.isSubscribed = false;
                 },
-                error: (error) => {},
+                error: (error) => {
+                  this.messageService.add({
+                    severity: 'error',
+                    summary: 'Abonnement',
+                    detail: 'Une erreur est survenue.',
+                  });
+                },
               });
           }
         });
       });
   }
-
-
 }

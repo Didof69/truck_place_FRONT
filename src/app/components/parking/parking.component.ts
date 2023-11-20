@@ -9,6 +9,7 @@ import { ParkingService } from 'src/app/services/parking.service';
 import { OpinionByMember } from 'src/app/models/opinion-by-member';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-parking',
@@ -48,7 +49,6 @@ export class ParkingComponent {
   diffDates: number = 0;
 
   //parametrer la moyenne du parking
-  opinionsTab!: Opinion[];
   opinionsMembersTab: OpinionByMember[] = [];
   averageParking: number = 0;
   numberOpinions: number = 0;
@@ -57,7 +57,8 @@ export class ParkingComponent {
     private parkingService: ParkingService,
     private locationService: LocationService,
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -72,7 +73,7 @@ export class ParkingComponent {
           next: (response) => {
             this.user = response;
             this.isAdmin = this.user.admin;
- 
+
             //vérifie si le parking est dans les favoris
             if (
               this.user.likedParkings.some((parking) =>
@@ -132,26 +133,14 @@ export class ParkingComponent {
           });
 
         //récupérer les avis d'un parking
-        this.parkingService
-          .getOpinionsByParkingId(this.parking.parking_id)
-          .subscribe((opinions) => {
-            this.opinionsTab = [...opinions];
-            this.numberOpinions = this.opinionsTab.length;
-            if (this.opinionsTab.length > 0) {
-              this.averageParking = this.getAverageParking(this.opinionsTab);
-            }
-
-            //parametrer les avis à afficher pour un parking
-            const opinionsFullTab = [...opinions];
-            for (let i = 0; i < opinionsFullTab.length; i++) {
-              const opinion = {
-                pseudo: opinionsFullTab[i].user.pseudo,
-                opinion: opinionsFullTab[i].opinion,
-                note: opinionsFullTab[i].note,
-              };
-              this.opinionsMembersTab.push(opinion);
-            }
-          });
+        this.getOpinionsMembers();
+            this.parkingService.opinionsMembersTab$.subscribe(
+              (opinions) => (this.opinionsMembersTab = opinions)
+            );
+            this.parkingService.averageParking$.subscribe(
+              (average) => (this.averageParking = average)
+        );
+        this.parkingService.numberOpinions$.subscribe((number)=>this.numberOpinions = number)
       });
   }
 
@@ -222,11 +211,56 @@ export class ParkingComponent {
     // met à jour le user
     this.userService.updateUser(this.user).subscribe({
       next: (response) => {
-        //ajouter toast pour confirmer l'ajout ou suppression dans favoris
+        if (this.isParkingLiked) {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Favoris',
+            detail: 'Le parking a été ajouté à vos favoris.',
+          });
+        }
+        if (!this.isParkingLiked) {
+          this.messageService.add({
+            severity: 'warn',
+            summary: 'Favoris',
+            detail: "Le parking n'est plus dans vos favoris.",
+          });
+        }
       },
       error: (error) => {
-        //gérer l'erreur
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Favoris',
+          detail: 'Une erreur est survenue.',
+        });
       },
     });
+  }
+
+  //récuperer le tableau des opinions pour le parking
+  getOpinionsMembers():OpinionByMember[] {
+    this.parkingService
+      .getOpinionsByParkingId(this.parking.parking_id)
+      .subscribe((opinions) => {
+        const opinionsTab = [...opinions];
+        this.parkingService.numberOpinions$.next(opinionsTab.length);
+        if (opinionsTab.length > 0) {
+          this.parkingService.averageParking$.next(
+            this.getAverageParking(opinionsTab)
+          );
+        }
+
+        //parametrer les avis à afficher pour un parking
+        const opinionsFullTab = [...opinions];
+        for (let i = 0; i < opinionsFullTab.length; i++) {
+          const opinion = {
+            pseudo: opinionsFullTab[i].user.pseudo,
+            opinion: opinionsFullTab[i].opinion,
+            note: opinionsFullTab[i].note,
+          };
+          this.opinionsMembersTab.push(opinion);
+        }
+        this.parkingService.opinionsMembersTab$.next(this.opinionsMembersTab);
+      });
+    return this.opinionsMembersTab
   }
 }

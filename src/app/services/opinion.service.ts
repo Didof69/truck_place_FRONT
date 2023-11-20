@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { OpinionByMember } from '../models/opinion-by-member';
 import { Observable } from 'rxjs';
 import { CreatedOpinion } from '../models/created-opinion';
 
@@ -9,7 +8,7 @@ import { CreatedOpinion } from '../models/created-opinion';
 })
 export class OpinionService {
   urlAPI = 'http://localhost:3000/api/opinions';
-
+  
   constructor(private http: HttpClient) {}
 
   setHeaders() {
