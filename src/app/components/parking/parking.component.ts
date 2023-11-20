@@ -1,4 +1,4 @@
-import { Component, afterNextRender } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as L from 'leaflet';
 import { Location } from 'src/app/models/location';

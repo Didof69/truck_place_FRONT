@@ -310,13 +310,17 @@ ul {
 }
 
 @media only screen and (max-width: 48rem) {
+    .container {
+        padding: 0;
+    }
+
     .wrapper {
         display: none;
     }
 
     .wrapper_media {
         display: flex;
-        height: 100vh;
+        height: 90vh;
         width: 100%;
     }
 
@@ -370,19 +374,18 @@ ul {
         font-size: 14px;
     }
 
+    .bottomnav {
+        bottom: 200px;
+    }
+
     .bottomnav .next {
         font-size: 8px;
-        letter-spacing: 8px;
-        font-weight: 500;
-        text-transform: uppercase;
-        margin-top: 20px;
-        margin-bottom: 10px;
     }
 
     .desc {
         position: absolute;
         left: 40px;
-        bottom: 20px;
+        bottom: 60px;
         display: flex;
     }
 
@@ -405,8 +408,13 @@ ul {
         line-height: 2;
     }
 
+    .slogan p {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
     .scrolldown {
-        left: 10px;
+        left: 50px;
     }
 
     .upbar {
@@ -416,4 +424,5 @@ ul {
     .upbar .title {
         padding-left: 50px;
     }
+
 }
