@@ -1,5 +1,3 @@
-<p-toast [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"></p-toast>
-
 <div
   class="modal fade modal-zone"
   id="createOpinionModal"
@@ -52,7 +50,8 @@
             type="submit"
             class="btn btn-truck"
             [disabled]="opinionForm.invalid"
-             data-bs-dismiss="modal"
+            data-bs-toggle="modal"
+            data-bs-target="#parkingModal"
           >
             Evaluer
           </button>

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Location } from 'src/app/models/location';
 import { Parking } from 'src/app/models/parking';
 import { Service } from 'src/app/models/service';
@@ -31,43 +32,69 @@ export class UpdateParkingModalComponent {
   constructor(
     private router: Router,
     private serviceService: ServiceService,
-    private parkingService: ParkingService
+    private parkingService: ParkingService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
-    this.serviceService.getAllService().subscribe((services) => {
-      this.servicesTab = services;
+    this.serviceService.getAllService().subscribe({
+      next: (services) => {
+        this.servicesTab = services;
 
-      //récupère les id des services déjà cochés
-      for (let i = 0; i < this.parking.services.length; i++) {
-        this.parkingServicesAlreadyChecked.push(
-          this.parking.services[i].service_id
-        );
-      }
-      this.checkedIdServices = this.parkingServicesAlreadyChecked;
+        //récupère les id des services déjà cochés
+        for (let i = 0; i < this.parking.services.length; i++) {
+          this.parkingServicesAlreadyChecked.push(
+            this.parking.services[i].service_id
+          );
+        }
+        this.checkedIdServices = this.parkingServicesAlreadyChecked;
+      },
+      error: (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Chargement des données',
+          detail: 'Une erreur est survenue.',
+        });
+      },
     });
   }
 
   onSubmit() {
+    this.checkedServices = []
     for (let i = 0; i < this.checkedIdServices.length; i++) {
       this.checkedServices.push(
         this.servicesTab[this.checkedIdServices[i] - 1]
       );
     }
 
-    this.parking.services = this.checkedServices;
+    this.parking.services = this.checkedServices;  
     this.parking.registration_date = new Date();
-    
+
     if (this.parking.nb_space_free <= this.parking.nb_space_all) {
       this.parkingService.updateParking(this.parking).subscribe({
         next: (response) => {
-          location.reload();
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Modification du parking',
+            detail: 'Le parking a bien été modifié.',
+          });          
+          this.parkingService.parking$.next(response);          
         },
         error: (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Modification du parking',
+            detail: 'Une erreur est survenue.',
+          });
           this.isNegative = true;
         },
       });
     } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Modification du parking',
+        detail: 'Une erreur est survenue.',
+      });
       this.isValid = false;
     }
   }

@@ -62,12 +62,22 @@ export class ParkingComponent {
   ) {}
 
   ngOnInit() {
+    this.parkingService.parking$.subscribe((data) => {
+      this.parking = data
+       this.diffDates = this.differenceDateInMinuts(
+          this.parking.registration_date
+        );
+        this.getReliability(this.diffDates);
+    });
+
     const routeParam = this.route.snapshot.paramMap;
     const parkingIdFromRoute = Number(routeParam.get('id'));
-
+    
     this.parkingService
       .getParkingById(parkingIdFromRoute)
       .subscribe((parking) => {
+        this.parkingService.parking$.next(parking);
+
         //recuperer le User
         this.userService.getUserByPseudo().subscribe({
           next: (response) => {
@@ -84,9 +94,14 @@ export class ParkingComponent {
             }
           },
 
-          error: (error) => {},
+          error: (error) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Chargement des données',
+              detail: 'Une erreur est survenue.',
+            });
+          },
         });
-        this.parking = parking;
 
         //mettre à jour l'indicateur de fiabilité
         this.diffDates = this.differenceDateInMinuts(
@@ -134,13 +149,15 @@ export class ParkingComponent {
 
         //récupérer les avis d'un parking
         this.getOpinionsMembers();
-            this.parkingService.opinionsMembersTab$.subscribe(
-              (opinions) => (this.opinionsMembersTab = opinions)
-            );
-            this.parkingService.averageParking$.subscribe(
-              (average) => (this.averageParking = average)
+        this.parkingService.opinionsMembersTab$.subscribe(
+          (opinions) => (this.opinionsMembersTab = opinions)
         );
-        this.parkingService.numberOpinions$.subscribe((number)=>this.numberOpinions = number)
+        this.parkingService.averageParking$.subscribe(
+          (average) => (this.averageParking = average)
+        );
+        this.parkingService.numberOpinions$.subscribe(
+          (number) => (this.numberOpinions = number)
+        );
       });
   }
 
@@ -222,7 +239,7 @@ export class ParkingComponent {
           this.messageService.add({
             severity: 'warn',
             summary: 'Favoris',
-            detail: "Le parking n'est plus dans vos favoris.",
+            detail: 'Le parking a été supprimé de vos favoris.',
           });
         }
       },
@@ -237,30 +254,39 @@ export class ParkingComponent {
   }
 
   //récuperer le tableau des opinions pour le parking
-  getOpinionsMembers():OpinionByMember[] {
+  getOpinionsMembers(): OpinionByMember[] {
     this.parkingService
       .getOpinionsByParkingId(this.parking.parking_id)
-      .subscribe((opinions) => {
-        const opinionsTab = [...opinions];
-        this.parkingService.numberOpinions$.next(opinionsTab.length);
-        if (opinionsTab.length > 0) {
-          this.parkingService.averageParking$.next(
-            this.getAverageParking(opinionsTab)
-          );
-        }
+      .subscribe({
+        next: (opinions) => {
+          const opinionsTab = [...opinions];
+          this.parkingService.numberOpinions$.next(opinionsTab.length);
+          if (opinionsTab.length > 0) {
+            this.parkingService.averageParking$.next(
+              this.getAverageParking(opinionsTab)
+            );
+          }
 
-        //parametrer les avis à afficher pour un parking
-        const opinionsFullTab = [...opinions];
-        for (let i = 0; i < opinionsFullTab.length; i++) {
-          const opinion = {
-            pseudo: opinionsFullTab[i].user.pseudo,
-            opinion: opinionsFullTab[i].opinion,
-            note: opinionsFullTab[i].note,
-          };
-          this.opinionsMembersTab.push(opinion);
-        }
-        this.parkingService.opinionsMembersTab$.next(this.opinionsMembersTab);
+          //parametrer les avis à afficher pour un parking
+          const opinionsFullTab = [...opinions];
+          for (let i = 0; i < opinionsFullTab.length; i++) {
+            const opinion = {
+              pseudo: opinionsFullTab[i].user.pseudo,
+              opinion: opinionsFullTab[i].opinion,
+              note: opinionsFullTab[i].note,
+            };
+            this.opinionsMembersTab.push(opinion);
+          }
+          this.parkingService.opinionsMembersTab$.next(this.opinionsMembersTab);
+        },
+        error: (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Chargement des données',
+            detail: 'Une erreur est survenue.',
+          });
+        },
       });
-    return this.opinionsMembersTab
+    return this.opinionsMembersTab;
   }
 }

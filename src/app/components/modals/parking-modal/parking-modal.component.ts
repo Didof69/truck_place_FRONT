@@ -36,17 +36,26 @@ export class ParkingModalComponent {
   ngOnInit() {
     this.subscribeService
       .getSubscriptionUser()
-      .subscribe((userSubscriptions) => {
-        userSubscriptions.forEach((susbcription) => {
-          if (
-            this.isEqualParking(
-              susbcription.parking_id,
-              this.parking.parking_id
-            )
-          ) {
-            this.isSubscribed = true;
-          }
-        });
+      .subscribe({
+        next: (userSubscriptions) => {
+          userSubscriptions.forEach((susbcription) => {
+            if (
+              this.isEqualParking(
+                susbcription.parking_id,
+                this.parking.parking_id
+              )
+            ) {
+              this.isSubscribed = true;
+            }
+          })
+        },
+        error: (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Chargement des données',
+            detail: 'Une erreur est survenue.',
+          });
+        }
       });
   }
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { Parking } from 'src/app/models/parking';
 import { User } from 'src/app/models/user';
 import { ParkingService } from 'src/app/services/parking.service';
@@ -20,7 +21,8 @@ export class PageAdminComponent {
 
   constructor(
     private userService: UserService,
-    private parkingService: ParkingService
+    private parkingService: ParkingService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -28,10 +30,14 @@ export class PageAdminComponent {
       next: (parkings) => {
         this.parkingsTab = parkings;
         this.parkingsTabFilter = [...this.parkingsTab];
-        this.sortParkingsTab(this.parkingsTabFilter)
+        this.sortParkingsTab(this.parkingsTabFilter);
       },
       error: (error) => {
-        //gérer les erreurs
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Chargement des données',
+          detail: 'Une erreur est survenue.',
+        });
       },
     });
 
@@ -47,7 +53,11 @@ export class PageAdminComponent {
         this.sortUsersTab(this.usersTabFilter);
       },
       error: (error) => {
-        //gérer les erreurs
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Chargement des données',
+          detail: 'Une erreur est survenue.',
+        });
       },
     });
   }
@@ -88,7 +98,7 @@ export class PageAdminComponent {
     this.usersTabFilter = this.usersTab.filter((e) =>
       e.pseudo.toLocaleLowerCase().includes(value.toLocaleLowerCase())
     );
-    this.sortUsersTab(this.usersTabFilter)
+    this.sortUsersTab(this.usersTabFilter);
   }
 
   onSearchParking(value: string) {
@@ -98,12 +108,17 @@ export class PageAdminComponent {
         .toLocaleLowerCase()
         .startsWith(value.toLocaleLowerCase())
     );
-    this.sortParkingsTab(this.parkingsTabFilter)
+    this.sortParkingsTab(this.parkingsTabFilter);
   }
 
   onUserDelete(pseudo: string) {
     this.userService.deleteUser(pseudo).subscribe({
       next: (response) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Suppression du profil',
+          detail: `Le profil de ${pseudo} a été supprimé.`,
+        });
         this.userService.getAllUsers().subscribe({
           next: (users) => {
             this.usersTab = [];
@@ -117,12 +132,20 @@ export class PageAdminComponent {
             this.sortUsersTab(this.usersTabFilter);
           },
           error: (error) => {
-            //gérer les erreurs
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Chargement des données',
+              detail: 'Une erreur est survenue.',
+            });
           },
         });
       },
       error: (error) => {
-        //gérer l'erreur
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Suppression du profil',
+          detail: 'Une erreur est survenue.',
+        });
       },
     });
   }
@@ -130,19 +153,32 @@ export class PageAdminComponent {
   onParkingDelete(parking_id: number) {
     this.parkingService.deleteParking(parking_id).subscribe({
       next: (response) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Suppression du parking',
+          detail: `Le parkind #${parking_id} a été supprimé.`,
+        });
         this.parkingService.getAllParkings().subscribe({
           next: (parkings) => {
             this.parkingsTab = parkings;
-            this.parkingsTabFilter = [...this.parkingsTab]
+            this.parkingsTabFilter = [...this.parkingsTab];
             this.sortParkingsTab(this.parkingsTabFilter);
           },
           error: (error) => {
-            //gérer les erreurs
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Chargement des données',
+              detail: 'Une erreur est survenue.',
+            });
           },
         });
       },
       error: (error) => {
-        //gérer l'erreur
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Suppression du parking',
+          detail: 'Une erreur est survenue.',
+        });
       },
     });
   }

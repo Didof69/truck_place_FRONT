@@ -64,7 +64,7 @@ export class UserProfileComponent {
         setTimeout(() => {
           sessionStorage.clear();
           this.userService.isLog$.next(false);
-        }, 1500);
+        }, 2000);
       },
       error: (error) => {
         this.messageService.add({

@@ -12,6 +12,7 @@ import { OpinionByMember } from '../models/opinion-by-member';
 })
 export class ParkingService {
   urlAPI = 'http://localhost:3000/api/parkings';
+  parking$ = new Subject<Parking>();
   opinionsMembersTab$ = new Subject<OpinionByMember[]>();
   averageParking$ = new Subject<number>();
   numberOpinions$ = new Subject<number>();

@@ -48,9 +48,6 @@ export class CreateOpinionModalComponent {
           summary: 'Avis',
           detail: 'Votre avis est déposé.',
         });
-        setTimeout(() => {
-          this.router.navigate(['/map/parking/', this.parking.parking_id]);
-        }, 2000);
       },
       error: (error) => {
         this.messageService.add({
