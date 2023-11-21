@@ -40,6 +40,7 @@ export class PageMapComponent {
         [this.latitude, this.longitude],
         12
       );
+      this.setMarkerMap();
     } else {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
@@ -59,33 +60,34 @@ export class PageMapComponent {
           .addTo(this.myRoadmap)
           .openPopup(); 
       });
+      this.setMarkerMap()
     }
-
-    this.parkingService.getAllParkings().subscribe((parkings) => {
-      this.parkingTab = parkings;
-      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: 'Truck Place',
-      }).addTo(this.myRoadmap);
-
-      //pointe les parking de carte
-      for (let i = 0; i < this.parkingTab.length; i++) {
-        const myIcon = L.icon({
-          iconUrl: '../../../../assets/icones/pin_park.png',
-        });
-        L.marker(
-          [+this.parkingTab[i].latitude, +this.parkingTab[i].longitude],
-          { icon: myIcon,}
-        )
-          .bindPopup(
-            `<a href="map/parking/${this.parkingTab[i].parking_id}" 
-            style="font-size: 1rem;color: #337551;">Accéder au parking : ${this.parkingTab[i].parking_name}</a>`
-          )
-          .addTo(this.myRoadmap)
-      }
-    });
   }
-  getPosition() {}
+ 
+  setMarkerMap() {
+        this.parkingService.getAllParkings().subscribe((parkings) => {
+          this.parkingTab = parkings;
+          L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: 'Truck Place',
+          }).addTo(this.myRoadmap);
 
+          //pointe les parking de carte
+          for (let i = 0; i < this.parkingTab.length; i++) {
+            const myIcon = L.icon({
+              iconUrl: '../../../../assets/icones/pin_park.png',
+            });
+            L.marker(
+              [+this.parkingTab[i].latitude, +this.parkingTab[i].longitude],
+              { icon: myIcon }
+            )
+              .bindPopup(
+                `<a href="map/parking/${this.parkingTab[i].parking_id}" 
+            style="font-size: 1rem;color: #337551;">Accéder au parking : ${this.parkingTab[i].parking_name}</a>`
+              )
+              .addTo(this.myRoadmap);
+          }
+        });
+  }
   onSearchLocation(location: Location) {
     const myIcon = L.icon({
       iconUrl: '../../../../assets/icones/marker.png',

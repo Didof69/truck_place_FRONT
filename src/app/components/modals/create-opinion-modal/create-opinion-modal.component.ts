@@ -42,6 +42,12 @@ export class CreateOpinionModalComponent {
     this.opinion.note = +this.opinion.note;
     this.opinionService.createOpinion(this.opinion).subscribe({
       next: (response) => {
+        this.opinion = {
+          opinion: '',
+          note: 0,
+          user_id: 0,
+          parking_id: 0,
+        };
         this.getOpinionsMembers();
         this.messageService.add({
           severity: 'success',

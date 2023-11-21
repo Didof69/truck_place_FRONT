@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^16.1.0",
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
+    "@asymmetrik/ngx-leaflet": "^16.0.1",
     "@ng-select/ng-select": "^11.1.1",
     "@ng-web-apis/common": "^3.0.6",
     "@ng-web-apis/geolocation": "^3.0.6",

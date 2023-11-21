@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -73,14 +74,15 @@ import { MessageService } from 'primeng/api';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    LeafletModule,
     FormsModule,
     NgSelectModule,
     BrowserAnimationsModule,
     ToastModule,
-    MessagesModule
+    MessagesModule,
   ],
   exports: [UppercaseFirstPipe],
-  providers: [MessageService],//lié à primeng
+  providers: [MessageService], //lié à primeng
   bootstrap: [AppComponent],
 })
 export class AppModule {}
