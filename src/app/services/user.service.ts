@@ -25,9 +25,7 @@ export class UserService {
     }
   }
 
-  getIsAdmin() {
-    console.log(this.isAdmin$,'dans le service');
-    
+  getIsAdmin() {  
     return this.isAdmin
   }
 

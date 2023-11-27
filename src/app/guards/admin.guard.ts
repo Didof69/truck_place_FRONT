@@ -14,13 +14,10 @@ export const adminGuard: CanActivateFn = (
   const userService = inject(forwardRef(() => UserService));
   const router = inject(forwardRef(() => Router));
 
-  if (!userService.isAdmin) {
-    console.log('dans le guard :!',userService.isAdmin);
-    
+  if (!userService.isAdmin) {  
     router.navigate(['/home']);
     return false;
   } else {
-    console.log('dans le guard :', userService.isAdmin);
     return true;
   }
 };
