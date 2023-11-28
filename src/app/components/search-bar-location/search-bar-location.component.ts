@@ -1,6 +1,8 @@
+import { UpperCasePipe } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Location } from 'src/app/models/location';
 import { LocationService } from 'src/app/services/location.service';
+import { UppercaseFirstPipe } from 'src/app/uppercase-first.pipe';
 
 @Component({
   selector: 'app-search-bar-location',

@@ -88,7 +88,7 @@
                 [class.input-error]="!isValid || isNbFreeNegative || nb_space_free.value>nb_space_all.value"
                 required
               />
-              <div *ngIf="!isValid || nb_space_free.value>nb_space_all.value" class="alert">
+              <div *ngIf="!isValid || +nb_space_free.value>+nb_space_all.value" class="alert">
                 <p class="alert">
                   Le nombre de places libres ne peut exéder le nombre de places
                   totales.
@@ -188,7 +188,7 @@
               type="submit"
               class="btn btn-truck"
               data-bs-dismiss="modal"
-              [disabled]="createParkingForm.invalid || nb_space_free.value>nb_space_all.value"
+              [disabled]="createParkingForm.invalid || +nb_space_free.value>+nb_space_all.value"
             >
               Créer
             </button>
