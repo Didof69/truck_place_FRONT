@@ -19,6 +19,7 @@ import { MessageService } from 'primeng/api';
 export class ParkingComponent {
   user!: User;
   isAdmin!: boolean;
+  isLog!: boolean;
 
   parking: Parking = {
     parking_id: 0,
@@ -62,24 +63,27 @@ export class ParkingComponent {
   ) {}
 
   ngOnInit() {
+        this.userService.isLog$.subscribe((data) => (this.isLog = data));
+
     this.parkingService.parking$.subscribe((data) => {
-      this.parking = data
-       this.diffDates = this.differenceDateInMinuts(
-          this.parking.registration_date
-        );
-        this.getReliability(this.diffDates);
+      this.parking = data;
+      this.diffDates = this.differenceDateInMinuts(
+        this.parking.registration_date
+      );
+      this.getReliability(this.diffDates);
     });
 
     const routeParam = this.route.snapshot.paramMap;
     const parkingIdFromRoute = Number(routeParam.get('id'));
-    
+
     this.parkingService
       .getParkingById(parkingIdFromRoute)
       .subscribe((parking) => {
         this.parkingService.parking$.next(parking);
 
         //recuperer le User
-        this.userService.getUserByPseudo().subscribe({
+        if (this.isLog) {
+                 this.userService.getUserByPseudo().subscribe({
           next: (response) => {
             this.user = response;
             this.isAdmin = this.user.admin;
@@ -97,11 +101,13 @@ export class ParkingComponent {
           error: (error) => {
             this.messageService.add({
               severity: 'error',
-              summary: 'Chargement des données',
-              detail: 'Une erreur est survenue.',
+              summary: "Chargement de données",
+              detail:
+                'Une erreur est survenue.',
             });
           },
-        });
+        }); 
+        }
 
         //mettre à jour l'indicateur de fiabilité
         this.diffDates = this.differenceDateInMinuts(

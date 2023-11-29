@@ -47,7 +47,7 @@ export class PageMapComponent {
         this.longitude = position.coords.longitude;
         this.myRoadmap = L.map('map').setView(
           [this.latitude, this.longitude],
-          12
+          16
         );
         const myIcon = L.icon({
           iconUrl: '../../../../assets/icones/target.png',
@@ -71,7 +71,7 @@ export class PageMapComponent {
             attribution: 'Truck Place',
           }).addTo(this.myRoadmap);
 
-          //pointe les parking de carte
+          //pointe les parkings sur la carte
           for (let i = 0; i < this.parkingTab.length; i++) {
             const myIcon = L.icon({
               iconUrl: '../../../../assets/icones/pin_park.png',
@@ -88,6 +88,7 @@ export class PageMapComponent {
           }
         });
   }
+
   onSearchLocation(location: Location) {
     const myIcon = L.icon({
       iconUrl: '../../../../assets/icones/marker.png',

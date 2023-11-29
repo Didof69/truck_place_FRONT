@@ -6,6 +6,7 @@ import { User } from 'src/app/models/user';
 import { SubscribeService } from 'src/app/services/subscribe.service';
 import { CreatedSubscribe } from 'src/app/models/created-subscribe';
 import { MessageService } from 'primeng/api';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-parking-modal',
@@ -25,16 +26,20 @@ export class ParkingModalComponent {
   isClicked: boolean = false;
   isValid: boolean = true;
   isSubscribed: boolean = false;
-
+  isLog: boolean = false;
   @Output() likeEvent = new EventEmitter();
   constructor(
     private router: Router,
     private subscribeService: SubscribeService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
-    this.subscribeService
+    this.userService.isLog$.subscribe((data) => this.isLog = data);
+
+    if (this.isLog) {
+      this.subscribeService
       .getSubscriptionUser()
       .subscribe({
         next: (userSubscriptions) => {
@@ -57,6 +62,8 @@ export class ParkingModalComponent {
           });
         }
       });
+    }
+    
   }
 
   returnMap() {
