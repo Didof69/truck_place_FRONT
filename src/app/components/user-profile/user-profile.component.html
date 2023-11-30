@@ -153,19 +153,6 @@
     </form>
   </div>
 
-  <div *ngIf="user.likedParkings.length > 0" class="parking-liked">
-    <div class="card m-2 parking-zone">
-      <p>Parkings Favoris</p>
-      <div class="d-flex flex-row parking-scroll">
-        <app-parking-liked-card
-          *ngFor="let parking of user.likedParkings"
-          [parking]="parking"
-          [user]="user"
-        ></app-parking-liked-card>
-      </div>
-    </div>
-  </div>
-
   <div *ngIf="userSubscriptions.length > 0" class="parking-liked">
     <div class="card m-2 subscription-zone">
       <p>Abonnements</p>
@@ -178,6 +165,20 @@
       </div>
     </div>
   </div>
+
+  <div *ngIf="user.likedParkings.length > 0" class="parking-liked">
+    <div class="card m-2 parking-zone">
+      <p>Parkings Favoris</p>
+      <div class="d-flex flex-row parking-scroll">
+        <app-parking-liked-card
+          *ngFor="let parking of user.likedParkings"
+          [parking]="parking"
+          [user]="user"
+        ></app-parking-liked-card>
+      </div>
+    </div>
+  </div>
+  
   <div class="delete-profile d-flex justify-content-center">
     <!-- Button trigger modal -->
     <button
