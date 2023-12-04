@@ -14,15 +14,15 @@
     </div>
         <div [routerLink]="['/map/parking/', parking.parking_id]">
       <p class="parking-name">
-        {{ parking.parking_name | uppercaseFirst }}
+        {{ parking.parking_name | uppercaseFirst | slice:0:30}}
       </p>
       <p *ngIf="location" class="location">
-        {{ location.zip_code }} {{ location.city_name | uppercaseFirst }}
+        {{ location.zip_code }} {{ location.city_name | uppercaseFirst}}
       </p>
     </div>
-        <div class="road" *ngIf="parking.main_road">
+        <div class="road" *ngIf="parking.main_road || parking.direction">
       <p>{{ parking.main_road }}</p>
-      <p>Direction : {{ parking.direction }}</p>
+      <p *ngIf="parking.direction">Direction : {{ parking.direction }}</p>
     </div>
     </div>
 

@@ -8,6 +8,7 @@
       [value]="[locationValue]"
       placeholder="Code postal"
       (input)="onSearch(search.value)"
+      autocomplete="off"
     />
   </div>
   <div *ngIf="search.value && !buttonClicked">

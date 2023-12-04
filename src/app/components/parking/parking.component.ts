@@ -118,7 +118,7 @@ export class ParkingComponent {
         //charger la map et le marqueur du parking
         const myRoadmap = L.map('map').setView(
           [+parking.latitude, +parking.longitude],
-          12
+          16
         );
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
           attribution: 'Truck Place',
