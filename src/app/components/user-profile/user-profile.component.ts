@@ -23,7 +23,6 @@ export class UserProfileComponent {
 
   constructor(
     private userService: UserService,
-    private router: Router,
     private subscribeService: SubscribeService,
     private messageService: MessageService
   ) {}

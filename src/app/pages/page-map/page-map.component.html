@@ -1,4 +1,7 @@
 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#createParkingModal"><img src="../../../assets/icones/create_green.png" alt="" class="icone" *ngIf="isLog"></button>
 <app-create-parking-modal *ngIf="isLog"></app-create-parking-modal>
 <app-map></app-map>
-<app-search-bar-location class="searchBar" (location)="onSearchLocation($event)"></app-search-bar-location>
+<app-search-bar-location 
+class="searchBar" 
+(location)="onSearchLocation($event)">
+</app-search-bar-location>
