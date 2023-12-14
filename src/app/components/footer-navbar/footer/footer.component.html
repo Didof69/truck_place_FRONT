@@ -1,14 +1,37 @@
-<footer id="footerDisplay" class="d-flex bg-dark fixed-bottom flex-wrap justify-content-between align-items-center py-3 ">
-    <p class="col-md-4 mb-0 text-white">© 2023 Truck Place, Inc</p>
+<footer
+  id="footerDisplay"
+  class="d-flex bg-dark fixed-bottom flex-wrap justify-content-between align-items-center py-3"
+>
+  <p class="col-md-4 mb-0 text-white">© 2023 Truck Place, Inc</p>
 
-    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-      <img id="logo" src="../assets/logos/logo_clair.png" alt="logo de l'application truck place">
-    </a>
+  <a
+    href="/"
+    class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+  >
+    <img
+      id="logo"
+      src="../assets/logos/logo_clair.png"
+      alt="logo de l'application truck place"
+    />
+  </a>
 
-    <ul class="nav col-md-4 justify-content-end">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Home</a></li>
-      
-      <li class="nav-item"><a [routerLink]="'map'" class="nav-link px-2 text-white">Carte</a></li>
-      <li class="nav-item"><a [routerLink]="['account']" class="nav-link px-2 text-white">Profil</a></li>
-    </ul>
-  </footer>
+  <ul class="nav col-md-4 justify-content-end">
+    <li class="nav-item">
+      <a href="#" class="nav-link px-2 text-white">Home</a>
+    </li>
+    <li *ngIf="warningChecked" class="nav-item">
+      <a [routerLink]="'map'" class="nav-link px-2 text-white">Carte</a>
+    </li>
+    <li
+      *ngIf="!warningChecked"
+      class="nav-item"
+      data-bs-toggle="modal"
+      data-bs-target="#warningModal"
+    >
+      <a [routerLink]="'map'" class="nav-link px-2 text-white">Carte</a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['account']" class="nav-link px-2 text-white">Profil</a>
+    </li>
+  </ul>
+</footer>

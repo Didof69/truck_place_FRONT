@@ -12,7 +12,6 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class ParkingService {
-  // urlAPI = 'http://localhost:3000/api/parkings';
   parking$ = new Subject<Parking>();
   opinionsMembersTab$ = new Subject<OpinionByMember[]>();
   averageParking$ = new Subject<number>();

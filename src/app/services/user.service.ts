@@ -12,7 +12,6 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class UserService {
-  // urlAPI = 'http://localhost:3000/api/';
   public isLog$: BehaviorSubject<boolean>;
   public isAdmin$ = new Subject<boolean>();
   isAdmin = false

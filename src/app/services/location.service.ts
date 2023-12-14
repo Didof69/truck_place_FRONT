@@ -8,7 +8,6 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class LocationService {
-  // urlAPI = 'http://localhost:3000/api';
   constructor(private http: HttpClient) {}
 
   getLocations(): Observable<Location[]> {

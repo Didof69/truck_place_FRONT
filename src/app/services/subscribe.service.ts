@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class SubscribeService {
-  // urlAPI: string = 'http://localhost:3000/api/subscribes';
 public userSubscription$= new Subject<Subscribe[]>
   
   constructor(private http: HttpClient) {}

@@ -8,8 +8,6 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class OpinionService {
-  // urlAPI = 'http://localhost:3000/api/opinions';
-  
   constructor(private http: HttpClient) {}
 
   setHeaders() {

@@ -7,8 +7,4 @@ import { Component, Input } from '@angular/core';
 })
 export class NavbarPhoneComponent {
   @Input() warningChecked!: boolean; 
-  
-  ngOnInit() {
-    console.log(this.warningChecked); 
-  }
 }

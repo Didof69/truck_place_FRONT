@@ -8,7 +8,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header d-flex align-items-stretch">
-      <div style="width: 30px;"></div>
+        <div style="width: 30px"></div>
 
         <div class="d-flex flex-column text-center">
           <h1 class="modal-title" id="parkingModalLabel">
@@ -81,7 +81,12 @@
                 </div>
               </div>
               <div>
-                <div *ngIf="!isValid || parking.nb_space_free>parking.nb_space_all" class="alert">
+                <div
+                  *ngIf="
+                    !isValid || parking.nb_space_free > parking.nb_space_all
+                  "
+                  class="alert"
+                >
                   <p class="alert">
                     Le nombre de places libres ne peut exéder le nombre de
                     places totales.
@@ -164,9 +169,12 @@
                 <button
                   type="submit"
                   class="btn btn-truck"
-                  [disabled]="updateParkingForm.invalid || parking.nb_space_free>parking.nb_space_all"
-                       data-bs-toggle="modal"
-            data-bs-target="#parkingModal"
+                  [disabled]="
+                    updateParkingForm.invalid ||
+                    parking.nb_space_free > parking.nb_space_all
+                  "
+                  data-bs-toggle="modal"
+                  data-bs-target="#parkingModal"
                 >
                   Mettre à jour
                 </button>
