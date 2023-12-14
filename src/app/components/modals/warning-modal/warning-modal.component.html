@@ -1,36 +1,14 @@
-<div class="modal" tabindex="-1">
+<div class="modal fade" id="warningModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true" data-show="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- <div
-  class="modal fade"
-  id="warningModal"
-  tabindex="-1"
-  aria-labelledby="warningModalLabel"
->
-  <div class="modal-dialog">
-    <div class="modal-content" style="background-color: #bc3030; color: white">
-      <div class="modal-header d-flex flex-column">
-        <img
+         <img
           class="icone"
           src="../../../assets/icones/warning.png"
           alt="panneau attention"
         />
-        <h1 class="modal-title fs-5" id="warningModalLabel">
-          Avertissement Important : Utilisation d'app Truck Place uniquement à
+        <h1 class="modal-title fs-5" id="warningModalLabel" class="text-center">
+          Avertissement : Utilisation de Truck Place uniquement à
           l'arrêt
         </h1>
         <img
@@ -38,8 +16,10 @@
           src="../../../assets/icones/warning.png"
           alt="panneau attention"
         />
-        <div class="d-flex justify-content-center" style="width: 100%">
-          <p class="align-self-end">Cher utilisateur de Truck Place,</p>
+      </div>
+      <div class="modal-body">
+                <div class="d-flex flex-column" style="width: 100%">
+          <p class="">Cher utilisateur de Truck Place,</p>
 
           <p>
             Nous tenons à rappeler l'importance cruciale de la sécurité routière
@@ -86,15 +66,9 @@
           <p>L'équipe Truck Place</p>
         </div>
       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onAcceptWarn()">J'ai compris</button>
+      </div>
     </div>
   </div>
-  <div class="modal-footer">
-    <button
-      class="btn btn-delete-modal"
-      (click)="onAcceptWarn()"
-      data-bs-dismiss="modal"
-    >
-     J'ai compris
-    </button>
-  </div>
-</div> -->
+</div>

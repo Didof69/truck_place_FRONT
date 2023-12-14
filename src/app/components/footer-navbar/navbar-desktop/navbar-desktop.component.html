@@ -15,22 +15,57 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-        
-          <a class="nav-link" aria-current="page" [routerLink]="['home']">  <img class="icone" src="../../../assets/icones/home_green.png" alt="" />Home</a>
+          <a class="nav-link" aria-current="page" [routerLink]="['home']">
+            <img
+              class="icone"
+              src="../../../assets/icones/home_green.png"
+              alt=""
+            />Home</a
+          >
+        </li>
+
+        <li
+          *ngIf="!warningChecked"
+          class="nav-item"
+          data-bs-toggle="modal"
+          data-bs-target="#warningModal"
+        >
+          <a class="nav-link" [routerLink]="['map']"
+            ><img
+              class="icone"
+              src="../../../assets/icones/map_green.png"
+              alt=""
+            />Carte</a
+          >
+        </li>
+
+        <li *ngIf="warningChecked" class="nav-item">
+          <a class="nav-link" [routerLink]="['map']"
+            ><img
+              class="icone"
+              src="../../../assets/icones/map_green.png"
+              alt=""
+            />Carte</a
+          >
         </li>
 
         <li class="nav-item">
-          
-          <a class="nav-link" [routerLink]="['map']"><img class="icone" src="../../../assets/icones/map_green.png" alt="" />Carte</a>
+          <a class="nav-link" [routerLink]="['account']">
+            <img
+              class="icone"
+              src="../../../assets/icones/account_green.png"
+              alt=""
+            />Profil</a
+          >
         </li>
         <li class="nav-item">
-         
-
-          <a class="nav-link" [routerLink]="['account']"> <img class="icone" src="../../../assets/icones/account_green.png" alt="" />Profil</a>
-        </li>        
-        <li class="nav-item">
-          
-          <a class="nav-link disabled" [routerLink]="['']"><img class="icone" src="../../../assets/icones/notif_off.png" alt="" />A venir</a>
+          <a class="nav-link disabled" [routerLink]="['']"
+            ><img
+              class="icone"
+              src="../../../assets/icones/notif_off.png"
+              alt=""
+            />A venir</a
+          >
         </li>
       </ul>
     </div>

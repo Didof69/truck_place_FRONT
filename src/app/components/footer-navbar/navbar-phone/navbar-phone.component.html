@@ -11,7 +11,22 @@
           <p>Home</p></a
         >
       </li>
-      <li class="nav-item">
+      <li
+        *ngIf="!warningChecked"
+        class="nav-item"
+        data-bs-toggle="modal"
+        data-bs-target="#warningModal"
+      >
+        <a class="nav-link" [routerLink]="['map']">
+          <img
+            class="icone"
+            src="../../../assets/icones/map_green.png"
+            alt=""
+          />
+          <p>Carte</p></a
+        >
+      </li>
+      <li *ngIf="warningChecked" class="nav-item">
         <a class="nav-link" [routerLink]="['map']">
           <img
             class="icone"
@@ -31,7 +46,7 @@
           <p>Profil</p></a
         >
       </li>
-            <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link disabled" [routerLink]="['']">
           <img
             class="icone"
