@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { Location } from 'src/app/models/location';
 import { Parking } from 'src/app/models/parking';
 import { User } from 'src/app/models/user';
@@ -27,7 +28,8 @@ export class ParkingLikedCardComponent {
 
   constructor(
     private locationService: LocationService,
-    private userService: UserService
+    private userService: UserService, 
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -64,10 +66,18 @@ export class ParkingLikedCardComponent {
     // met à jour le user
     this.userService.updateUser(this.user).subscribe({
       next: (response) => {
-        //ajouter toast pour confirmer l'ajout ou suppression dans favoris
+              this.messageService.add({
+                severity: 'warn',
+                summary: 'Favoris',
+                detail: "Le parking n'est plus dans vos favoris",
+              });
       },
       error: (error) => {
-        //gérer l'erreur
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Favoris',
+                detail: 'Un problème est survenu.',
+              });
       },
     });
   }

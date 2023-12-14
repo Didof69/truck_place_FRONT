@@ -107,14 +107,27 @@ export class UserProfileComponent {
         this.subscribeService.getSubscriptionUser().subscribe({
           next: (subscriptions) => {
             this.userSubscriptions = subscriptions;
+                 this.messageService.add({
+                   severity: 'success',
+                   summary: 'Abonnement',
+                   detail: 'Votre abonnemnent a été supprimé.',
+                 });
           },
           error: (error) => {
-            //gerer l'erreur
+                 this.messageService.add({
+                   severity: 'error',
+                   summary: 'Abonnement',
+                   detail: 'Un problème est survenu.',
+                 });
           },
         });
       },
       error: (error) => {
-        //gerer l'erreur
+             this.messageService.add({
+               severity: 'error',
+               summary: 'Abonnement',
+               detail: 'Un problème est survenu.',
+             });
       },
     });
   }

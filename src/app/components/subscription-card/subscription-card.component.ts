@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { Location } from 'src/app/models/location';
 import { Parking } from 'src/app/models/parking';
 import { Subscribe } from 'src/app/models/subscribe';
@@ -26,7 +27,8 @@ export class SubscriptionCardComponent {
   constructor(
     private parkingService: ParkingService,
     private locationService: LocationService,
-    private subscribeService: SubscribeService
+    private subscribeService: SubscribeService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -54,12 +56,20 @@ export class SubscriptionCardComponent {
           .subscribe({
             next: (location) => (this.location = location),
             error: (error) => {
-              //gerer l'erreur
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Chargement',
+                detail: 'Un problème est survenu.',
+              });
             },
           });
       },
       error: (error) => {
-        //gérer l'erreur
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Chargement',
+          detail: 'Un problème est survenu.',
+        });
       },
     });
   }
@@ -82,15 +92,27 @@ export class SubscriptionCardComponent {
           this.subscribeService.getSubscriptionUser().subscribe({
             next: (subscriptions) => {
               this.subscribeService.userSubscription$.next(subscriptions);
-              
+              this.messageService.add({
+                severity: 'warn',
+                summary: 'Abonnement',
+                detail: 'Votre abonnemnent a été supprimé.',
+              });
             },
             error: (error) => {
-              //gerer l'erreur
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Abonnement',
+                detail: 'Un problème est survenu.',
+              });
             },
           });
         },
         error: (error) => {
-          //gerer l'erreur
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Chargement',
+            detail: 'Un problème est survenu.',
+          });
         },
       });
   }

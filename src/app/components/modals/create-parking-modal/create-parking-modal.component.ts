@@ -60,9 +60,25 @@ export class CreateParkingModalComponent {
       this.servicesTab = services;
     });
 
-    this.userService.getUserByPseudo().subscribe((user) => {
-      this.user = user;
-      //gérer l'erreur qui renvoie vers le login
+    // this.userService.getUserByPseudo().subscribe((user) => {
+    //   this.user = user;
+    //   //gérer l'erreur qui renvoie vers le login
+    // });
+
+    this.userService.getUserByPseudo().subscribe({
+      next: (user) => {
+        this.user = user;
+      },
+      error: (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Chargement',
+          detail: 'Une erreur est survenue.',
+        });
+        setTimeout(() => {
+          this.router.navigate(['/account/login/']);
+        }, 2000);
+      },
     });
   }
 
