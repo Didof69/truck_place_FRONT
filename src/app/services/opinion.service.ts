@@ -2,12 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CreatedOpinion } from '../models/created-opinion';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OpinionService {
-  urlAPI = 'http://localhost:3000/api/opinions';
+  // urlAPI = 'http://localhost:3000/api/opinions';
   
   constructor(private http: HttpClient) {}
 
@@ -22,7 +23,7 @@ export class OpinionService {
   createOpinion(opinion: CreatedOpinion): Observable<CreatedOpinion> {
     const headers = this.setHeaders();
     return this.http.post<CreatedOpinion>(
-      `http://localhost:3000/api/opinions`,
+      environment.api+`/opinions`,
       opinion,
       { headers }
     );

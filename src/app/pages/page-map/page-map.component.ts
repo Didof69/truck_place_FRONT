@@ -15,7 +15,7 @@ export class PageMapComponent {
   parkingTab!: Parking[];
   myRoadmap!: L.Map;
 
-  //paramètre selon le token l'état de la connexion
+  //paramètre l'état de la connexion
   isLog: Boolean = false;
 
   //parametre de la géolocalisation

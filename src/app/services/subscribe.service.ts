@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { CreatedSubscribe } from '../models/created-subscribe';
 import { Subscribe } from '../models/subscribe';
 import { Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SubscribeService {
-  urlAPI: string = 'http://localhost:3000/api/subscribes';
+  // urlAPI: string = 'http://localhost:3000/api/subscribes';
 public userSubscription$= new Subject<Subscribe[]>
   
   constructor(private http: HttpClient) {}
@@ -23,18 +24,24 @@ public userSubscription$= new Subject<Subscribe[]>
 
   createSubscribe(createdSubscribe: CreatedSubscribe): Observable<Subscribe> {
     const headers = this.setHeaders();
-    return this.http.post<Subscribe>(`${this.urlAPI}`, createdSubscribe, {
-      headers,
-    });
+    return this.http.post<Subscribe>(
+      environment.api + `/subscribes`,
+      createdSubscribe,
+      {
+        headers,
+      }
+    );
   }
 
   getSubscriptionUser(): Observable<Subscribe[]>{
     const headers = this.setHeaders();
-    return this.http.get<Subscribe[]>(`${this.urlAPI}`, {headers});
+    return this.http.get<Subscribe[]>(environment.api + `/subscribes`, {
+      headers,
+    });
   }
 
   deleteSubscribe(subscribe_id :number): Observable<Subscribe>{
     const headers = this.setHeaders();
-    return this.http.delete<Subscribe>(`${this.urlAPI}/${subscribe_id}`, { headers });
+    return this.http.delete<Subscribe>(environment.api + `/subscribes/${subscribe_id}`, { headers });
   }
 }

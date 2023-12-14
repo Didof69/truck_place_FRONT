@@ -6,12 +6,13 @@ import { UserLog } from '../models/user-log';
 import { LogData } from '../models/log-data';
 import { CreatedUser } from '../models/created-user';
 import { UpdatedUser } from '../models/updated-user';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  urlAPI = 'http://localhost:3000/api/';
+  // urlAPI = 'http://localhost:3000/api/';
   public isLog$: BehaviorSubject<boolean>;
   public isAdmin$ = new Subject<boolean>();
   isAdmin = false
@@ -39,23 +40,23 @@ export class UserService {
 
   signUp(createdUser: CreatedUser): Observable<CreatedUser> {
     return this.http.post<CreatedUser>(
-      `${this.urlAPI}auth/register`,
+      environment.api + `/auth/register`,
       createdUser
     );
   }
 
   login(userLog: UserLog): Observable<LogData> {
-    return this.http.post<LogData>(`${this.urlAPI}auth/login`, userLog);
+    return this.http.post<LogData>(environment.api + `/auth/login`, userLog);
   }
 
   getAllUsers(): Observable<User[]> {
     const headers = this.setHeaders();
-    return this.http.get<User[]>(`${this.urlAPI}users/admin`, { headers });
+    return this.http.get<User[]>(environment.api + `/users/admin`, { headers });
   }
 
   getUserByPseudo(): Observable<User> {
     const headers = this.setHeaders();
-    return this.http.get<User>(`${this.urlAPI}users`, { headers }).pipe(
+    return this.http.get<User>(environment.api +`/users`, { headers }).pipe(
       tap((user: User) => {
         this.isAdmin$.next(user.admin);
         this.isAdmin = user.admin
@@ -65,13 +66,13 @@ export class UserService {
 
   updateUser(user: UpdatedUser): Observable<User> {
     const headers = this.setHeaders();
-    return this.http.patch<User>(`${this.urlAPI}users/${user.user_id}`, user, {
+    return this.http.patch<User>(environment.api +`/users/${user.user_id}`, user, {
       headers,
     });
   }
 
   deleteUser(pseudo: string): Observable<User> {
     const headers = this.setHeaders();
-    return this.http.delete<User>(`${this.urlAPI}users/${pseudo}`, { headers });
+    return this.http.delete<User>(environment.api +`/users/${pseudo}`, { headers });
   }
 }

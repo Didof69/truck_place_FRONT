@@ -6,12 +6,13 @@ import { Opinion } from '../models/opinion';
 import { CreatedParking } from '../models/created-parking';
 import { UpdatedParking } from '../models/updated-parking';
 import { OpinionByMember } from '../models/opinion-by-member';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ParkingService {
-  urlAPI = 'http://localhost:3000/api/parkings';
+  // urlAPI = 'http://localhost:3000/api/parkings';
   parking$ = new Subject<Parking>();
   opinionsMembersTab$ = new Subject<OpinionByMember[]>();
   averageParking$ = new Subject<number>();
@@ -28,35 +29,41 @@ export class ParkingService {
   }
 
   getAllParkings(): Observable<Parking[]> {
-    return this.http.get<Parking[]>(`${this.urlAPI}`);
+    return this.http.get<Parking[]>(environment.api+`/parkings`);
   }
 
   getParkingsLikedByUser(): Observable<Parking[]> {
     const headers = this.setHeaders();
-    return this.http.get<Parking[]>(`${this.urlAPI}/liked`, { headers });
+    return this.http.get<Parking[]>(environment.api+`/parkings/liked`, { headers });
   }
 
   getParkingById(parking_id: number): Observable<Parking> {
-    return this.http.get<Parking>(`${this.urlAPI}/${parking_id}`);
+    return this.http.get<Parking>(
+      environment.api+`/parkings/${parking_id}`
+    );
   }
 
   getOpinionsByParkingId(parking_id: number): Observable<Opinion[]> {
     return this.http.get<Opinion[]>(
-      `http://localhost:3000/api/opinions/parking/${parking_id}`
+      environment.api+`/opinions/parking/${parking_id}`
     );
   }
 
   createParking(createdParking: CreatedParking): Observable<Parking> {
     const headers = this.setHeaders();
-    return this.http.post<Parking>(`${this.urlAPI}`, createdParking, {
-      headers,
-    });
+    return this.http.post<Parking>(
+      environment.api + `/parkings`,
+      createdParking,
+      {
+        headers,
+      }
+    );
   }
 
   updateParking(updatedParking: UpdatedParking): Observable<Parking> {
     const headers = this.setHeaders();
     return this.http.patch<Parking>(
-      `${this.urlAPI}/${updatedParking.parking_id}`,
+      environment.api+`/parkings/${updatedParking.parking_id}`,
       updatedParking,
       {
         headers,
@@ -66,7 +73,7 @@ export class ParkingService {
 
   deleteParking(parking_id: number): Observable<Parking> {
     const headers = this.setHeaders();
-    return this.http.delete<Parking>(`${this.urlAPI}/${parking_id}`, {
+    return this.http.delete<Parking>(environment.api+`/parkings/${parking_id}`, {
       headers,
     });
   }
