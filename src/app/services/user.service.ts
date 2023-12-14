@@ -14,7 +14,8 @@ import { environment } from 'src/environments/environment.development';
 export class UserService {
   public isLog$: BehaviorSubject<boolean>;
   public isAdmin$ = new Subject<boolean>();
-  isAdmin = false
+  public warningChecked$: BehaviorSubject<boolean>;
+  isAdmin = false;
 
   constructor(private http: HttpClient) {
     const token = sessionStorage.getItem('token');
@@ -23,10 +24,11 @@ export class UserService {
     } else {
       this.isLog$ = new BehaviorSubject(false);
     }
+    this.warningChecked$ = new BehaviorSubject(false)
   }
 
-  getIsAdmin() {  
-    return this.isAdmin
+  getIsAdmin() {
+    return this.isAdmin;
   }
 
   setHeaders() {
@@ -55,23 +57,29 @@ export class UserService {
 
   getUserByPseudo(): Observable<User> {
     const headers = this.setHeaders();
-    return this.http.get<User>(environment.api +`/users`, { headers }).pipe(
+    return this.http.get<User>(environment.api + `/users`, { headers }).pipe(
       tap((user: User) => {
         this.isAdmin$.next(user.admin);
-        this.isAdmin = user.admin
+        this.isAdmin = user.admin;
       })
     );
   }
 
   updateUser(user: UpdatedUser): Observable<User> {
     const headers = this.setHeaders();
-    return this.http.patch<User>(environment.api +`/users/${user.user_id}`, user, {
-      headers,
-    });
+    return this.http.patch<User>(
+      environment.api + `/users/${user.user_id}`,
+      user,
+      {
+        headers,
+      }
+    );
   }
 
   deleteUser(pseudo: string): Observable<User> {
     const headers = this.setHeaders();
-    return this.http.delete<User>(environment.api +`/users/${pseudo}`, { headers });
+    return this.http.delete<User>(environment.api + `/users/${pseudo}`, {
+      headers,
+    });
   }
 }

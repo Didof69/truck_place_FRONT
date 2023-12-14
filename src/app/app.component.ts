@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from './services/user.service';
  
 @Component({
   selector: 'app-root',
@@ -7,9 +8,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'truck_place_front';
-  warningChecked = false
+  warningChecked!: boolean;
 
-  warningCheck(value:boolean) {
-    this.warningChecked = value;
-  }
+  constructor(private userService : UserService) {}
+
+  ngOnInit() {
+    this.userService.warningChecked$.subscribe((data) => (this.warningChecked = data));
+    
+   }
+  
+  // warningCheck(value:boolean) {
+  //   this.warningChecked = value;
+  // }
 }

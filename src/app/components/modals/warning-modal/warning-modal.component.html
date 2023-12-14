@@ -1,15 +1,23 @@
-<div class="modal fade" id="warningModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true" data-show="true">
+<div
+  class="modal fade"
+  id="warningModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="warningModalLabel"
+  aria-hidden="true"
+  data-show="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-         <img
+        <img
           class="icone"
           src="../../../assets/icones/warning.png"
           alt="panneau attention"
         />
         <h1 class="modal-title fs-5" id="warningModalLabel" class="text-center">
-          Avertissement : Utilisation de Truck Place uniquement à
-          l'arrêt
+          Avertissement : Utilisation de Truck Place uniquement à l'arrêt
         </h1>
         <img
           class="icone"
@@ -18,8 +26,8 @@
         />
       </div>
       <div class="modal-body">
-                <div class="d-flex flex-column" style="width: 100%">
-          <p class="">Cher utilisateur de Truck Place,</p>
+        <div class="d-flex flex-column" style="width: 100%">
+          <p class="">Chère utilisatrice, Cher utilisateur de Truck Place,</p>
 
           <p>
             Nous tenons à rappeler l'importance cruciale de la sécurité routière
@@ -67,7 +75,14 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onAcceptWarn()">J'ai compris</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          (click)="onAcceptWarn()"
+        >
+          J'ai compris
+        </button>
       </div>
     </div>
   </div>

@@ -37,6 +37,7 @@ export class ParkingModalComponent {
 
   ngOnInit() {
     this.userService.isLog$.subscribe((data) => this.isLog = data);
+    this.userService.warningChecked$.next(true);
 
     if (this.isLog) {
       this.subscribeService
