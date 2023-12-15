@@ -14,10 +14,5 @@ export class AppComponent {
 
   ngOnInit() {
     this.userService.warningChecked$.subscribe((data) => (this.warningChecked = data));
-    
    }
-  
-  // warningCheck(value:boolean) {
-  //   this.warningChecked = value;
-  // }
 }
