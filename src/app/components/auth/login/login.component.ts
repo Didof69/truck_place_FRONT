@@ -16,10 +16,9 @@ export class LoginComponent {
 
   isFormValidate = false;
   connexionKO = false;
+  showPassword = false;
 
-  constructor(
-    private userService: UserService,
-  ) {}
+  constructor(private userService: UserService) {}
 
   login(connexionForm: NgForm) {
     this.isFormValidate = true;
@@ -35,5 +34,9 @@ export class LoginComponent {
         },
       });
     }
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }

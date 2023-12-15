@@ -10,7 +10,7 @@
     margin-top: 1rem;
 }
 
-h1{
+h1 {
     font-size: 1.5rem;
 }
 
@@ -73,6 +73,17 @@ input {
 .btn:hover {
     background-color: #234e35;
     box-shadow: 0rem 0rem 0rem 0.05rem #234e35;
+}
+
+#btn-view-password {
+    border: none;
+    color: #337551;
+    background-color: transparent;
+    font-size: 12px;
+}
+
+.password-confirm{
+    margin-top: 0;
 }
 
 /*Media Queries */

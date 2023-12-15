@@ -4,9 +4,9 @@
   </div>
 
   <form #inscription="ngForm" (ngSubmit)="signUp(inscription)">
-       <div class="form-group">
+    <div class="form-group">
       <input
-      id="pseudoInput"
+        id="pseudoInput"
         type="text"
         required
         class="form-control shadow-sm"
@@ -33,7 +33,9 @@
         placeholder="Nom"
       />
       <div *ngIf="user_name.invalid && isFormSubmit" class="alert">
-        <div *ngIf="user_name.errors?.['required']">Ce champ est obligatoire.</div>
+        <div *ngIf="user_name.errors?.['required']">
+          Ce champ est obligatoire.
+        </div>
       </div>
     </div>
 
@@ -49,7 +51,9 @@
         placeholder="Prénom"
       />
       <div *ngIf="firstname.invalid && isFormSubmit" class="alert">
-        <div *ngIf="firstname.errors?.['required']">Ce champ est obligatoire.</div>
+        <div *ngIf="firstname.errors?.['required']">
+          Ce champ est obligatoire.
+        </div>
       </div>
     </div>
 
@@ -79,7 +83,7 @@
 
     <div class="form-group">
       <input
-        type="password"
+        type="{{ showPassword ? 'text' : 'password' }}"
         required
         pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}"
         class="form-control shadow-sm"
@@ -98,29 +102,35 @@
         </div>
       </div>
     </div>
-
+    <button
+      type="button"
+      id="btn-view-password"
+      (click)="togglePasswordVisibility()"
+    >
+      {{
+        showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"
+      }}
+    </button>
     <div class="form-group">
       <input
-        type="password"
+        type="{{ showPassword ? 'text' : 'password' }}"
         required
-        class="form-control shadow-sm"
+        class="form-control shadow-sm password-confirm"
         [(ngModel)]="user.password_confirm"
         name="password_confirm"
         #password="ngModel"
         [class.input-error]="
-          user.password !== user.password_confirm &&
-          isFormSubmit
+          user.password !== user.password_confirm && isFormSubmit
         "
         placeholder="Confirmez votre mot de passe"
       />
       <div>
-        <p style="font-size: 0.6rem; padding-left: 0.3rem; margin-bottom: 0;">*12 caract. mini dont 1 maj., 1 chiffre et 1 symbole</p>
+        <p style="font-size: 0.6rem; padding-left: 0.3rem; margin-bottom: 0">
+          *12 caract. mini dont 1 maj., 1 chiffre et 1 symbole
+        </p>
       </div>
       <div
-        *ngIf="
-          user.password!== user.password_confirm &&
-          isFormSubmit
-        "
+        *ngIf="user.password !== user.password_confirm && isFormSubmit"
         class="alert"
       >
         <div class="errorConfirme">Les mots de passe ne correspondent pas.</div>

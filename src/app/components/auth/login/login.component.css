@@ -65,6 +65,12 @@ input {
     box-shadow: 0rem 0rem 0rem 0.05rem #234e35;
 }
 
+#btn-view-password{
+    border: none;
+    color : #337551;
+    background-color: transparent;
+    font-size: 12px;
+}
 
 /*Media Queries */
 @media only screen and (max-width: 48rem) {
