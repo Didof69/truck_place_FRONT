@@ -11,9 +11,11 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './parking-liked-card.component.html',
   styleUrls: ['./parking-liked-card.component.css'],
 })
+  
 export class ParkingLikedCardComponent {
   @Input() user!: User;
   @Input() parking!: Parking;
+
   location: Location = {
     insee_code: '',
     zip_code: '',
@@ -89,6 +91,7 @@ export class ParkingLikedCardComponent {
     const diff = (today.getTime() - date.getTime()) / 60000;
     return diff;
   }
+  
   getReliability(value: number) {
     if (value <= 30) {
       this.reliabilityStatus = 'reliabilitySafe';

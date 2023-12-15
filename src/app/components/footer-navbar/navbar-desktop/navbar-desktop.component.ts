@@ -7,9 +7,10 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./navbar-desktop.component.css'],
 })
 export class NavbarDesktopComponent {
-  // @Input() warningChecked!: boolean;
   warningChecked!: boolean;
-  constructor(private userService: UserService) {}
+
+  constructor(private userService: UserService) { }
+  
   ngOnInit() {
     this.userService.warningChecked$.subscribe(
       (data) => (this.warningChecked = data)

@@ -7,9 +7,10 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent {
-  // @Input() warningChecked!: boolean;
   warningChecked!: boolean;
-  constructor(private userService: UserService) {}
+
+  constructor(private userService: UserService) { }
+  
   ngOnInit() {
     this.userService.warningChecked$.subscribe((data)=>this.warningChecked=data);
   }

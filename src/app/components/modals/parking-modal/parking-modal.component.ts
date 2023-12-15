@@ -13,6 +13,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './parking-modal.component.html',
   styleUrls: ['./parking-modal.component.css'],
 })
+  
 export class ParkingModalComponent {
   @Input() parking!: Parking;
   @Input() isParkingLiked!: boolean;
@@ -22,12 +23,13 @@ export class ParkingModalComponent {
   @Input() averageParking!: number;
   @Input() user!: User;
   @Input() isAdmin!: boolean;
+  @Output() likeEvent = new EventEmitter();
 
   isClicked: boolean = false;
   isValid: boolean = true;
   isSubscribed: boolean = false;
   isLog: boolean = false;
-  @Output() likeEvent = new EventEmitter();
+
   constructor(
     private router: Router,
     private subscribeService: SubscribeService,
@@ -36,13 +38,11 @@ export class ParkingModalComponent {
   ) {}
 
   ngOnInit() {
-    this.userService.isLog$.subscribe((data) => this.isLog = data);
+    this.userService.isLog$.subscribe((data) => (this.isLog = data));
     this.userService.warningChecked$.next(true);
 
     if (this.isLog) {
-      this.subscribeService
-      .getSubscriptionUser()
-      .subscribe({
+      this.subscribeService.getSubscriptionUser().subscribe({
         next: (userSubscriptions) => {
           userSubscriptions.forEach((susbcription) => {
             if (
@@ -53,7 +53,7 @@ export class ParkingModalComponent {
             ) {
               this.isSubscribed = true;
             }
-          })
+          });
         },
         error: (error) => {
           this.messageService.add({
@@ -61,10 +61,9 @@ export class ParkingModalComponent {
             summary: 'Chargement des données',
             detail: 'Une erreur est survenue.',
           });
-        }
+        },
       });
     }
-    
   }
 
   returnMap() {
@@ -106,7 +105,7 @@ export class ParkingModalComponent {
           summary: 'Abonnement',
           detail: `L'abonnement a été pris en compte pour ${nb} heure(s)`,
         });
-        
+
         this.isClicked = false;
         this.isSubscribed = true;
       },
@@ -125,7 +124,7 @@ export class ParkingModalComponent {
     return parking_id1 === parking_id2;
   }
 
- //désabonne du parking
+  //désabonne du parking
   onUnsubscribeBtn() {
     this.subscribeService
       .getSubscriptionUser()

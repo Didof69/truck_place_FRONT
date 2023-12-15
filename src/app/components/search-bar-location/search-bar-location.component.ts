@@ -7,8 +7,10 @@ import { LocationService } from 'src/app/services/location.service';
   templateUrl: './search-bar-location.component.html',
   styleUrls: ['./search-bar-location.component.css'],
 })
+  
 export class SearchBarLocationComponent {
   @Output() location = new EventEmitter<Location>();
+  
   buttonClicked: boolean = false;
 
   locationsList!: Location[];

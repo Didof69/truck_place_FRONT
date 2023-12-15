@@ -14,6 +14,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './create-parking-modal.component.html',
   styleUrls: ['./create-parking-modal.component.css'],
 })
+  
 export class CreateParkingModalComponent {
   isValid: Boolean = true;
   isNbAllNegative: Boolean = false;
@@ -59,11 +60,6 @@ export class CreateParkingModalComponent {
     this.serviceService.getAllService().subscribe((services) => {
       this.servicesTab = services;
     });
-
-    // this.userService.getUserByPseudo().subscribe((user) => {
-    //   this.user = user;
-    //   //gérer l'erreur qui renvoie vers le login
-    // });
 
     this.userService.getUserByPseudo().subscribe({
       next: (user) => {

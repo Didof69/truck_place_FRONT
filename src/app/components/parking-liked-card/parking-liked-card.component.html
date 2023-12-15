@@ -24,8 +24,8 @@
       </div>
 
       <div>
-        <p class="parking-name" style="max-lines: 1;">
-          {{ parking.parking_name | uppercaseFirst | slice:0:30}}
+        <p class="parking-name" style="max-lines: 1">
+          {{ parking.parking_name | uppercaseFirst | slice : 0 : 30 }}
         </p>
         <p class="location">
           {{ location.zip_code }} {{ location.city_name | uppercaseFirst }}

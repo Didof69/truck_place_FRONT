@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './page-account.component.html',
   styleUrls: ['./page-account.component.css'],
 })
+  
 export class PageAccountComponent {
   user!: User;
   isLog!: boolean;

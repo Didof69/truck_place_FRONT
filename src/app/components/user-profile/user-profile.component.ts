@@ -11,15 +11,16 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css'],
 })
+  
 export class UserProfileComponent {
   @Input() user!: User;
-  isAdmin!: boolean;
 
   userSubscriptions: Subscribe[] = [];
-
+  
   //paramètre pour gérer l'édition du UserProfil
   updateMode: boolean = false;
   isValid: boolean = true;
+  isAdmin!: boolean;
 
   constructor(
     private userService: UserService,

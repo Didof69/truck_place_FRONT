@@ -12,6 +12,7 @@ import { ServiceService } from 'src/app/services/service.service';
   templateUrl: './update-parking-modal.component.html',
   styleUrls: ['./update-parking-modal.component.css'],
 })
+  
 export class UpdateParkingModalComponent {
   @Input() parking!: Parking;
   @Input() location!: Location;

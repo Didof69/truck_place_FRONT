@@ -9,6 +9,7 @@ import { ParkingService } from 'src/app/services/parking.service';
   templateUrl: './delete-parking-modal.component.html',
   styleUrls: ['./delete-parking-modal.component.css'],
 })
+  
 export class DeleteParkingModalComponent {
   @Input() parking!: Parking;
   constructor(

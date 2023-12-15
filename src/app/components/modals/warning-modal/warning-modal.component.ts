@@ -7,9 +7,8 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './warning-modal.component.html',
   styleUrls: ['./warning-modal.component.css'],
 })
-export class WarningModalComponent {
-  // @Output() warningEvent = new EventEmitter<boolean>();
   
+export class WarningModalComponent {
   constructor(private userService: UserService){}
   
   onAcceptWarn() {

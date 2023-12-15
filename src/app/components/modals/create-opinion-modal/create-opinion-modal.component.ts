@@ -9,18 +9,19 @@ import { Parking } from 'src/app/models/parking';
 import { User } from 'src/app/models/user';
 import { OpinionService } from 'src/app/services/opinion.service';
 import { ParkingService } from 'src/app/services/parking.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-create-opinion-modal',
   templateUrl: './create-opinion-modal.component.html',
   styleUrls: ['./create-opinion-modal.component.css'],
 })
+  
 export class CreateOpinionModalComponent {
   @Input() opinionsMembersTab!: OpinionByMember[];
   @Input() parking!: Parking;
   @Input() location!: Location;
   @Input() user!: User;
+
   noteTab: number[] = [1, 2, 3, 4, 5];
   opinion: CreatedOpinion = {
     opinion: '',
@@ -31,7 +32,6 @@ export class CreateOpinionModalComponent {
 
   constructor(
     private opinionService: OpinionService,
-    private router: Router,
     private messageService: MessageService,
     private parkingService: ParkingService
   ) {}

@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './page-admin.component.html',
   styleUrls: ['./page-admin.component.css'],
 })
+  
 export class PageAdminComponent {
   usersTab: User[] = [];
   usersTabFilter: User[] = [];

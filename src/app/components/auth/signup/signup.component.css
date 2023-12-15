@@ -98,7 +98,6 @@ input {
         font-size: 0.69rem;
     }
 
-
     .errorMdp, .errorConfirme {
         width: 55vw;
     }
@@ -112,7 +111,6 @@ input {
         background-color: #337551;
     }
 }
-
 
 @media (min-width: 100rem) {
     .mainContainer {

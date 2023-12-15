@@ -20,6 +20,7 @@ export class ParkingComponent {
   user!: User;
   isAdmin!: boolean;
   isLog!: boolean;
+  isParkingLiked: boolean = false;
 
   parking: Parking = {
     parking_id: 0,
@@ -34,8 +35,6 @@ export class ParkingComponent {
     user_id: 0,
     services: [{ service_id: 0, service_name: '' }],
   };
-
-  isParkingLiked: boolean = false;
 
   location: Location = {
     insee_code: '',
@@ -63,7 +62,7 @@ export class ParkingComponent {
   ) {}
 
   ngOnInit() {
-        this.userService.isLog$.subscribe((data) => (this.isLog = data));
+    this.userService.isLog$.subscribe((data) => (this.isLog = data));
 
     this.parkingService.parking$.subscribe((data) => {
       this.parking = data;
@@ -83,30 +82,29 @@ export class ParkingComponent {
 
         //recuperer le User
         if (this.isLog) {
-                 this.userService.getUserByPseudo().subscribe({
-          next: (response) => {
-            this.user = response;
-            this.isAdmin = this.user.admin;
+          this.userService.getUserByPseudo().subscribe({
+            next: (response) => {
+              this.user = response;
+              this.isAdmin = this.user.admin;
 
-            //vérifie si le parking est dans les favoris
-            if (
-              this.user.likedParkings.some((parking) =>
-                this.isEqualParking(parking, this.parking)
-              )
-            ) {
-              this.isParkingLiked = true;
-            }
-          },
+              //vérifie si le parking est dans les favoris
+              if (
+                this.user.likedParkings.some((parking) =>
+                  this.isEqualParking(parking, this.parking)
+                )
+              ) {
+                this.isParkingLiked = true;
+              }
+            },
 
-          error: (error) => {
-            this.messageService.add({
-              severity: 'error',
-              summary: "Chargement de données",
-              detail:
-                'Une erreur est survenue.',
-            });
-          },
-        }); 
+            error: (error) => {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Chargement de données',
+                detail: 'Une erreur est survenue.',
+              });
+            },
+          });
         }
 
         //mettre à jour l'indicateur de fiabilité

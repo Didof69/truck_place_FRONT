@@ -12,9 +12,11 @@ import { SubscribeService } from 'src/app/services/subscribe.service';
   templateUrl: './subscription-card.component.html',
   styleUrls: ['./subscription-card.component.css'],
 })
+  
 export class SubscriptionCardComponent {
   @Input() subscription!: Subscribe;
   @Input() userSubscriptions!: Subscribe[];
+
   parking!: Parking;
   location!: Location;
   remainingTime!: number;
@@ -124,6 +126,7 @@ export class SubscriptionCardComponent {
     const diff = (today.getTime() - date.getTime()) / 60000;
     return diff;
   }
+  
   getReliability(value: number) {
     if (value <= 30) {
       this.reliabilityStatus = 'reliabilitySafe';

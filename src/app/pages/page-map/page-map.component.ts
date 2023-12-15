@@ -26,50 +26,13 @@ export class PageMapComponent implements AfterViewInit {
   constructor(
     private parkingService: ParkingService,
     private readonly geolocation$: GeolocationService,
-    private userService : UserService
+    private userService: UserService
   ) {}
 
-  //  ngOnInit() {
-  //     if (sessionStorage.getItem('token')) {
-  //       this.isLog=true
-  //     }
-
-  //     // Déclaration de la carte en fonction de la geolocalisation
-  //     if (!navigator.geolocation) {
-  //       this.latitude = 45.75;
-  //       this.longitude = 4.85;
-  //       this.myRoadmap = L.map('map').setView(
-  //         [this.latitude, this.longitude],
-  //         12
-  //       );
-  //       this.setMarkerMap();
-  //     } else {
-  //       navigator.geolocation.getCurrentPosition((position) =>  {
-  //         this.latitude = position.coords.latitude;
-  //         this.longitude = position.coords.longitude;
-  //         this.myRoadmap = L.map('map').setView(
-  //           [this.latitude, this.longitude],
-  //           16
-  //         );
-  //         const myIcon = L.icon({
-  //           iconUrl: '../../../../assets/icones/target.png',
-  //         });
-  //         const popup = 'Vous êtes ici';
-  //         L.marker([position.coords.latitude, position.coords.longitude], {
-  //           icon: myIcon,
-  //         })
-  //           .bindPopup(popup)
-  //           .addTo(this.myRoadmap)
-  //           .openPopup();
-  //       });
-  //       this.setMarkerMap()
-  //     }
-  //   }
-
   ngOnInit() {
-        this.userService.isLog$.subscribe((data) => (this.isLog = data));
+    this.userService.isLog$.subscribe((data) => (this.isLog = data));
   }
-  
+
   ngAfterViewInit() {
     // Vérifiez si l'élément 'map' est disponible dans le DOM
     const mapElement = document.getElementById('map');
