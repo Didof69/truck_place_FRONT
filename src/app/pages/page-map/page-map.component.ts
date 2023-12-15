@@ -5,6 +5,7 @@ import * as L from 'leaflet';
 import { ParkingService } from 'src/app/services/parking.service';
 import { Parking } from '../../models/parking';
 import { Location } from 'src/app/models/location';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-page-map',
@@ -16,7 +17,7 @@ export class PageMapComponent implements AfterViewInit {
   myRoadmap!: L.Map;
 
   //paramètre l'état de la connexion
-  isLog: Boolean = false;
+  isLog!: Boolean;
 
   //parametre de la géolocalisation
   latitude!: number;
@@ -24,7 +25,8 @@ export class PageMapComponent implements AfterViewInit {
 
   constructor(
     private parkingService: ParkingService,
-    private readonly geolocation$: GeolocationService
+    private readonly geolocation$: GeolocationService,
+    private userService : UserService
   ) {}
 
   //  ngOnInit() {
@@ -64,6 +66,10 @@ export class PageMapComponent implements AfterViewInit {
   //     }
   //   }
 
+  ngOnInit() {
+        this.userService.isLog$.subscribe((data) => (this.isLog = data));
+  }
+  
   ngAfterViewInit() {
     // Vérifiez si l'élément 'map' est disponible dans le DOM
     const mapElement = document.getElementById('map');
