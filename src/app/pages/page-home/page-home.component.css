@@ -377,6 +377,7 @@ ul {
 
     .bottomnav {
         bottom: 200px;
+        right: 70px;
     }
 
     .bottomnav .next {
@@ -386,7 +387,7 @@ ul {
     .desc {
         position: absolute;
         left: 40px;
-        bottom: 60px;
+        bottom: 90px;
         display: flex;
     }
 
@@ -415,7 +416,7 @@ ul {
     }
 
     .scrolldown {
-        left: 50px;
+        left: 40px;
     }
 
     .upbar {
