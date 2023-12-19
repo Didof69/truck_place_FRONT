@@ -1,22 +1,26 @@
-.navbar{
-    height: 4rem;
+.navbar {
+    height: 5rem;
     padding-top: 0;
     padding-bottom: 0;
 }
 
-li{
+li {
     margin-left: 10px;
     margin-right: 10px;
     justify-content: center;
 }
 
-a{
-    padding: 0;   
-    width: 50px; 
+a {
+    padding: 0;
+    width: 50px;
 }
 
-p{
+p {
     margin: 0;
+}
+
+.enabled {
+    color: white;
 }
 
 .icone {

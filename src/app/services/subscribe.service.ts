@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { CreatedSubscribe } from '../models/created-subscribe';
 import { Subscribe } from '../models/subscribe';
 import { Observable, Subject } from 'rxjs';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',

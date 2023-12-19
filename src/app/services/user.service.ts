@@ -6,7 +6,7 @@ import { UserLog } from '../models/user-log';
 import { LogData } from '../models/log-data';
 import { CreatedUser } from '../models/created-user';
 import { UpdatedUser } from '../models/updated-user';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',

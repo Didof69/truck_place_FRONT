@@ -2,7 +2,7 @@
   <div class="container-fluid justify-content-center text-center">
     <ul class="navbar-nav d-flex flex-row">
       <li class="nav-item">
-        <a class="nav-link" aria-current="page" [routerLink]="['home']">
+        <a class="nav-link enabled" aria-current="page" [routerLink]="['home']">
           <img
             class="icone"
             src="../../../assets/icones/home_green.png"
@@ -17,7 +17,7 @@
         data-bs-toggle="modal"
         data-bs-target="#warningModal"
       >
-        <a class="nav-link" [routerLink]="['map']">
+        <a class="nav-link enabled" [routerLink]="['map']">
           <img
             class="icone"
             src="../../../assets/icones/map_green.png"
@@ -27,7 +27,7 @@
         >
       </li>
       <li *ngIf="warningChecked" class="nav-item">
-        <a class="nav-link" [routerLink]="['map']">
+        <a class="nav-link enabled" [routerLink]="['map']">
           <img
             class="icone"
             src="../../../assets/icones/map_green.png"
@@ -37,7 +37,7 @@
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['account']">
+        <a class="nav-link enabled" [routerLink]="['account']">
           <img
             class="icone"
             src="../../../assets/icones/account_green.png"
@@ -57,5 +57,6 @@
         >
       </li>
     </ul>
+    <p class="col-md-4 mb-0 text-white" style="font-size: 10px;">© 2023 Truck Place, Inc - <a href="../../../assets/Mentions-legales-2023.pdf" target="_blank" style="color:white;font-size: 10px;">Mentions légales</a></p>
   </div>
 </nav>

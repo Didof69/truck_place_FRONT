@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-  api: 'http://api.yera5885.odns.fr/api'
+  api: 'https://api.truck-place.fr/api'
 };
 
 // export const environment = {

@@ -6,7 +6,7 @@ import { Opinion } from '../models/opinion';
 import { CreatedParking } from '../models/created-parking';
 import { UpdatedParking } from '../models/updated-parking';
 import { OpinionByMember } from '../models/opinion-by-member';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
